@@ -1,0 +1,2848 @@
+{
+ "generado": "2026-10-19 15:33",
+ "datos": {
+  "fuente": "descarga previa (1 sorteos nuevos)",
+  "n_sorteos": 4280,
+  "primer_concurso": 1,
+  "primera_fecha": "1984-08-19",
+  "ultimo_concurso": 4280,
+  "ultima_fecha": "2026-10-18",
+  "validacion": {
+   "producto_unico": true,
+   "concursos_consecutivos": true,
+   "concurso_inicia_en_1": true,
+   "fechas_no_decrecientes": true,
+   "r1_a_r6_ordenados": true,
+   "r7_distinto_de_r1_r6": true
+  },
+  "cambios_formato": [
+   {
+    "concurso": 1,
+    "fecha": "1984-08-19",
+    "maximo": 36
+   },
+   {
+    "concurso": 2,
+    "fecha": "1984-08-26",
+    "maximo": 38
+   },
+   {
+    "concurso": 5,
+    "fecha": "1984-09-16",
+    "maximo": 39
+   },
+   {
+    "concurso": 557,
+    "fecha": "1993-04-07",
+    "maximo": 42
+   },
+   {
+    "concurso": 563,
+    "fecha": "1993-04-28",
+    "maximo": 44
+   },
+   {
+    "concurso": 1548,
+    "fecha": "2002-10-06",
+    "maximo": 47
+   },
+   {
+    "concurso": 1878,
+    "fecha": "2005-12-04",
+    "maximo": 48
+   },
+   {
+    "concurso": 1881,
+    "fecha": "2005-12-14",
+    "maximo": 50
+   },
+   {
+    "concurso": 1891,
+    "fecha": "2006-01-18",
+    "maximo": 51
+   },
+   {
+    "concurso": 2089,
+    "fecha": "2007-12-12",
+    "maximo": 56
+   }
+  ],
+  "era_inicio_concurso": 2089,
+  "era_inicio_fecha": "2007-12-12",
+  "era_n": 2192,
+  "p_sorteo_sin_52_56": 0.4992083388309803,
+  "ultimos": [
+   {
+    "CONCURSO": 4273,
+    "R1": 6,
+    "R2": 18,
+    "R3": 24,
+    "R4": 44,
+    "R5": 50,
+    "R6": 55,
+    "R7": 39
+   },
+   {
+    "CONCURSO": 4274,
+    "R1": 20,
+    "R2": 27,
+    "R3": 32,
+    "R4": 38,
+    "R5": 43,
+    "R6": 54,
+    "R7": 26
+   },
+   {
+    "CONCURSO": 4275,
+    "R1": 17,
+    "R2": 20,
+    "R3": 22,
+    "R4": 26,
+    "R5": 33,
+    "R6": 45,
+    "R7": 32
+   },
+   {
+    "CONCURSO": 4276,
+    "R1": 14,
+    "R2": 19,
+    "R3": 21,
+    "R4": 47,
+    "R5": 54,
+    "R6": 55,
+    "R7": 41
+   },
+   {
+    "CONCURSO": 4277,
+    "R1": 9,
+    "R2": 15,
+    "R3": 18,
+    "R4": 32,
+    "R5": 39,
+    "R6": 46,
+    "R7": 6
+   },
+   {
+    "CONCURSO": 4278,
+    "R1": 1,
+    "R2": 4,
+    "R3": 7,
+    "R4": 41,
+    "R5": 43,
+    "R6": 51,
+    "R7": 42
+   },
+   {
+    "CONCURSO": 4279,
+    "R1": 1,
+    "R2": 12,
+    "R3": 27,
+    "R4": 29,
+    "R5": 41,
+    "R6": 55,
+    "R7": 47
+   },
+   {
+    "CONCURSO": 4280,
+    "R1": 10,
+    "R2": 18,
+    "R3": 20,
+    "R4": 31,
+    "R5": 34,
+    "R6": 45,
+    "R7": 15
+   }
+  ],
+  "ultimas_fechas": [
+   "2026-10-02",
+   "2026-10-04",
+   "2026-10-07",
+   "2026-10-09",
+   "2026-10-11",
+   "2026-10-14",
+   "2026-10-16",
+   "2026-10-18"
+  ]
+ },
+ "distribucion": {
+  "pmf_teorica": [
+   0.10714285714285714,
+   0.09740259740259741,
+   0.08838383838383838,
+   0.08004574042309891,
+   0.07234903461318555,
+   0.06525599200404972,
+   0.05873039280364475,
+   0.05273749557878304,
+   0.04724400645599314,
+   0.04221804832237685,
+   0.03762913002646632,
+   0.03344811557908117,
+   0.029647193354185586,
+   0.0261998452897454,
+   0.023080816088585233,
+   0.02026608241924557,
+   0.017732822116839873,
+   0.015459383383911686,
+   0.013425253991291727,
+   0.011611030478955007,
+   0.009998387356877922,
+   0.008570046305895362,
+   0.0073097453785578095,
+   0.006202208199988444,
+   0.005233113168740249,
+   0.0043890626576531125,
+   0.003657552214710927,
+   0.0030269397638986984,
+   0.002486414806059645,
+   0.0020259676197523033,
+   0.0016363584621076298,
+   0.0013090867696861038,
+   0.0010363603593348321,
+   0.0008110646290446512,
+   0.0006267317588072305,
+   0.0004775099114721756,
+   0.0003581324336041317,
+   0.0002638870563398865,
+   0.0001905850962454736,
+   0.0001345306561732755,
+   9.24898261191269e-05,
+   6.165988407941794e-05,
+   3.963849690819724e-05,
+   2.4392921174275225e-05,
+   1.4229204018327215e-05,
+   7.761384009996662e-06,
+   3.880692004998331e-06,
+   1.7247520022214806e-06,
+   6.467820008330552e-07,
+   1.847948573808729e-07,
+   3.0799142896812156e-08
+  ],
+  "pmf_empirica": [
+   0.11405109489051095,
+   0.09762773722627738,
+   0.08759124087591241,
+   0.07801094890510948,
+   0.07983576642335767,
+   0.05930656934306569,
+   0.055656934306569344,
+   0.05018248175182482,
+   0.04881386861313869,
+   0.04425182481751825,
+   0.0364963503649635,
+   0.034215328467153285,
+   0.03467153284671533,
+   0.021897810218978103,
+   0.024635036496350366,
+   0.01916058394160584,
+   0.012773722627737226,
+   0.015054744525547446,
+   0.010948905109489052,
+   0.010948905109489052,
+   0.010492700729927007,
+   0.00958029197080292,
+   0.006386861313868613,
+   0.00958029197080292,
+   0.005474452554744526,
+   0.0031934306569343066,
+   0.0018248175182481751,
+   0.002281021897810219,
+   0.004105839416058394,
+   0.002737226277372263,
+   0.002737226277372263,
+   0.0,
+   0.0009124087591240876,
+   0.0004562043795620438,
+   0.0018248175182481751,
+   0.0,
+   0.0018248175182481751,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0004562043795620438,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "mediana_teorica": 6,
+  "media_teorica": 8.142857142857142,
+  "mediana_observada": 6.0,
+  "media_observada": 8.09580291970803,
+  "p_r1_hasta_10": 0.7115100031304249,
+  "p_r1_hasta_mediana": 0.5105800599696271,
+  "curva_calificacion": [
+   {
+    "prediccion": 1,
+    "teorica": 7.857142857142857,
+    "empirica": 7.871259124087593
+   },
+   {
+    "prediccion": 2,
+    "teorica": 8.092857142857143,
+    "empirica": 8.102828467153286
+   },
+   {
+    "prediccion": 3,
+    "teorica": 8.270129870129868,
+    "empirica": 8.275821167883212
+   },
+   {
+    "prediccion": 4,
+    "teorica": 8.394372294372296,
+    "empirica": 8.39625912408759
+   },
+   {
+    "prediccion": 5,
+    "teorica": 8.470587274360861,
+    "empirica": 8.469890510948906
+   },
+   {
+    "prediccion": 6,
+    "teorica": 8.503392833581515,
+    "empirica": 8.495620437956205
+   },
+   {
+    "prediccion": 7,
+    "teorica": 8.497044797599736,
+    "empirica": 8.485766423357665
+   },
+   {
+    "prediccion": 8,
+    "teorica": 8.455458525935772,
+    "empirica": 8.442518248175183
+   },
+   {
+    "prediccion": 9,
+    "teorica": 8.38222975692454,
+    "empirica": 8.369160583941605
+   },
+   {
+    "prediccion": 10,
+    "teorica": 8.280654584039713,
+    "empirica": 8.266514598540146
+   },
+   {
+    "prediccion": 11,
+    "teorica": 8.153748582161457,
+    "empirica": 8.137317518248175
+   },
+   {
+    "prediccion": 12,
+    "teorica": 8.004265102267324,
+    "empirica": 7.986222627737226
+   },
+   {
+    "prediccion": 13,
+    "teorica": 7.834712753025738,
+    "empirica": 7.814598540145985
+   },
+   {
+    "prediccion": 14,
+    "teorica": 7.647372087771644,
+    "empirica": 7.622171532846715
+   },
+   {
+    "prediccion": 15,
+    "teorica": 7.444311515343701,
+    "empirica": 7.416605839416059
+   },
+   {
+    "prediccion": 16,
+    "teorica": 7.2274024532626076,
+    "empirica": 7.19625912408759
+   },
+   {
+    "prediccion": 17,
+    "teorica": 6.998333741729968,
+    "empirica": 6.964416058394161
+   },
+   {
+    "prediccion": 18,
+    "teorica": 6.758625336927224,
+    "empirica": 6.724908759124087
+   },
+   {
+    "prediccion": 19,
+    "teorica": 6.509641302094131,
+    "empirica": 6.476368613138686
+   },
+   {
+    "prediccion": 20,
+    "teorica": 6.252602114866265,
+    "empirica": 6.221259124087592
+   },
+   {
+    "prediccion": 21,
+    "teorica": 5.988596309351026,
+    "empirica": 5.959580291970804
+   },
+   {
+    "prediccion": 22,
+    "teorica": 5.718591471421661,
+    "empirica": 5.6916058394160585
+   },
+   {
+    "prediccion": 23,
+    "teorica": 5.443444605708756,
+    "empirica": 5.4178832116788325
+   },
+   {
+    "prediccion": 24,
+    "teorica": 5.163911892768718,
+    "empirica": 5.140328467153284
+   },
+   {
+    "prediccion": 25,
+    "teorica": 4.880657854908689,
+    "empirica": 4.8570255474452555
+   }
+  ],
+  "mejor_constante": 6,
+  "calif_mejor_constante": 8.503392833581515,
+  "chi2_r1": {
+   "estadistico": 23.85999257354649,
+   "gl": 29,
+   "p": 0.7358044813725967
+  }
+ },
+ "pruebas": {
+  "frecuencias": [
+   250,
+   236,
+   242,
+   238,
+   254,
+   231,
+   217,
+   239,
+   221,
+   226,
+   220,
+   252,
+   245,
+   237,
+   251,
+   222,
+   228,
+   245,
+   256,
+   236,
+   259,
+   224,
+   220,
+   252,
+   246,
+   219,
+   209,
+   226,
+   262,
+   226,
+   218,
+   242,
+   242,
+   210,
+   235,
+   240,
+   209,
+   209,
+   235,
+   238,
+   233,
+   225,
+   240,
+   244,
+   236,
+   217,
+   221,
+   232,
+   242,
+   261,
+   223,
+   242,
+   219,
+   258,
+   240,
+   252
+  ],
+  "esperado_por_bola": 234.85714285714286,
+  "chi2_bolas": {
+   "estadistico": 47.77737226277372,
+   "gl": 55,
+   "p": 0.7444086373950405
+  },
+  "acf": [
+   0.007463625579704187,
+   -0.031419487093907524,
+   0.0008017770005596821,
+   0.0164289738330014,
+   -0.011282990893969584,
+   -0.028635741783260633,
+   0.01446218069820246,
+   0.00011223567150980624,
+   -0.019297599097830447,
+   0.009354832084261876,
+   0.009035836825923498,
+   0.0009325839531105243,
+   -0.003959434458267468,
+   -0.010098006920513684,
+   0.018731056618249333,
+   -0.003894225451865236,
+   -0.006022081864411845,
+   -0.019213421673861024,
+   0.016732066795499406,
+   -0.0076104634479587105
+  ],
+  "banda": 0.041863525228121284,
+  "acf_fuera": 0,
+  "ljung_box_p": {
+   "10": 0.7768210278451564,
+   "20": 0.9786589609429518
+  },
+  "rachas": {
+   "observadas": 1081,
+   "esperadas": 1095.8175182481752,
+   "z": -0.6338016321524335,
+   "p": 0.5262102878993364
+  },
+  "independencia": {
+   "estadistico": 5.533351930436231,
+   "gl": 9,
+   "p": 0.785560043322198,
+   "filas": [
+    "1-3",
+    "4-6",
+    "7-10",
+    "11+"
+   ],
+   "pct": [
+    [
+     32.2,
+     22.1,
+     18.3,
+     27.4
+    ],
+    [
+     27.5,
+     22.1,
+     21.0,
+     29.4
+    ],
+    [
+     29.9,
+     20.2,
+     19.3,
+     30.6
+    ],
+    [
+     29.5,
+     22.1,
+     21.0,
+     27.4
+    ]
+   ]
+  }
+ },
+ "demo": {
+  "curva": [
+   [
+    0.1638184065517691,
+    0.10289666056632996
+   ],
+   [
+    0.10294688297915705,
+    0.09272347390651703
+   ],
+   [
+    0.09382832300724442,
+    0.09358923137187958
+   ],
+   [
+    0.09358524159365093,
+    0.0926172286272049
+   ],
+   [
+    0.09139480318912525,
+    0.0925660952925682
+   ],
+   [
+    0.09114350509090521,
+    0.09282398968935013
+   ],
+   [
+    0.09129731856363336,
+    0.09279907494783401
+   ],
+   [
+    0.08933784718980495,
+    0.09252286702394485
+   ],
+   [
+    0.09152272357461379,
+    0.09287555515766144
+   ],
+   [
+    0.09068443394198861,
+    0.09295377880334854
+   ],
+   [
+    0.08982073915066179,
+    0.09307704865932465
+   ],
+   [
+    0.09024150528244136,
+    0.09287213534116745
+   ],
+   [
+    0.09011054300155837,
+    0.09333029389381409
+   ],
+   [
+    0.08909555203521374,
+    0.09324922412633896
+   ],
+   [
+    0.08942668625374431,
+    0.09292861819267273
+   ],
+   [
+    0.09091736655874351,
+    0.09339841455221176
+   ],
+   [
+    0.08972549908554431,
+    0.09317953884601593
+   ],
+   [
+    0.08866687644388258,
+    0.09319780021905899
+   ],
+   [
+    0.08940787252384363,
+    0.09330987930297852
+   ],
+   [
+    0.0883931870466655,
+    0.09378588199615479
+   ],
+   [
+    0.08862029476878569,
+    0.0932118147611618
+   ],
+   [
+    0.08749521253342481,
+    0.09336623549461365
+   ],
+   [
+    0.08822315831467048,
+    0.09341292828321457
+   ],
+   [
+    0.08809733352403051,
+    0.0934002473950386
+   ],
+   [
+    0.08751339870937092,
+    0.09332866221666336
+   ],
+   [
+    0.08912547986531995,
+    0.09361866861581802
+   ],
+   [
+    0.08833888807554835,
+    0.09350769966840744
+   ],
+   [
+    0.0875928530219904,
+    0.09347252547740936
+   ]
+  ],
+  "n": 500,
+  "salida_min": 5.33692741394043,
+  "salida_max": 8.081666946411133,
+  "salida_std": 0.44254717230796814,
+  "salida_hist": [
+   3,
+   1,
+   12,
+   18,
+   22,
+   38,
+   60,
+   54,
+   54,
+   53,
+   61,
+   36,
+   31,
+   28,
+   16,
+   7,
+   4,
+   1,
+   0,
+   1
+  ],
+  "salida_bordes": [
+   5.33692741394043,
+   5.4741644859313965,
+   5.611401557922363,
+   5.748638153076172,
+   5.885875225067139,
+   6.0231122970581055,
+   6.160349369049072,
+   6.297586441040039,
+   6.434823036193848,
+   6.5720601081848145,
+   6.709297180175781,
+   6.846534252166748,
+   6.983771324157715,
+   7.121007919311523,
+   7.258245468139648,
+   7.395482063293457,
+   7.532719135284424,
+   7.669956207275391,
+   7.807192802429199,
+   7.944430351257324,
+   8.081666946411133
+  ]
+ },
+ "busqueda": {
+  "n_configs": 160,
+  "n_validacion": 500,
+  "constante": 6,
+  "ref_validacion": 8.447799999999999,
+  "validacion_desde": "2019-05-15",
+  "validacion_hasta": "2023-08-09",
+  "le_ganan_en_validacion": 27,
+  "mejor": 8.459200000000001,
+  "peor": 8.3542,
+  "puntos": [
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.459200000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.4544
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.453800000000001
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4532
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4526
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.452599999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.452
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4514
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4514
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.450800000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4508
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4508
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4508
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4508
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.449599999999998
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.449
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.449
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.449
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.448400000000001
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.448400000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.448400000000001
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.448400000000001
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4472
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4472
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4472
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447199999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.446600000000002
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4466
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4466
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.446599999999998
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.446599999999998
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.446000000000002
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.446
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.446
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.446
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.446
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.446
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.445400000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.445400000000001
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4454
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4454
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.444799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.444799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.444799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.444799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4442
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4442
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.4442
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4436
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4436
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4436
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.443
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.443
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.443
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.442400000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.442400000000001
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.442400000000001
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.4424
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4424
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4424
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4418
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4418
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4412
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.4412
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.4406
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.440599999999998
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.44
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.44
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.44
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.439400000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4394
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.438799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.438799999999999
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.438799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4382
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4376
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.4376
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.4376
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.437599999999998
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.437
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.437
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.437
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4364
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.4364
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.436399999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4358
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4352
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4352
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4346
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4346
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.432799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4322
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4322
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4322
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4316
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.431599999999998
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.431599999999998
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.431
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.431
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.431
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.430400000000002
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.429799999999998
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.429200000000002
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.429199999999998
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4274
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4268
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.426200000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4232
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.422
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4214
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.419599999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.419
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.418400000000002
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4184
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.417200000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.416599999999999
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4148
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.413599999999999
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.41
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4076
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.4052
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.404
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4034
+   },
+   {
+    "familia": "CNN",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.3926
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.3848
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.38
+   },
+   {
+    "familia": "MLP",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.375200000000001
+   },
+   {
+    "familia": "GRU",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.375200000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.365
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.3542
+   }
+  ],
+  "por_familia": [
+   {
+    "familia": "CNN",
+    "count": 31,
+    "max": 8.4544,
+    "median": 8.4448
+   },
+   {
+    "familia": "GRU",
+    "count": 30,
+    "max": 8.4592,
+    "median": 8.443
+   },
+   {
+    "familia": "LSTM",
+    "count": 29,
+    "max": 8.4526,
+    "median": 8.4478
+   },
+   {
+    "familia": "MLP",
+    "count": 43,
+    "max": 8.4532,
+    "median": 8.437
+   },
+   {
+    "familia": "Transformer",
+    "count": 27,
+    "max": 8.4502,
+    "median": 8.4388
+   }
+  ],
+  "por_perdida": [
+   {
+    "perdida": "clase",
+    "count": 80,
+    "max": 8.4592,
+    "median": 8.4478
+   },
+   {
+    "perdida": "l1",
+    "count": 75,
+    "max": 8.4526,
+    "median": 8.437
+   },
+   {
+    "perdida": "mse",
+    "count": 5,
+    "max": 8.3926,
+    "median": 8.3752
+   }
+  ],
+  "top10": [
+   {
+    "id": 107,
+    "nombre": "GRU-CLASE k=50 ambas h=16x2 do=0.4 lr=0.001 wd=0.001",
+    "calificacion": 8.459200000000001
+   },
+   {
+    "id": 133,
+    "nombre": "CNN-CLASE k=20 escalada h=128x2 do=0.4 lr=0.001 wd=0.0",
+    "calificacion": 8.4544
+   },
+   {
+    "id": 47,
+    "nombre": "CNN-CLASE k=5 ambas h=64x2 do=0.2 lr=0.003 wd=0.0001",
+    "calificacion": 8.453800000000001
+   },
+   {
+    "id": 40,
+    "nombre": "MLP-CLASE k=20 multihot h=32x1 do=0.2 lr=0.001 wd=0.0001",
+    "calificacion": 8.4532
+   },
+   {
+    "id": 134,
+    "nombre": "LSTM-L1 k=10 multihot h=128x2 do=0.0 lr=0.003 wd=0.001",
+    "calificacion": 8.4526
+   },
+   {
+    "id": 95,
+    "nombre": "MLP-CLASE k=10 escalada h=32x1 do=0.4 lr=0.003 wd=0.0",
+    "calificacion": 8.452599999999999
+   },
+   {
+    "id": 67,
+    "nombre": "CNN-CLASE k=20 ambas h=32x1 do=0.2 lr=0.003 wd=0.001",
+    "calificacion": 8.452
+   },
+   {
+    "id": 39,
+    "nombre": "CNN-CLASE k=5 ambas h=64x1 do=0.0 lr=0.001 wd=0.0",
+    "calificacion": 8.4514
+   },
+   {
+    "id": 121,
+    "nombre": "LSTM-CLASE k=10 multihot h=16x1 do=0.2 lr=0.001 wd=0.001",
+    "calificacion": 8.4514
+   },
+   {
+    "id": 87,
+    "nombre": "LSTM-L1 k=5 ambas h=16x2 do=0.2 lr=0.001 wd=0.0",
+    "calificacion": 8.450800000000001
+   }
+  ],
+  "config": {
+   "semillas_busqueda": [
+    0,
+    1
+   ],
+   "reentrenar_busqueda": 250,
+   "semillas_final": [
+    0,
+    1,
+    2
+   ],
+   "reentrenar_final": 100,
+   "espacio": {
+    "familia": [
+     "MLP",
+     "LSTM",
+     "GRU",
+     "CNN",
+     "Transformer"
+    ],
+    "perdida": [
+     "l1",
+     "clase"
+    ],
+    "ventana": [
+     5,
+     10,
+     20,
+     50
+    ],
+    "entrada": [
+     "escalada",
+     "multihot",
+     "ambas"
+    ],
+    "oculto": [
+     16,
+     32,
+     64,
+     128
+    ],
+    "capas": [
+     1,
+     2
+    ],
+    "dropout": [
+     0.0,
+     0.2,
+     0.4
+    ],
+    "lr": [
+     0.001,
+     0.003
+    ],
+    "weight_decay": [
+     0.0,
+     0.0001,
+     0.001
+    ]
+   },
+   "rapido": false
+  }
+ },
+ "prueba": {
+  "desde": "2023-08-11",
+  "hasta": "2026-10-18",
+  "n": 500,
+  "tabla": [
+   {
+    "metodo": "Constante 6 (teoría)",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.447799999999999,
+    "calificacion": 8.523399999999999,
+    "error_abs": 4.922,
+    "dif_vs_ref": 0.0,
+    "ic_bajo": 0.0,
+    "ic_alto": 0.0,
+    "moda": 6,
+    "pct_moda": 1.0,
+    "rango": [
+     6,
+     6
+    ]
+   },
+   {
+    "metodo": "Mediana histórica",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.447799999999999,
+    "calificacion": 8.523399999999999,
+    "error_abs": 4.922,
+    "dif_vs_ref": 0.0,
+    "ic_bajo": 0.0,
+    "ic_alto": 0.0,
+    "moda": 6,
+    "pct_moda": 1.0,
+    "rango": [
+     6,
+     6
+    ]
+   },
+   {
+    "metodo": "CNN-Clasif. k=20 (#133)",
+    "tipo": "Deep Learning",
+    "clave": "133",
+    "validacion": 8.4544,
+    "calificacion": 8.5216,
+    "error_abs": 4.928,
+    "dif_vs_ref": -0.0018000000000000132,
+    "ic_bajo": -0.009600000000000032,
+    "ic_alto": 0.005999999999999993,
+    "moda": 6,
+    "pct_moda": 0.91,
+    "rango": [
+     6,
+     7
+    ]
+   },
+   {
+    "metodo": "Números calientes (Dirichlet)",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.4382,
+    "calificacion": 8.5216,
+    "error_abs": 4.928,
+    "dif_vs_ref": -0.0018000000000000114,
+    "ic_bajo": -0.007200000000000022,
+    "ic_alto": 0.003599999999999996,
+    "moda": 6,
+    "pct_moda": 0.954,
+    "rango": [
+     5,
+     7
+    ]
+   },
+   {
+    "metodo": "Transformer-Clasif. k=20 (#129)",
+    "tipo": "Deep Learning",
+    "clave": "129",
+    "validacion": 8.4502,
+    "calificacion": 8.5204,
+    "error_abs": 4.932,
+    "dif_vs_ref": -0.0030000000000000105,
+    "ic_bajo": -0.012600000000000014,
+    "ic_alto": 0.0065999999999999765,
+    "moda": 6,
+    "pct_moda": 0.866,
+    "rango": [
+     6,
+     7
+    ]
+   },
+   {
+    "metodo": "Campeón: Ensamble top-5 (mediana)",
+    "tipo": "Deep Learning",
+    "clave": "ensamble",
+    "validacion": 8.462200000000001,
+    "calificacion": 8.516200000000001,
+    "error_abs": 4.946,
+    "dif_vs_ref": -0.0072000000000000085,
+    "ic_bajo": -0.015000000000000027,
+    "ic_alto": 0.0011999999999999708,
+    "moda": 6,
+    "pct_moda": 0.904,
+    "rango": [
+     5,
+     7
+    ]
+   },
+   {
+    "metodo": "GRU-Clasif. k=50 (#107)",
+    "tipo": "Deep Learning",
+    "clave": "107",
+    "validacion": 8.459200000000001,
+    "calificacion": 8.5162,
+    "error_abs": 4.946,
+    "dif_vs_ref": -0.007200000000000012,
+    "ic_bajo": -0.018000000000000006,
+    "ic_alto": 0.0035999999999999817,
+    "moda": 6,
+    "pct_moda": 0.858,
+    "rango": [
+     5,
+     8
+    ]
+   },
+   {
+    "metodo": "CNN-Clasif. k=5 (#47)",
+    "tipo": "Deep Learning",
+    "clave": "47",
+    "validacion": 8.453800000000001,
+    "calificacion": 8.5156,
+    "error_abs": 4.948,
+    "dif_vs_ref": -0.007800000000000024,
+    "ic_bajo": -0.020400000000000022,
+    "ic_alto": 0.004799999999999973,
+    "moda": 6,
+    "pct_moda": 0.77,
+    "rango": [
+     5,
+     7
+    ]
+   },
+   {
+    "metodo": "LSTM-L1 k=10 (#134)",
+    "tipo": "Deep Learning",
+    "clave": "134",
+    "validacion": 8.4526,
+    "calificacion": 8.5156,
+    "error_abs": 4.948,
+    "dif_vs_ref": -0.007799999999999999,
+    "ic_bajo": -0.021,
+    "ic_alto": 0.0053999999999999986,
+    "moda": 6,
+    "pct_moda": 0.75,
+    "rango": [
+     5,
+     7
+    ]
+   },
+   {
+    "metodo": "Cadena de Markov",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.449,
+    "calificacion": 8.5138,
+    "error_abs": 4.954,
+    "dif_vs_ref": -0.009600000000000039,
+    "ic_bajo": -0.024600000000000014,
+    "ic_alto": 0.005399999999999958,
+    "moda": 6,
+    "pct_moda": 0.68,
+    "rango": [
+     6,
+     7
+    ]
+   },
+   {
+    "metodo": "Mediana últimos 50",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.423800000000002,
+    "calificacion": 8.506,
+    "error_abs": 4.98,
+    "dif_vs_ref": -0.017400000000000027,
+    "ic_bajo": -0.045000000000000054,
+    "ic_alto": 0.010799999999999995,
+    "moda": 6,
+    "pct_moda": 0.38,
+    "rango": [
+     4,
+     8
+    ]
+   },
+   {
+    "metodo": "MLP-Clasif. k=20 (#40)",
+    "tipo": "Deep Learning",
+    "clave": "40",
+    "validacion": 8.4532,
+    "calificacion": 8.5048,
+    "error_abs": 4.984,
+    "dif_vs_ref": -0.018600000000000033,
+    "ic_bajo": -0.03780000000000007,
+    "ic_alto": 0.0005999999999999428,
+    "moda": 6,
+    "pct_moda": 0.538,
+    "rango": [
+     5,
+     8
+    ]
+   },
+   {
+    "metodo": "Gradient boosting (L1)",
+    "tipo": "ML clásico",
+    "clave": null,
+    "validacion": 8.450800000000001,
+    "calificacion": 8.5042,
+    "error_abs": 4.986,
+    "dif_vs_ref": -0.019200000000000023,
+    "ic_bajo": -0.03480000000000003,
+    "ic_alto": -0.003600000000000028,
+    "moda": 6,
+    "pct_moda": 0.672,
+    "rango": [
+     5,
+     8
+    ]
+   },
+   {
+    "metodo": "Media histórica",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.401,
+    "calificacion": 8.455,
+    "error_abs": 5.15,
+    "dif_vs_ref": -0.06840000000000003,
+    "ic_bajo": -0.11880000000000003,
+    "ic_alto": -0.016800000000000034,
+    "moda": 8,
+    "pct_moda": 1.0,
+    "rango": [
+     8,
+     8
+    ]
+   },
+   {
+    "metodo": "CNN-MSE k=10 (#10)",
+    "tipo": "Deep Learning",
+    "clave": "10",
+    "validacion": 8.3926,
+    "calificacion": 8.4538,
+    "error_abs": 5.154,
+    "dif_vs_ref": -0.06960000000000002,
+    "ic_bajo": -0.11881500000000005,
+    "ic_alto": -0.019185000000000223,
+    "moda": 8,
+    "pct_moda": 0.836,
+    "rango": [
+     7,
+     9
+    ]
+   },
+   {
+    "metodo": "Mediana últimos 10",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.338,
+    "calificacion": 8.4394,
+    "error_abs": 5.202,
+    "dif_vs_ref": -0.08400000000000009,
+    "ic_bajo": -0.1332000000000001,
+    "ic_alto": -0.03420000000000012,
+    "moda": 6,
+    "pct_moda": 0.196,
+    "rango": [
+     2,
+     12
+    ]
+   },
+   {
+    "metodo": "Último R1",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 7.7968,
+    "calificacion": 7.9366,
+    "error_abs": 6.878,
+    "dif_vs_ref": -0.5868,
+    "ic_bajo": -0.7326,
+    "ic_alto": -0.44578500000000026,
+    "moda": 1,
+    "pct_moda": 0.124,
+    "rango": [
+     1,
+     37
+    ]
+   }
+  ],
+  "campeon": {
+   "metodo": "Campeón: Ensamble top-5 (mediana)",
+   "tipo": "Deep Learning",
+   "clave": "ensamble",
+   "validacion": 8.462200000000001,
+   "calificacion": 8.516200000000001,
+   "error_abs": 4.946,
+   "dif_vs_ref": -0.0072000000000000085,
+   "ic_bajo": -0.015000000000000027,
+   "ic_alto": 0.0011999999999999708,
+   "moda": 6,
+   "pct_moda": 0.904,
+   "rango": [
+    5,
+    7
+   ]
+  },
+  "gana": false,
+  "serie": {
+   "real": [
+    1,
+    11,
+    6,
+    2,
+    19,
+    4,
+    4,
+    13,
+    4,
+    25,
+    8,
+    3,
+    1,
+    13,
+    2,
+    21,
+    2,
+    5,
+    8,
+    13,
+    11,
+    2,
+    6,
+    22,
+    9,
+    11,
+    14,
+    25,
+    1,
+    7,
+    5,
+    8,
+    5,
+    4,
+    10,
+    5,
+    9,
+    5,
+    9,
+    16,
+    3,
+    5,
+    5,
+    4,
+    8,
+    12,
+    19,
+    13,
+    7,
+    2,
+    10,
+    13,
+    3,
+    4,
+    8,
+    13,
+    30,
+    7,
+    10,
+    10,
+    8,
+    2,
+    10,
+    17,
+    17,
+    19,
+    2,
+    5,
+    10,
+    8,
+    6,
+    3,
+    2,
+    11,
+    13,
+    22,
+    1,
+    7,
+    14,
+    2,
+    9,
+    1,
+    26,
+    5,
+    1,
+    6,
+    5,
+    7,
+    4,
+    1,
+    2,
+    7,
+    12,
+    1,
+    9,
+    22,
+    14,
+    4,
+    3,
+    7,
+    2,
+    7,
+    13,
+    5,
+    20,
+    6,
+    1,
+    8,
+    5,
+    5,
+    11,
+    4,
+    6,
+    20,
+    17,
+    14,
+    9,
+    1,
+    1,
+    10
+   ],
+   "Campeón": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    7,
+    7,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    7,
+    6,
+    6,
+    6,
+    5,
+    5,
+    5,
+    5,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    5,
+    5,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    5,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    7,
+    7,
+    7,
+    7,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "Mejor MSE": [
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    7,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    7,
+    7,
+    8,
+    7,
+    7,
+    7,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    7,
+    8,
+    7,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8
+   ]
+  }
+ },
+ "tres_sorteos": {
+  "prediccion": 6,
+  "esperada": 8.503392833581513,
+  "p_9_o_mas": 0.35764253308360067,
+  "p_8_o_mas": 0.7805713317770402,
+  "p_menos_de_7": 0.057069701221661724,
+  "p10": 7.300000000000001,
+  "p50": 8.7,
+  "p90": 9.4,
+  "histograma": [
+   {
+    "hasta": 10.0,
+    "prob": 0.03685238644517991
+   },
+   {
+    "hasta": 9.5,
+    "prob": 0.25368422325287204
+   },
+   {
+    "hasta": 9.0,
+    "prob": 0.2867769337024974
+   },
+   {
+    "hasta": 8.5,
+    "prob": 0.1760462176158087
+   },
+   {
+    "hasta": 8.0,
+    "prob": 0.11355995650256981
+   },
+   {
+    "hasta": 7.5,
+    "prob": 0.06683998103313527
+   },
+   {
+    "hasta": 7.0,
+    "prob": 0.03572782068597614
+   },
+   {
+    "hasta": 6.5,
+    "prob": 0.017398115846171458
+   },
+   {
+    "hasta": 6.0,
+    "prob": 0.007797962608557054
+   },
+   {
+    "hasta": 5.5,
+    "prob": 0.0032761468356113264
+   },
+   {
+    "hasta": 5.0,
+    "prob": 0.00130437188031669
+   },
+   {
+    "hasta": 4.5,
+    "prob": 0.0004878118650710464
+   },
+   {
+    "hasta": 4.0,
+    "prob": 0.00016988312585197696
+   },
+   {
+    "hasta": 3.5,
+    "prob": 5.512215437815567e-05
+   },
+   {
+    "hasta": 3.0,
+    "prob": 1.671297470721538e-05
+   }
+  ],
+  "por_prediccion": [
+   {
+    "prediccion": 2,
+    "esperada": 8.092857142857143
+   },
+   {
+    "prediccion": 3,
+    "esperada": 8.27012987012987
+   },
+   {
+    "prediccion": 4,
+    "esperada": 8.394372294372294
+   },
+   {
+    "prediccion": 5,
+    "esperada": 8.47058727436086
+   },
+   {
+    "prediccion": 6,
+    "esperada": 8.503392833581513
+   },
+   {
+    "prediccion": 7,
+    "esperada": 8.497044797599736
+   },
+   {
+    "prediccion": 8,
+    "esperada": 8.455458525935775
+   },
+   {
+    "prediccion": 9,
+    "esperada": 8.382229756924541
+   },
+   {
+    "prediccion": 10,
+    "esperada": 8.280654584039711
+   },
+   {
+    "prediccion": 11,
+    "esperada": 8.153748582161459
+   },
+   {
+    "prediccion": 12,
+    "esperada": 8.004265102267322
+   }
+  ]
+ },
+ "prediccion": {
+  "final": 6,
+  "metodo": "Constante 6 (mediana teórica)",
+  "razon": "el campeón de Deep Learning no le ganó a la constante en la prueba final",
+  "campeon_predice": 6,
+  "por_metodo": {
+   "GRU-Clasif. k=50 (#107)": 6,
+   "CNN-Clasif. k=20 (#133)": 6,
+   "CNN-Clasif. k=5 (#47)": 6,
+   "MLP-Clasif. k=20 (#40)": 6,
+   "LSTM-L1 k=10 (#134)": 6,
+   "Transformer-Clasif. k=20 (#129)": 5,
+   "CNN-MSE k=10 (#10)": 8,
+   "Ensamble top-5 (mediana)": 6,
+   "Constante 6 (teoría)": 6,
+   "Mediana histórica": 6
+  },
+  "coinciden": [
+   "CNN-Clasif. k=20 (#133)",
+   "CNN-Clasif. k=5 (#47)",
+   "Constante 6 (teoría)",
+   "Ensamble top-5 (mediana)",
+   "GRU-Clasif. k=50 (#107)",
+   "LSTM-L1 k=10 (#134)",
+   "MLP-Clasif. k=20 (#40)",
+   "Mediana histórica"
+  ],
+  "datos_hasta": "2026-10-18",
+  "ultimo_concurso": 4280,
+  "busqueda_hasta": "2026-10-18",
+  "calif_esperada": 8.503392833581515
+ }
+}

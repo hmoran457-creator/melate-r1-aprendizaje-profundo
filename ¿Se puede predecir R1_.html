@@ -1,0 +1,1277 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>¿Se puede predecir R1?</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Diapositivas de pantalla completa (scroll libre; flechas y botones saltan de una en una); la bola de sorteo es el motivo visual (R1 = la bola más chica, en color). */
+:root {
+  --bg: #eef1f5;
+  --panel: #ffffff;
+  --ink: #142033;
+  --muted: #46536a;       /* más oscuro que un gris de pantalla: en proyector el gris claro se pierde */
+  --line: #d3dae4;
+  --ball: #e0512b;        /* R1 / nuestra predicción */
+  --ball-ink: #ffffff;
+  --theory: #0f8b7d;      /* la fórmula, el azar */
+  --data: #2f5d9e;        /* lo observado */
+  --net: #8a4fd1;         /* las redes */
+  --bad: #b3261e;
+  --plain-ball: #f8fafc;
+  --plain-ball-edge: #c3ccd8;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1420; --panel: #152033; --ink: #e8edf5; --muted: #9aa8bb; --line: #2a3a52;
+    --ball: #ff6b42; --ball-ink: #1a0d08; --theory: #2ec4b0; --data: #6f9de0; --net: #b28af0; --bad: #ff7b6e;
+    --plain-ball: #1f2c42; --plain-ball-edge: #3a4d6b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1420; --panel: #152033; --ink: #e8edf5; --muted: #9aa8bb; --line: #2a3a52;
+  --ball: #ff6b42; --ball-ink: #1a0d08; --theory: #2ec4b0; --data: #6f9de0; --net: #b28af0; --bad: #ff7b6e;
+  --plain-ball: #1f2c42; --plain-ball-edge: #3a4d6b; color-scheme: dark;
+}
+/* Sin scroll-snap: con "proximity" un giro corto de la rueda hacia arriba regresaba al inicio de la misma diapositiva */
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: clamp(15px, 0.55vw + 10px, 22px); line-height: 1.5; margin: 0; }
+/* Los títulos quedan a la misma altura en todas las diapositivas; solo la portada y la predicción van centradas */
+.slide {
+  min-height: 100vh; min-height: 100dvh; box-sizing: border-box;
+  display: grid; align-content: start; gap: 1.2rem;
+  padding-block: clamp(28px, 5vh, 56px); padding-top: clamp(32px, 7vh, 80px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  border-bottom: 1px solid var(--line);
+}
+.slide.hero, .slide.final { align-content: center; }
+.wrap { width: min(1560px, 100%); margin-inline: auto; display: grid; gap: 1.1rem; min-width: 0; }
+.eyebrow { font-family: var(--mono); font-size: 0.78em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+h1, h2 { font-family: var(--display); font-weight: 800; letter-spacing: -0.01em; text-wrap: balance; margin: 0; line-height: 1.08; }
+h1 { font-size: clamp(2.2rem, 6vw, 5rem); }
+h2 { font-size: clamp(1.4rem, 2.5vw, 2.2rem); }
+p { margin: 0; max-width: 65ch; }
+.lead { font-size: 1.15em; color: var(--muted); max-width: 60ch; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: clamp(16px, 3vw, 40px); align-items: center; }
+.cols > * { min-width: 0; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.hl { color: var(--ball); font-weight: 700; }
+.th { color: var(--theory); font-weight: 700; }
+.nt { color: var(--net); font-weight: 700; }
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
+.chart text { fill: var(--muted); font-family: var(--mono); font-size: 15px; }
+.scroll-x { overflow-x: auto; }
+.scroll-x .chart { min-width: 640px; }
+.chart .t-ink { fill: var(--ink); }
+.chart .axis { stroke: var(--line); stroke-width: 1; }
+.figure { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: clamp(10px, 2vw, 22px); min-width: 0; }
+.caption { font-size: 0.9em; color: var(--muted); margin-top: 0.5rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 0.88em; color: var(--muted); margin-top: 0.4rem; }
+.legend i { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 50%; margin-right: 0.35em; vertical-align: -0.05em; }
+
+/* Bolas */
+.balls { display: flex; flex-wrap: wrap; gap: clamp(8px, 1.4vw, 18px); align-items: center; }
+.ball {
+  --size: clamp(52px, 7vw, 92px);
+  width: var(--size); height: var(--size); border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--display); font-weight: 600; font-size: calc(var(--size) * 0.36); font-variant-numeric: tabular-nums;
+  background: radial-gradient(circle at 34% 30%, var(--panel) 0 18%, var(--plain-ball) 46%);
+  border: 2px solid var(--plain-ball-edge); color: var(--ink); position: relative;
+  transition: transform 0.6s cubic-bezier(.2,.9,.25,1.2), background-color 0.4s, border-color 0.4s;
+}
+.ball.r1 { background: var(--ball); border-color: var(--ball); color: var(--ball-ink); }
+.ball.r1::after { content: "R1"; position: absolute; top: calc(100% + 6px); font-family: var(--mono); font-size: 13px; color: var(--ball); font-weight: 600; }
+.ball.small { --size: clamp(30px, 3.2vw, 42px); }
+.draw-row .balls { gap: 6px; }
+.ball.small.r1::after { display: none; }
+.ball.giant { --size: clamp(150px, 22vw, 260px); }
+.ball.giant.r1::after { content: none; }
+
+/* Portada */
+.hero h1 .r1word { color: var(--ball); }
+.hero .stage { min-height: clamp(130px, 16vw, 170px); display: grid; align-items: center; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; font-family: var(--mono); font-size: 0.85em; color: var(--muted); }
+
+/* Fórmula */
+.formula { font-family: var(--mono); font-size: clamp(1.2rem, 3vw, 2.3rem); background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 0.8em 1em; overflow-x: auto; }
+.formula b { color: var(--ball); }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; }
+.fact { border-top: 3px solid var(--line); padding-top: 0.6rem; display: grid; gap: 0.2rem; }
+.fact .big { font-family: var(--display); font-weight: 600; font-size: clamp(1.6rem, 3vw, 2.4rem); font-variant-numeric: tabular-nums; }
+.fact.accent { border-color: var(--ball); }
+.fact.theory { border-color: var(--theory); }
+.fact.net { border-color: var(--net); }
+.fact small { color: var(--muted); font-size: 0.9em; }
+#pruFacts .big { font-size: clamp(1.3rem, 2.2vw, 1.8rem); }
+.facts > * { min-width: 0; }
+#dChi { font-size: clamp(1.2rem, 2vw, 1.9rem); }
+/* Gráficas altas: se limitan a la pantalla (el SVG conserva su proporción y se centra) */
+#prueba .chart, #memorizar .chart { max-height: 50vh; }
+
+/* Pruebas */
+.tests { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; }
+.test { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 0.9rem 1rem; display: grid; gap: 0.25rem; }
+.test .p { font-family: var(--mono); font-size: 1.4em; font-weight: 600; color: var(--theory); }
+.test .verdict { font-size: 0.85em; color: var(--muted); }
+.chip { display: inline-block; font-family: var(--mono); font-size: 0.72em; padding: 0.15em 0.6em; border-radius: 99px; border: 1px solid currentColor; }
+
+/* Interactivo */
+.slider-row { display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; }
+input[type=range] { width: 100%; accent-color: var(--ball); }
+.readout { font-family: var(--display); font-size: clamp(1.4rem, 3vw, 2.2rem); font-variant-numeric: tabular-nums; }
+button { font: inherit; font-size: 0.9em; padding: 0.55em 1.1em; border-radius: 99px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+button.primary { background: var(--ball); border-color: var(--ball); color: var(--ball-ink); font-weight: 700; }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--data); outline-offset: 3px; }
+.draws { display: grid; gap: 0.7rem; }
+.draw-row { display: grid; grid-template-columns: 7.5em 1fr auto; gap: 0.8rem; align-items: center; }
+.draw-row > * { min-width: 0; }
+.draw-row .grade { font-family: var(--mono); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* Protocolo */
+.timeline { display: grid; gap: 0.5rem; }
+.tl-bar { display: flex; height: 60px; border-radius: 10px; overflow: hidden; font-family: var(--mono); font-size: 0.85em; }
+.tl-bar div { display: grid; place-items: center; color: var(--panel); font-weight: 600; text-align: center; padding: 0 4px; min-width: 0; }
+.tl-dates { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.72em; color: var(--muted); }
+.steps { display: grid; gap: 0.8rem; counter-reset: s; }
+.steps li { list-style: none; display: grid; grid-template-columns: 2.2em 1fr; gap: 0.6rem; align-items: start; }
+.steps li::before { counter-increment: s; content: counter(s); font-family: var(--display); font-weight: 600; width: 1.8em; height: 1.8em; border-radius: 50%; display: grid; place-items: center; border: 2px solid var(--ink); font-size: 0.9em; }
+.steps { padding: 0; margin: 0; }
+
+/* Modelos */
+.zoo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 10px; }
+.zoo div { border: 1px solid var(--line); border-radius: 12px; padding: 0.8rem; background: var(--panel); display: grid; gap: 0.2rem; }
+.zoo b { font-family: var(--display); font-weight: 600; color: var(--net); }
+.zoo span { font-size: 0.82em; color: var(--muted); }
+.dims { display: grid; gap: 0.4rem; font-size: 0.9em; }
+.dims div { display: grid; grid-template-columns: 9em 1fr; gap: 0.6rem; border-bottom: 1px dashed var(--line); padding-bottom: 0.35rem; }
+.dims dt, .dims b { color: var(--muted); font-weight: 400; }
+
+/* Final */
+.final { text-align: center; justify-items: center; }
+.final .ball.giant { margin: 0.6rem 0 0.4rem; }
+.agree { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 900px; }
+.agree span { font-family: var(--mono); font-size: 0.8em; padding: 0.2em 0.7em; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); }
+.agree span.yes { border-color: var(--ball); color: var(--ink); }
+[hidden] { display: none !important; }   /* el visor de Claude ya lo trae; el archivo local no */
+.reales { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0.4rem 1.4rem; padding: 0.6rem 1.2rem; border: 2px solid var(--ball); border-radius: 12px; background: var(--panel); }
+.takeaways { display: grid; gap: 0.9rem; counter-reset: t; }
+.takeaways p { padding-left: 1rem; border-left: 3px solid var(--line); }
+.takeaways p:first-child { border-color: var(--ball); }
+
+/* Explicaciones para no especialistas */
+.plain { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--theory); border-radius: 10px; padding: 0.75rem 1rem; max-width: 80ch; font-size: 0.95em; }
+.test .q { font-weight: 700; font-size: 1.02em; }
+.test .verdict b { color: var(--ink); }
+.dims dd { margin: 0; }
+
+/* Pestañas y diagrama de arquitectura */
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabs button { font-size: 0.85em; padding: 0.35em 0.9em; border-color: var(--line); background: var(--panel); }
+.tabs button.on { background: var(--ink); border-color: var(--ink); color: var(--bg); font-weight: 700; }
+.tabs.small { margin-bottom: 0.4rem; }
+.tabs.small button { font-size: 0.7em; }
+.arq { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(12px, 2vw, 28px); align-items: start; }
+@media (max-width: 860px) { .arq { grid-template-columns: 1fr; } }
+.arq-side { display: grid; gap: 0.9rem; min-width: 0; }
+.chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 6px; }
+.chips span { display: grid; gap: 1px; border: 1px solid var(--line); border-radius: 8px; padding: 0.35rem 0.6rem; background: var(--panel); }
+.chips small { color: var(--muted); font-size: 0.72em; }
+.chips b { font-size: 0.9em; font-variant-numeric: tabular-nums; }
+.pick { display: flex; gap: 0.5rem; align-items: center; font-size: 0.85em; color: var(--muted); margin-bottom: 0.3rem; }
+.pick select { font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 0.25em 0.5em; max-width: 100%; }
+#memoria .chart { max-height: 30vh; }
+#memoria .test .verdict { font-size: 0.82em; }
+#modelos .dims { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); column-gap: 28px; margin-top: 0.8rem; }
+details.mas summary { cursor: pointer; color: var(--ink); font-weight: 700; font-size: 0.95em; }
+details.mas summary:focus-visible { outline: 3px solid var(--data); outline-offset: 3px; }
+.layers { margin: 0; padding-left: 1.2em; display: grid; gap: 0.35rem; font-size: 0.86em; }
+.layers small { color: var(--muted); }
+@keyframes fadein { from { opacity: 0; } }
+.play .fade { animation: fadein 1.2s ease-out backwards; animation-delay: 0.3s; }
+
+/* Glosario */
+.glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 10px 22px; margin: 0; }
+.glossary div { border-top: 2px solid var(--line); padding-top: 0.4rem; }
+.glossary dt { font-family: var(--display); font-weight: 600; font-size: 0.95em; }
+.glossary dd { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.9em; }
+
+/* Navegación */
+.nav {
+  position: fixed; right: 0; bottom: 0; z-index: 20; display: flex; gap: 8px; align-items: center;
+  padding: 10px max(14px, env(safe-area-inset-right, 0px)) max(10px, env(safe-area-inset-bottom, 0px)) 10px;
+  font-family: var(--mono); font-size: 12px; color: var(--muted);
+}
+.nav button { padding: 0.35em 0.8em; font-size: 12px; background: var(--panel); border-color: var(--line); }
+.progress { position: fixed; left: 0; right: 0; top: 0; height: calc(4px + env(safe-area-inset-top, 0px)); z-index: 21; pointer-events: none; }
+.progress div { height: 4px; margin-top: env(safe-area-inset-top, 0px); background: var(--ball); width: 0; transition: width 0.3s; }
+
+/* Movimiento: todo está dibujado en reposo; al entrar una diapositiva, se reproduce la animación. */
+@keyframes grow-y { from { transform: scaleY(0); } }
+@keyframes grow-x { from { transform: scaleX(0); } }
+@keyframes draw { from { stroke-dashoffset: var(--len, 1200); } }
+@keyframes pop { from { transform: scale(0.2); opacity: 0; } }
+@keyframes rise { from { transform: translateY(14px); opacity: 0; } }
+.play .gy { transform-box: fill-box; transform-origin: bottom; animation: grow-y 0.8s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i, 0) * 14ms); }
+.play .gx { transform-box: fill-box; transform-origin: left; animation: grow-x 0.8s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i, 0) * 50ms); }
+.play .ln { stroke-dasharray: var(--len, 1200); animation: draw 1.4s ease-out backwards; animation-delay: 0.3s; }
+.play .pp { animation: pop 0.5s cubic-bezier(.2,.9,.3,1.3) backwards; animation-delay: calc(var(--i, 0) * 9ms + 0.2s); }
+.play .rise { animation: rise 0.6s ease-out backwards; animation-delay: calc(var(--i, 0) * 90ms); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .play .gy, .play .gx, .play .ln, .play .pp, .play .rise, .play .fade { animation: none; }
+  .ball { transition: none; }
+}
+</style>
+
+<div class="progress" aria-hidden="true"><div id="progress"></div></div>
+
+<!-- 1. Portada -->
+<section class="slide hero" id="inicio">
+  <div class="wrap">
+    <div class="eyebrow">Examen final · Aprendizaje Profundo · Equipo <span class="hl">R1</span></div>
+    <h1>¿Se puede predecir <span class="r1word">R1</span> del Melate?</h1>
+    <div class="stage"><div class="balls" id="heroBalls" aria-label="Último sorteo"></div></div>
+    <p class="lead" id="heroCaption"></p>
+    <div class="meta"><span id="heroMeta1"></span><span id="heroMeta2"></span><span>Presentación: 24 de octubre de 2026</span></div>
+  </div>
+</section>
+
+<!-- 2. El reto -->
+<section class="slide" id="reto">
+  <div class="wrap">
+    <div class="eyebrow">El reto</div>
+    <h2>Un solo número, tres sorteos</h2>
+    <div class="formula" role="math">calificación = 10 − 0.3 × |<b>sorteo</b> − predicción|</div>
+    <div class="facts">
+      <div class="fact accent rise" style="--i:0"><span class="big">23 · 25 · 28</span><small>de octubre: los tres sorteos que califican la misma predicción</small></div>
+      <div class="fact rise" style="--i:1"><span class="big num">−0.3</span><small>por cada número de distancia. Fallar por 10 deja 7.0</small></div>
+      <div class="fact rise" style="--i:2"><span class="big">la distancia</span><small>es lo único que castiga, así que conviene el valor de en medio (la <b>mediana</b>), no el promedio</small></div>
+    </div>
+    <p class="lead" id="spoiler"></p>
+  </div>
+</section>
+
+<!-- 3. R1 es la bola más chica -->
+<section class="slide" id="ordenados">
+  <div class="wrap cols">
+    <div style="display:grid;gap:1rem">
+      <div class="eyebrow">Primer hallazgo</div>
+      <h2>R1 no es la primera bola. Es la más chica.</h2>
+      <p id="ordenTxt"></p>
+      <p class="lead">Predecir R1 es predecir el <b>mínimo de seis números al azar entre 1 y 56</b>. Ese mínimo casi siempre es bajo.</p>
+    </div>
+    <div class="figure">
+      <div class="draws" id="ultimos"></div>
+      <div class="caption" id="ultimosCap"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Los datos y los cambios de formato -->
+<section class="slide" id="datos">
+  <div class="wrap">
+    <div class="eyebrow">Los datos</div>
+    <h2 id="datosTitulo"></h2>
+    <div class="cols">
+      <div class="figure"><svg class="chart" id="chFormato" viewBox="0 0 640 280" role="img" aria-label="Número más alto posible por fecha"></svg>
+        <div class="caption">Número más alto observado hasta cada fecha. El universo creció de 39 a 56.</div></div>
+      <div class="facts" style="grid-template-columns:1fr">
+        <div class="fact rise" style="--i:0"><span class="big num" id="fTotal"></span><small id="fTotalTxt"></small></div>
+        <div class="fact accent rise" style="--i:1"><span class="big num" id="fEra"></span><small id="fEraTxt"></small></div>
+        <div class="fact theory rise" style="--i:2"><span class="big num">6 de 56</span><small>las reglas actuales: seis números naturales más un adicional (R7), que no afecta a R1</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Distribución -->
+<section class="slide" id="distribucion">
+  <div class="wrap">
+    <div class="eyebrow">Estadística · la distribución exacta</div>
+    <h2 id="distTitulo"></h2>
+    <div class="cols">
+      <div class="figure"><svg class="chart" id="chDist" viewBox="0 0 640 300" role="img" aria-label="Distribución de R1"></svg>
+        <div class="legend"><span><i style="background:var(--data)"></i>observado</span><span><i style="background:var(--theory)"></i>teoría</span><span><i style="background:var(--ball)"></i><span id="leyMed"></span></span></div></div>
+      <div style="display:grid;gap:1rem">
+        <div class="formula" style="font-size:clamp(1rem,2vw,1.5rem)">P(R1 = k) = C(56−k, 5) / C(56, 6)</div>
+        <p>Una bola vale <i>k</i> y las otras cinco salen de las 56 − <i>k</i> mayores. La fórmula no usa ningún dato, y aun así describe los datos.</p>
+        <div class="facts">
+          <div class="fact accent"><span class="big num" id="dMed"></span><small>mediana (teoría y datos)</small></div>
+          <div class="fact"><span class="big num" id="dMean"></span><small>media observada</small></div>
+          <div class="fact theory"><span class="big" id="dChi"></span><small id="dChiTxt"></small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Por qué la mediana: interactivo -->
+<section class="slide" id="mediana">
+  <div class="wrap">
+    <div class="eyebrow">Estadística · qué número conviene</div>
+    <h2>La calificación esperada tiene un máximo, y está en la mediana</h2>
+    <p class="plain" id="defSiempre"></p>
+    <div class="cols">
+      <div class="figure"><svg class="chart" id="chCurva" viewBox="0 0 640 300" role="img" aria-label="Calificación esperada según la predicción"></svg></div>
+      <div style="display:grid;gap:1rem">
+        <label for="pred" class="eyebrow">Mueve tu predicción</label>
+        <div class="slider-row"><span class="num">1</span><input type="range" id="pred" min="1" max="25" step="1"><span class="num">25</span></div>
+        <div class="facts">
+          <div class="fact accent"><span class="readout" id="predOut"></span><small>predicción</small></div>
+          <div class="fact theory"><span class="readout" id="predCal"></span><small>calificación esperada por sorteo</small></div>
+        </div>
+        <p id="predTxt" class="lead"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Memoria -->
+<section class="slide" id="memoria">
+  <div class="wrap">
+    <div class="eyebrow">Estadística · ¿el pasado ayuda a adivinar?</div>
+    <h2 id="memTitulo"></h2>
+    <div class="tests" id="tests"></div>
+    <div class="cols" style="align-items:start">
+      <div class="plain"><b>Cómo leer estas pruebas.</b> Cada una pregunta "¿esto se ve como puro azar?". El número <b>p</b> dice qué tan raro sería el resultado si el sorteo fuera 100 % al azar. Si p es mayor que 0.05, no hay nada raro, y por lo tanto no hay ninguna pista que una red pueda aprovechar.</div>
+      <div class="figure"><svg class="chart" id="chAcf" viewBox="0 0 640 240" role="img" aria-label="Autocorrelación de R1"></svg>
+        <div class="caption" id="acfCap"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Modelos -->
+<section class="slide" id="modelos">
+  <div class="wrap">
+    <div class="eyebrow">Deep Learning · lo que probamos</div>
+    <h2 id="zooTitulo"></h2>
+    <div class="plain"><b>Una red neuronal</b> es una fórmula con miles de "perillas" (parámetros). <b>Entrenarla</b> es girar esas perillas poco a poco, pasada tras pasada sobre los sorteos del pasado (cada pasada es una <b>época</b>), para que se equivoque cada vez menos.</div>
+    <div class="zoo">
+      <div class="rise" style="--i:0"><b>MLP</b><span>La más sencilla: pone los últimos sorteos en una fila y los pasa por capas de neuronas.</span></div>
+      <div class="rise" style="--i:1"><b>LSTM</b><span>Lee los sorteos en orden, uno por uno, y va guardando una memoria de lo que ya vio.</span></div>
+      <div class="rise" style="--i:2"><b>GRU</b><span>Como la LSTM, con una memoria más simple y más rápida de entrenar.</span></div>
+      <div class="rise" style="--i:3"><b>CNN 1D</b><span>Desliza "filtros" sobre la secuencia buscando patrones en pocos sorteos seguidos.</span></div>
+      <div class="rise" style="--i:4"><b>Transformer</b><span>La idea de los modelos de lenguaje actuales, en miniatura: cada sorteo "consulta" a los demás.</span></div>
+    </div>
+    <p class="lead" style="max-width:none">El error con el que se entrena importa. Con <b>L1</b> la red aprende a apuntar a la mediana, que es justo lo que premia el examen. Con <b>MSE</b> aprende a apuntar al promedio (8), y eso cuesta puntos.</p>
+    <details class="mas">
+      <summary>Todo lo que variamos entre configuraciones</summary>
+      <dl class="dims">
+        <div><dt>Qué responde</dt><dd>un número (el R1 estimado), o la probabilidad de cada valor de 1 a 51 (R1 nunca pasa de 51: no cabrían cinco números mayores); en ese caso se toma el valor de en medio, la mediana</dd></div>
+        <div><dt>Cómo mide su error</dt><dd><b class="hl">L1</b>: la distancia, igual que el examen · <b>MSE</b>: la distancia al cuadrado</dd></div>
+        <div><dt>Cuánta historia ve</dt><dd>los últimos 5, 10, 20 o 50 sorteos (en las gráficas, "k")</dd></div>
+        <div><dt>Cómo ve cada sorteo</dt><dd>los seis números · una lista de 56 casillas que marca qué bolas salieron · ambas cosas</dd></div>
+        <div><dt>Ajustes finos</dt><dd>16 a 128 neuronas por capa, 1 o 2 capas, <i>dropout</i> (apagar neuronas al azar para que no memoricen), velocidad de aprendizaje y <i>weight decay</i> (castigo a las perillas muy grandes)</dd></div>
+        <div><dt>Para comparar</dt><dd>métodos sin redes: gradient boosting, cadena de Markov, "números calientes", medianas recientes</dd></div>
+      </dl>
+    </details>
+  </div>
+</section>
+
+<!-- 9. Arquitecturas -->
+<section class="slide" id="arquitectura">
+  <div class="wrap">
+    <div class="eyebrow">Deep Learning · una red por dentro</div>
+    <h2 id="arqTitulo"></h2>
+    <div class="tabs" id="tabsArq" role="tablist" aria-label="Red finalista"></div>
+    <div class="arq">
+      <div class="figure"><svg class="chart" id="chArq" viewBox="0 0 760 360" role="img" aria-label="Diagrama de capas de la red"></svg>
+        <div class="caption">Cada círculo es una neurona (si una capa tiene más de 10, se dibujan 10). Cada línea es una conexión, y cada conexión es un parámetro que la red ajusta al entrenar.</div></div>
+      <div class="arq-side">
+        <div class="chips" id="arqChips"></div>
+        <ol class="layers" id="arqCapas"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Protocolo -->
+<section class="slide" id="protocolo">
+  <div class="wrap">
+    <div class="eyebrow">Cómo evitamos engañarnos</div>
+    <h2 id="protoTitulo"></h2>
+    <div class="plain" id="protoPlain"></div>
+    <div class="timeline">
+      <div class="tl-bar" id="tlBar"></div>
+      <div class="tl-dates" id="tlDates"></div>
+    </div>
+    <ol class="steps">
+      <li class="rise" style="--i:0"><p><b>Estudiar sin ver el futuro.</b> Para predecir un sorteo, la red solo conoce los anteriores, y se vuelve a entrenar conforme avanza el tiempo.</p></li>
+      <li class="rise" style="--i:1"><p><b>Elegir al campeón con los exámenes de práctica.</b> Gana la configuración con mejor calificación en validación, o la combinación de las 5 mejores si le va mejor.</p></li>
+      <li class="rise" style="--i:2"><p id="paso3"></p></li>
+      <li class="rise" style="--i:3"><p><b>Regla decidida antes de ver el final.</b> Enviamos el número del campeón solo si le gana a "siempre 6" por un margen que no se explique por suerte (intervalo de confianza de 95 % completamente arriba de cero). Si no, enviamos 6.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 11. Búsqueda -->
+<section class="slide" id="busqueda">
+  <div class="wrap">
+    <div class="eyebrow">Deep Learning · la búsqueda</div>
+    <h2 id="busqTitulo"></h2>
+    <div class="figure scroll-x"><svg class="chart" id="chBusq" viewBox="0 0 960 300" role="img" aria-label="Calificación de cada configuración en validación"></svg>
+      <div class="caption" id="busqCap"></div></div>
+  </div>
+</section>
+
+<!-- 12. Qué aprendió la red -->
+<section class="slide" id="aprendio">
+  <div class="wrap cols">
+    <div style="display:grid;gap:1rem">
+      <div class="eyebrow">Deep Learning · qué aprendió</div>
+      <h2>La red redescubrió la mediana</h2>
+      <p id="aprTxt"></p>
+      <div class="facts" id="aprFacts"></div>
+    </div>
+    <div class="figure"><svg class="chart" id="chDemo" viewBox="0 0 640 280" role="img" aria-label="Respuestas de una red MLP-L1"></svg>
+      <div class="caption" id="demoCap"></div></div>
+  </div>
+</section>
+
+<!-- 13. Curvas de entrenamiento -->
+<section class="slide" id="curvas">
+  <div class="wrap">
+    <div class="eyebrow">Deep Learning · ¿memorizaron en vez de aprender?</div>
+    <h2>Así se ve el sobreentrenamiento, y por qué a nosotros no nos pasó</h2>
+    <div class="plain"><b>Sobreentrenar</b> es memorizar las respuestas en vez de aprender. Se reconoce así: el error con los sorteos que la red ya vio sigue bajando, pero el error con sorteos nuevos empieza a subir. El <b>early stopping</b> vigila ese segundo error y detiene el entrenamiento en su punto más bajo.</div>
+    <div class="cols" style="align-items:start">
+      <div class="figure">
+        <label class="pick" for="selCurva">Red: <select id="selCurva"></select></label>
+        <svg class="chart" id="chCurva2" viewBox="0 0 640 300" role="img" aria-label="Curva de entrenamiento de la red elegida"></svg>
+        <div class="legend"><span><i style="background:var(--muted)"></i>error en sorteos que ya vio</span><span><i style="background:var(--net)"></i>error en sorteos nuevos</span></div>
+        <div class="caption" id="curvaCap"></div></div>
+      <div class="figure"><svg class="chart" id="chSobre" viewBox="0 0 640 300" role="img" aria-label="Curva de una red sobreentrenada a propósito"></svg>
+        <div class="legend"><span><i style="background:var(--muted)"></i>error en sorteos que ya vio</span><span><i style="background:var(--net)"></i>error en sorteos nuevos</span></div>
+        <div class="caption" id="sobreCap"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 14. Ventaja en vistos vs no vistos -->
+<section class="slide" id="memorizar">
+  <div class="wrap">
+    <div class="eyebrow">Deep Learning · la prueba de que no memorizaron</div>
+    <h2 id="memoTitulo"></h2>
+    <div class="plain" id="memoPlain"></div>
+    <div class="figure scroll-x"><svg class="chart" id="chMemo" viewBox="0 0 960 330" role="img" aria-label="Ventaja sobre siempre 6 en sorteos vistos y no vistos"></svg>
+      <div class="legend"><span><i style="background:var(--muted)"></i>en los sorteos con los que entrenó</span><span><i style="background:var(--net)"></i>en sorteos nuevos</span></div>
+      <div class="caption" id="memoCap"></div></div>
+  </div>
+</section>
+
+<!-- 15. Prueba final -->
+<section class="slide" id="prueba">
+  <div class="wrap">
+    <div class="eyebrow">El examen final</div>
+    <h2 id="pruTitulo"></h2>
+    <div class="facts" id="pruFacts"></div>
+    <div class="figure" style="overflow-x:auto"><svg class="chart" id="chPrueba" viewBox="0 0 960 520" role="img" aria-label="Diferencia contra siempre 6 en la prueba final" style="min-width:640px"></svg></div>
+    <p class="caption" id="pruCap"></p>
+  </div>
+</section>
+
+<!-- 16. Serie -->
+<section class="slide" id="serie">
+  <div class="wrap">
+    <div class="eyebrow">El examen final, sorteo por sorteo</div>
+    <h2 id="serieTitulo"></h2>
+    <div class="figure scroll-x"><svg class="chart" id="chSerie" viewBox="0 0 960 300" role="img" aria-label="R1 real contra predicciones"></svg>
+      <div class="legend"><span><i style="background:var(--data)"></i>R1 real</span><span><i style="background:var(--ball)"></i>lo que predijo el campeón</span><span><i style="background:var(--net)"></i>la mejor red entrenada con MSE</span></div>
+      <div class="caption" id="serieCap"></div></div>
+  </div>
+</section>
+
+<!-- 17. Tres sorteos: simulador -->
+<section class="slide" id="suerte">
+  <div class="wrap">
+    <div class="eyebrow">Tres sorteos · cuánto pesa la suerte</div>
+    <h2 id="suerteTitulo"></h2>
+    <div class="cols" style="align-items:start">
+      <div class="figure"><svg class="chart" id="chTres" viewBox="0 0 640 280" role="img" aria-label="Distribución de la calificación final"></svg>
+        <div class="caption" id="tresCap"></div></div>
+      <div style="display:grid;gap:1rem">
+        <p>Sorteamos aquí mismo tres Melates con 56 bolas, como los de la Lotería, y calificamos nuestra predicción. Cada vez que lo presiones sale distinto: eso es la suerte.</p>
+        <div><button class="primary" id="btnSortear" type="button">Sortear 3 Melates</button></div>
+        <div class="draws" id="simDraws" aria-live="polite"></div>
+        <div class="readout" id="simFinal"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 18. Predicción -->
+<section class="slide final" id="prediccion">
+  <div class="wrap final">
+    <div class="eyebrow">Nuestra predicción para el 23, 25 y 28 de octubre</div>
+    <div class="ball giant r1 pp" id="finalBall"></div>
+    <h2 id="finalTitulo"></h2>
+    <p class="lead" id="finalTxt"></p>
+    <div class="reales" id="reales" hidden></div>
+    <div class="agree" id="agree"></div>
+  </div>
+</section>
+
+<!-- 19. Conclusiones -->
+<section class="slide" id="conclusiones">
+  <div class="wrap">
+    <div class="eyebrow">Lo que aprendimos</div>
+    <h2>El mejor modelo fue entender el problema</h2>
+    <div class="takeaways" id="takeaways"></div>
+  </div>
+</section>
+
+<!-- 20. Glosario -->
+<section class="slide" id="glosario">
+  <div class="wrap">
+    <div class="eyebrow">Apéndice · glosario rápido</div>
+    <h2>Las palabras de esta presentación</h2>
+    <dl class="glossary" id="glosarioLista"></dl>
+    <p class="caption" id="fuente"></p>
+  </div>
+</section>
+
+<nav class="nav" aria-label="Navegación">
+  <span id="counter" class="num"></span>
+  <button type="button" id="btnPrev" aria-label="Diapositiva anterior">↑</button>
+  <button type="button" id="btnNext" aria-label="Diapositiva siguiente">↓</button>
+  <button type="button" id="btnTheme" aria-label="Cambiar tema">◐</button>
+  <button type="button" id="btnFull" aria-label="Pantalla completa">⛶</button>
+</nav>
+
+<script id="carga-datos" type="application/json">{"generado":"2026-10-20 07:29","datos":{"fuente":"descarga previa (1 sorteos nuevos)","n_sorteos":4280,"primer_concurso":1,"primera_fecha":"1984-08-19","ultimo_concurso":4280,"ultima_fecha":"2026-10-18","validacion":{"producto_unico":true,"concursos_consecutivos":true,"concurso_inicia_en_1":true,"fechas_no_decrecientes":true,"r1_a_r6_ordenados":true,"r7_distinto_de_r1_r6":true},"cambios_formato":[{"concurso":1,"fecha":"1984-08-19","maximo":36},{"concurso":2,"fecha":"1984-08-26","maximo":38},{"concurso":5,"fecha":"1984-09-16","maximo":39},{"concurso":557,"fecha":"1993-04-07","maximo":42},{"concurso":563,"fecha":"1993-04-28","maximo":44},{"concurso":1548,"fecha":"2002-10-06","maximo":47},{"concurso":1878,"fecha":"2005-12-04","maximo":48},{"concurso":1881,"fecha":"2005-12-14","maximo":50},{"concurso":1891,"fecha":"2006-01-18","maximo":51},{"concurso":2089,"fecha":"2007-12-12","maximo":56}],"era_inicio_concurso":2089,"era_inicio_fecha":"2007-12-12","era_n":2192,"p_sorteo_sin_52_56":0.4992083388309803,"ultimos":[{"CONCURSO":4273,"R1":6,"R2":18,"R3":24,"R4":44,"R5":50,"R6":55,"R7":39},{"CONCURSO":4274,"R1":20,"R2":27,"R3":32,"R4":38,"R5":43,"R6":54,"R7":26},{"CONCURSO":4275,"R1":17,"R2":20,"R3":22,"R4":26,"R5":33,"R6":45,"R7":32},{"CONCURSO":4276,"R1":14,"R2":19,"R3":21,"R4":47,"R5":54,"R6":55,"R7":41},{"CONCURSO":4277,"R1":9,"R2":15,"R3":18,"R4":32,"R5":39,"R6":46,"R7":6},{"CONCURSO":4278,"R1":1,"R2":4,"R3":7,"R4":41,"R5":43,"R6":51,"R7":42},{"CONCURSO":4279,"R1":1,"R2":12,"R3":27,"R4":29,"R5":41,"R6":55,"R7":47},{"CONCURSO":4280,"R1":10,"R2":18,"R3":20,"R4":31,"R5":34,"R6":45,"R7":15}],"ultimas_fechas":["2026-10-02","2026-10-04","2026-10-07","2026-10-09","2026-10-11","2026-10-14","2026-10-16","2026-10-18"]},"distribucion":{"pmf_teorica":[0.10714285714285714,0.09740259740259741,0.08838383838383838,0.08004574042309891,0.07234903461318555,0.06525599200404972,0.05873039280364475,0.05273749557878304,0.04724400645599314,0.04221804832237685,0.03762913002646632,0.03344811557908117,0.029647193354185586,0.0261998452897454,0.023080816088585233,0.02026608241924557,0.017732822116839873,0.015459383383911686,0.013425253991291727,0.011611030478955007,0.009998387356877922,0.008570046305895362,0.0073097453785578095,0.006202208199988444,0.005233113168740249,0.0043890626576531125,0.003657552214710927,0.0030269397638986984,0.002486414806059645,0.0020259676197523033,0.0016363584621076298,0.0013090867696861038,0.0010363603593348321,0.0008110646290446512,0.0006267317588072305,0.0004775099114721756,0.0003581324336041317,0.0002638870563398865,0.0001905850962454736,0.0001345306561732755,9.24898261191269e-05,6.165988407941794e-05,3.963849690819724e-05,2.4392921174275225e-05,1.4229204018327215e-05,7.761384009996662e-06,3.880692004998331e-06,1.7247520022214806e-06,6.467820008330552e-07,1.847948573808729e-07,3.0799142896812156e-08],"pmf_empirica":[0.11405109489051095,0.09762773722627738,0.08759124087591241,0.07801094890510948,0.07983576642335767,0.05930656934306569,0.055656934306569344,0.05018248175182482,0.04881386861313869,0.04425182481751825,0.0364963503649635,0.034215328467153285,0.03467153284671533,0.021897810218978103,0.024635036496350366,0.01916058394160584,0.012773722627737226,0.015054744525547446,0.010948905109489052,0.010948905109489052,0.010492700729927007,0.00958029197080292,0.006386861313868613,0.00958029197080292,0.005474452554744526,0.0031934306569343066,0.0018248175182481751,0.002281021897810219,0.004105839416058394,0.002737226277372263,0.002737226277372263,0.0,0.0009124087591240876,0.0004562043795620438,0.0018248175182481751,0.0,0.0018248175182481751,0.0,0.0,0.0,0.0,0.0004562043795620438,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"mediana_teorica":6,"media_teorica":8.142857142857142,"mediana_observada":6.0,"media_observada":8.09580291970803,"p_r1_hasta_10":0.7115100031304249,"p_r1_hasta_mediana":0.5105800599696271,"curva_calificacion":[{"prediccion":1,"teorica":7.857142857142857,"empirica":7.871259124087593},{"prediccion":2,"teorica":8.092857142857143,"empirica":8.102828467153286},{"prediccion":3,"teorica":8.270129870129868,"empirica":8.275821167883212},{"prediccion":4,"teorica":8.394372294372296,"empirica":8.39625912408759},{"prediccion":5,"teorica":8.470587274360861,"empirica":8.469890510948906},{"prediccion":6,"teorica":8.503392833581515,"empirica":8.495620437956205},{"prediccion":7,"teorica":8.497044797599736,"empirica":8.485766423357665},{"prediccion":8,"teorica":8.455458525935772,"empirica":8.442518248175183},{"prediccion":9,"teorica":8.38222975692454,"empirica":8.369160583941605},{"prediccion":10,"teorica":8.280654584039713,"empirica":8.266514598540146},{"prediccion":11,"teorica":8.153748582161457,"empirica":8.137317518248175},{"prediccion":12,"teorica":8.004265102267324,"empirica":7.986222627737226},{"prediccion":13,"teorica":7.834712753025738,"empirica":7.814598540145985},{"prediccion":14,"teorica":7.647372087771644,"empirica":7.622171532846715},{"prediccion":15,"teorica":7.444311515343701,"empirica":7.416605839416059},{"prediccion":16,"teorica":7.2274024532626076,"empirica":7.19625912408759},{"prediccion":17,"teorica":6.998333741729968,"empirica":6.964416058394161},{"prediccion":18,"teorica":6.758625336927224,"empirica":6.724908759124087},{"prediccion":19,"teorica":6.509641302094131,"empirica":6.476368613138686},{"prediccion":20,"teorica":6.252602114866265,"empirica":6.221259124087592},{"prediccion":21,"teorica":5.988596309351026,"empirica":5.959580291970804},{"prediccion":22,"teorica":5.718591471421661,"empirica":5.6916058394160585},{"prediccion":23,"teorica":5.443444605708756,"empirica":5.4178832116788325},{"prediccion":24,"teorica":5.163911892768718,"empirica":5.140328467153284},{"prediccion":25,"teorica":4.880657854908689,"empirica":4.8570255474452555}],"mejor_constante":6,"calif_mejor_constante":8.503392833581515,"chi2_r1":{"estadistico":23.85999257354649,"gl":29,"p":0.7358044813725967}},"pruebas":{"frecuencias":[250,236,242,238,254,231,217,239,221,226,220,252,245,237,251,222,228,245,256,236,259,224,220,252,246,219,209,226,262,226,218,242,242,210,235,240,209,209,235,238,233,225,240,244,236,217,221,232,242,261,223,242,219,258,240,252],"esperado_por_bola":234.85714285714286,"chi2_bolas":{"estadistico":47.77737226277372,"gl":55,"p":0.7444086373950405},"acf":[0.007463625579704187,-0.031419487093907524,0.0008017770005596821,0.0164289738330014,-0.011282990893969584,-0.028635741783260633,0.01446218069820246,0.00011223567150980624,-0.019297599097830447,0.009354832084261876,0.009035836825923498,0.0009325839531105243,-0.003959434458267468,-0.010098006920513684,0.018731056618249333,-0.003894225451865236,-0.006022081864411845,-0.019213421673861024,0.016732066795499406,-0.0076104634479587105],"banda":0.041863525228121284,"acf_fuera":0,"ljung_box_p":{"10":0.7768210278451564,"20":0.9786589609429518},"rachas":{"observadas":1081,"esperadas":1095.8175182481752,"z":-0.6338016321524335,"p":0.5262102878993364},"independencia":{"estadistico":5.533351930436231,"gl":9,"p":0.785560043322198,"filas":["1-3","4-6","7-10","11+"],"pct":[[32.2,22.1,18.3,27.4],[27.5,22.1,21.0,29.4],[29.9,20.2,19.3,30.6],[29.5,22.1,21.0,27.4]]}},"demo":{"curva":[[0.1638184065517691,0.10289666056632996],[0.10294688297915705,0.09272347390651703],[0.09382832300724442,0.09358923137187958],[0.09358524159365093,0.0926172286272049],[0.09139480318912525,0.0925660952925682],[0.09114350509090521,0.09282398968935013],[0.09129731856363336,0.09279907494783401],[0.08933784718980495,0.09252286702394485],[0.09152272357461379,0.09287555515766144],[0.09068443394198861,0.09295377880334854],[0.08982073915066179,0.09307704865932465],[0.09024150528244136,0.09287213534116745],[0.09011054300155837,0.09333029389381409],[0.08909555203521374,0.09324922412633896],[0.08942668625374431,0.09292861819267273],[0.09091736655874351,0.09339841455221176],[0.08972549908554431,0.09317953884601593],[0.08866687644388258,0.09319780021905899],[0.08940787252384363,0.09330987930297852],[0.0883931870466655,0.09378588199615479],[0.08862029476878569,0.0932118147611618],[0.08749521253342481,0.09336623549461365],[0.08822315831467048,0.09341292828321457],[0.08809733352403051,0.0934002473950386],[0.08751339870937092,0.09332866221666336],[0.08912547986531995,0.09361866861581802],[0.08833888807554835,0.09350769966840744],[0.0875928530219904,0.09347252547740936]],"n":500,"salida_min":5.33692741394043,"salida_max":8.081666946411133,"salida_std":0.44254717230796814,"salida_hist":[3,1,12,18,22,38,60,54,54,53,61,36,31,28,16,7,4,1,0,1],"salida_bordes":[5.33692741394043,5.4741644859313965,5.611401557922363,5.748638153076172,5.885875225067139,6.0231122970581055,6.160349369049072,6.297586441040039,6.434823036193848,6.5720601081848145,6.709297180175781,6.846534252166748,6.983771324157715,7.121007919311523,7.258245468139648,7.395482063293457,7.532719135284424,7.669956207275391,7.807192802429199,7.944430351257324,8.081666946411133]},"busqueda":{"n_configs":240,"n_validacion":500,"constante":6,"ref_validacion":8.447799999999999,"validacion_desde":"2019-05-15","validacion_hasta":"2023-08-09","le_ganan_en_validacion":42,"mejor":8.459200000000001,"peor":8.3542,"puntos":[{"familia":"GRU","perdida":"clase","ventana":50,"entrada":"ambas","calificacion":8.459200000000001},{"familia":"GRU","perdida":"clase","ventana":5,"entrada":"ambas","calificacion":8.4556},{"familia":"MLP","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.4556},{"familia":"CNN","perdida":"clase","ventana":20,"entrada":"escalada","calificacion":8.4544},{"familia":"CNN","perdida":"clase","ventana":5,"entrada":"ambas","calificacion":8.453800000000001},{"familia":"MLP","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.4532},{"familia":"LSTM","perdida":"l1","ventana":10,"entrada":"multihot","calificacion":8.4526},{"familia":"CNN","perdida":"l1","ventana":10,"entrada":"multihot","calificacion":8.4526},{"familia":"GRU","perdida":"clase","ventana":5,"entrada":"multihot","calificacion":8.4526},{"familia":"MLP","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.452599999999999},{"familia":"GRU","perdida":"clase","ventana":5,"entrada":"multihot","calificacion":8.452},{"familia":"CNN","perdida":"clase","ventana":20,"entrada":"ambas","calificacion":8.452},{"familia":"CNN","perdida":"clase","ventana":5,"entrada":"multihot","calificacion":8.451400000000001},{"familia":"Transformer","perdida":"clase","ventana":5,"entrada":"multihot","calificacion":8.451400000000001},{"familia":"CNN","perdida":"clase","ventana":5,"entrada":"ambas","calificacion":8.4514},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"multihot","calificacion":8.4514},{"familia":"LSTM","perdida":"l1","ventana":5,"entrada":"ambas","calificacion":8.450800000000001},{"familia":"CNN","perdida":"clase","ventana":5,"entrada":"ambas","calificacion":8.4508},{"familia":"GRU","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.4508},{"familia":"CNN","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.4508},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"multihot","calificacion":8.4508},{"familia":"GRU","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.4508},{"familia":"Transformer","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.4502},{"familia":"Transformer","perdida":"clase","ventana":20,"entrada":"ambas","calificacion":8.4502},{"familia":"MLP","perdida":"clase","ventana":5,"entrada":"ambas","calificacion":8.4502},{"familia":"MLP","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.4502},{"familia":"LSTM","perdida":"clase","ventana":50,"entrada":"ambas","calificacion":8.4502},{"familia":"GRU","perdida":"clase","ventana":20,"entrada":"escalada","calificacion":8.4502},{"familia":"GRU","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.4496},{"familia":"GRU","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.449599999999998},{"familia":"Transformer","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.449},{"familia":"Transformer","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.449},{"familia":"MLP","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.449},{"familia":"LSTM","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.449},{"familia":"CNN","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.448400000000001},{"familia":"Transformer","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.448400000000001},{"familia":"MLP","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.448400000000001},{"familia":"Transformer","perdida":"clase","ventana":20,"entrada":"escalada","calificacion":8.448400000000001},{"familia":"LSTM","perdida":"clase","ventana":5,"entrada":"multihot","calificacion":8.448400000000001},{"familia":"LSTM","perdida":"clase","ventana":5,"entrada":"ambas","calificacion":8.448400000000001},{"familia":"LSTM","perdida":"clase","ventana":5,"entrada":"ambas","calificacion":8.4478},{"familia":"Transformer","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.4478},{"familia":"CNN","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"CNN","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"MLP","perdida":"l1","ventana":50,"entrada":"multihot","calificacion":8.447799999999999},{"familia":"GRU","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.447799999999999},{"familia":"CNN","perdida":"clase","ventana":50,"entrada":"ambas","calificacion":8.447799999999999},{"familia":"CNN","perdida":"l1","ventana":20,"entrada":"ambas","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"Transformer","perdida":"clase","ventana":20,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"GRU","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"GRU","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.447799999999999},{"familia":"GRU","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"GRU","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"Transformer","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"GRU","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"CNN","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":50,"entrada":"ambas","calificacion":8.447799999999999},{"familia":"GRU","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"GRU","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.447799999999999},{"familia":"LSTM","perdida":"clase","ventana":50,"entrada":"ambas","calificacion":8.4472},{"familia":"Transformer","perdida":"clase","ventana":20,"entrada":"ambas","calificacion":8.4472},{"familia":"GRU","perdida":"clase","ventana":50,"entrada":"ambas","calificacion":8.4472},{"familia":"Transformer","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.447199999999999},{"familia":"MLP","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.446600000000002},{"familia":"GRU","perdida":"clase","ventana":5,"entrada":"ambas","calificacion":8.4466},{"familia":"Transformer","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.4466},{"familia":"GRU","perdida":"clase","ventana":10,"entrada":"multihot","calificacion":8.4466},{"familia":"CNN","perdida":"clase","ventana":5,"entrada":"multihot","calificacion":8.446599999999998},{"familia":"CNN","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.446599999999998},{"familia":"MLP","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.446000000000002},{"familia":"LSTM","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.446},{"familia":"MLP","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.446},{"familia":"CNN","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.446},{"familia":"Transformer","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.446},{"familia":"MLP","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.446},{"familia":"CNN","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.445400000000001},{"familia":"CNN","perdida":"clase","ventana":10,"entrada":"ambas","calificacion":8.445400000000001},{"familia":"CNN","perdida":"clase","ventana":10,"entrada":"multihot","calificacion":8.445400000000001},{"familia":"GRU","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.445400000000001},{"familia":"Transformer","perdida":"clase","ventana":10,"entrada":"escalada","calificacion":8.4454},{"familia":"CNN","perdida":"clase","ventana":20,"entrada":"escalada","calificacion":8.4454},{"familia":"Transformer","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.4454},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"ambas","calificacion":8.4454},{"familia":"CNN","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.444799999999999},{"familia":"GRU","perdida":"clase","ventana":5,"entrada":"ambas","calificacion":8.444799999999999},{"familia":"MLP","perdida":"l1","ventana":10,"entrada":"multihot","calificacion":8.444799999999999},{"familia":"CNN","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.444799999999999},{"familia":"CNN","perdida":"l1","ventana":10,"entrada":"multihot","calificacion":8.4442},{"familia":"CNN","perdida":"clase","ventana":20,"entrada":"escalada","calificacion":8.4442},{"familia":"Transformer","perdida":"clase","ventana":10,"entrada":"ambas","calificacion":8.4442},{"familia":"Transformer","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.4442},{"familia":"LSTM","perdida":"l1","ventana":20,"entrada":"ambas","calificacion":8.4442},{"familia":"GRU","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.4436},{"familia":"MLP","perdida":"l1","ventana":10,"entrada":"multihot","calificacion":8.4436},{"familia":"LSTM","perdida":"clase","ventana":50,"entrada":"ambas","calificacion":8.4436},{"familia":"CNN","perdida":"l1","ventana":20,"entrada":"ambas","calificacion":8.4436},{"familia":"CNN","perdida":"clase","ventana":5,"entrada":"multihot","calificacion":8.4436},{"familia":"CNN","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.4436},{"familia":"CNN","perdida":"clase","ventana":10,"entrada":"multihot","calificacion":8.443},{"familia":"MLP","perdida":"clase","ventana":5,"entrada":"multihot","calificacion":8.443},{"familia":"CNN","perdida":"clase","ventana":5,"entrada":"multihot","calificacion":8.443},{"familia":"MLP","perdida":"clase","ventana":20,"entrada":"ambas","calificacion":8.443},{"familia":"CNN","perdida":"clase","ventana":50,"entrada":"ambas","calificacion":8.443},{"familia":"CNN","perdida":"clase","ventana":10,"entrada":"ambas","calificacion":8.443},{"familia":"Transformer","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.442400000000001},{"familia":"Transformer","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.442400000000001},{"familia":"CNN","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.442400000000001},{"familia":"LSTM","perdida":"clase","ventana":5,"entrada":"ambas","calificacion":8.442400000000001},{"familia":"GRU","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.442400000000001},{"familia":"Transformer","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.442400000000001},{"familia":"CNN","perdida":"l1","ventana":10,"entrada":"ambas","calificacion":8.4424},{"familia":"GRU","perdida":"l1","ventana":5,"entrada":"escalada","calificacion":8.4424},{"familia":"MLP","perdida":"l1","ventana":50,"entrada":"multihot","calificacion":8.4424},{"familia":"LSTM","perdida":"l1","ventana":10,"entrada":"ambas","calificacion":8.4418},{"familia":"LSTM","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.4418},{"familia":"Transformer","perdida":"l1","ventana":20,"entrada":"escalada","calificacion":8.441799999999999},{"familia":"MLP","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.441799999999999},{"familia":"MLP","perdida":"clase","ventana":50,"entrada":"escalada","calificacion":8.441799999999999},{"familia":"CNN","perdida":"l1","ventana":10,"entrada":"multihot","calificacion":8.441799999999999},{"familia":"CNN","perdida":"l1","ventana":20,"entrada":"ambas","calificacion":8.441799999999999},{"familia":"MLP","perdida":"clase","ventana":20,"entrada":"ambas","calificacion":8.441799999999999},{"familia":"GRU","perdida":"clase","ventana":50,"entrada":"ambas","calificacion":8.441799999999999},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"multihot","calificacion":8.4412},{"familia":"MLP","perdida":"clase","ventana":5,"entrada":"escalada","calificacion":8.4412},{"familia":"CNN","perdida":"l1","ventana":5,"entrada":"escalada","calificacion":8.4406},{"familia":"MLP","perdida":"l1","ventana":50,"entrada":"escalada","calificacion":8.4406},{"familia":"Transformer","perdida":"l1","ventana":10,"entrada":"ambas","calificacion":8.4406},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"ambas","calificacion":8.440599999999998},{"familia":"Transformer","perdida":"l1","ventana":20,"entrada":"escalada","calificacion":8.440599999999998},{"familia":"LSTM","perdida":"clase","ventana":10,"entrada":"multihot","calificacion":8.440599999999998},{"familia":"GRU","perdida":"l1","ventana":5,"entrada":"escalada","calificacion":8.44},{"familia":"MLP","perdida":"clase","ventana":20,"entrada":"escalada","calificacion":8.44},{"familia":"GRU","perdida":"clase","ventana":10,"entrada":"ambas","calificacion":8.44},{"familia":"LSTM","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.44},{"familia":"GRU","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.44},{"familia":"LSTM","perdida":"l1","ventana":5,"entrada":"escalada","calificacion":8.44},{"familia":"MLP","perdida":"l1","ventana":50,"entrada":"escalada","calificacion":8.439400000000001},{"familia":"MLP","perdida":"clase","ventana":20,"entrada":"ambas","calificacion":8.439400000000001},{"familia":"LSTM","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.439400000000001},{"familia":"CNN","perdida":"l1","ventana":10,"entrada":"ambas","calificacion":8.4394},{"familia":"LSTM","perdida":"l1","ventana":20,"entrada":"escalada","calificacion":8.4394},{"familia":"Transformer","perdida":"l1","ventana":20,"entrada":"escalada","calificacion":8.438799999999999},{"familia":"Transformer","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.438799999999999},{"familia":"LSTM","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.438799999999999},{"familia":"CNN","perdida":"l1","ventana":10,"entrada":"multihot","calificacion":8.4382},{"familia":"MLP","perdida":"clase","ventana":10,"entrada":"ambas","calificacion":8.4382},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"escalada","calificacion":8.4376},{"familia":"Transformer","perdida":"clase","ventana":20,"entrada":"ambas","calificacion":8.4376},{"familia":"CNN","perdida":"l1","ventana":20,"entrada":"escalada","calificacion":8.4376},{"familia":"GRU","perdida":"l1","ventana":20,"entrada":"escalada","calificacion":8.437599999999998},{"familia":"MLP","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.437599999999998},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"multihot","calificacion":8.437},{"familia":"LSTM","perdida":"l1","ventana":50,"entrada":"escalada","calificacion":8.437},{"familia":"GRU","perdida":"l1","ventana":50,"entrada":"escalada","calificacion":8.437},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"escalada","calificacion":8.437},{"familia":"MLP","perdida":"l1","ventana":50,"entrada":"escalada","calificacion":8.4364},{"familia":"MLP","perdida":"clase","ventana":5,"entrada":"multihot","calificacion":8.4364},{"familia":"LSTM","perdida":"l1","ventana":5,"entrada":"escalada","calificacion":8.436399999999999},{"familia":"GRU","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.436399999999999},{"familia":"MLP","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.4358},{"familia":"GRU","perdida":"l1","ventana":10,"entrada":"ambas","calificacion":8.435799999999999},{"familia":"GRU","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.435799999999999},{"familia":"MLP","perdida":"clase","ventana":10,"entrada":"ambas","calificacion":8.4352},{"familia":"LSTM","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.4352},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"multihot","calificacion":8.4346},{"familia":"MLP","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.4346},{"familia":"LSTM","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.434},{"familia":"GRU","perdida":"l1","ventana":20,"entrada":"escalada","calificacion":8.432799999999999},{"familia":"MLP","perdida":"l1","ventana":20,"entrada":"ambas","calificacion":8.432799999999999},{"familia":"MLP","perdida":"clase","ventana":50,"entrada":"multihot","calificacion":8.4322},{"familia":"MLP","perdida":"clase","ventana":20,"entrada":"multihot","calificacion":8.4322},{"familia":"Transformer","perdida":"l1","ventana":20,"entrada":"ambas","calificacion":8.4322},{"familia":"Transformer","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.4316},{"familia":"MLP","perdida":"clase","ventana":10,"entrada":"ambas","calificacion":8.4316},{"familia":"MLP","perdida":"clase","ventana":10,"entrada":"multihot","calificacion":8.431599999999998},{"familia":"GRU","perdida":"l1","ventana":50,"entrada":"multihot","calificacion":8.431599999999998},{"familia":"LSTM","perdida":"l1","ventana":20,"entrada":"ambas","calificacion":8.431},{"familia":"GRU","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.431},{"familia":"CNN","perdida":"l1","ventana":5,"entrada":"escalada","calificacion":8.431},{"familia":"Transformer","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.430400000000002},{"familia":"MLP","perdida":"l1","ventana":20,"entrada":"ambas","calificacion":8.430400000000002},{"familia":"MLP","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.430399999999999},{"familia":"GRU","perdida":"l1","ventana":10,"entrada":"ambas","calificacion":8.429799999999998},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"ambas","calificacion":8.429200000000002},{"familia":"GRU","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.429200000000002},{"familia":"Transformer","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.429199999999998},{"familia":"GRU","perdida":"l1","ventana":5,"entrada":"multihot","calificacion":8.4274},{"familia":"MLP","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.4268},{"familia":"GRU","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.4268},{"familia":"MLP","perdida":"l1","ventana":50,"entrada":"escalada","calificacion":8.426200000000001},{"familia":"Transformer","perdida":"l1","ventana":10,"entrada":"multihot","calificacion":8.4232},{"familia":"GRU","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.422},{"familia":"LSTM","perdida":"l1","ventana":20,"entrada":"ambas","calificacion":8.422},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"multihot","calificacion":8.4214},{"familia":"CNN","perdida":"l1","ventana":5,"entrada":"multihot","calificacion":8.419599999999999},{"familia":"MLP","perdida":"l1","ventana":20,"entrada":"ambas","calificacion":8.419},{"familia":"Transformer","perdida":"l1","ventana":5,"entrada":"ambas","calificacion":8.418400000000002},{"familia":"MLP","perdida":"l1","ventana":10,"entrada":"multihot","calificacion":8.4184},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"escalada","calificacion":8.417200000000001},{"familia":"GRU","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.4166},{"familia":"Transformer","perdida":"l1","ventana":5,"entrada":"ambas","calificacion":8.416599999999999},{"familia":"Transformer","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.4148},{"familia":"MLP","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.414200000000001},{"familia":"LSTM","perdida":"l1","ventana":50,"entrada":"multihot","calificacion":8.413599999999999},{"familia":"GRU","perdida":"l1","ventana":5,"entrada":"ambas","calificacion":8.413},{"familia":"GRU","perdida":"l1","ventana":5,"entrada":"multihot","calificacion":8.412400000000002},{"familia":"LSTM","perdida":"l1","ventana":5,"entrada":"multihot","calificacion":8.4106},{"familia":"Transformer","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.41},{"familia":"GRU","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.4076},{"familia":"MLP","perdida":"l1","ventana":10,"entrada":"ambas","calificacion":8.407599999999999},{"familia":"MLP","perdida":"l1","ventana":50,"entrada":"escalada","calificacion":8.4052},{"familia":"GRU","perdida":"l1","ventana":10,"entrada":"ambas","calificacion":8.404},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"ambas","calificacion":8.4034},{"familia":"GRU","perdida":"l1","ventana":10,"entrada":"multihot","calificacion":8.4028},{"familia":"MLP","perdida":"l1","ventana":10,"entrada":"escalada","calificacion":8.401599999999998},{"familia":"CNN","perdida":"mse","ventana":10,"entrada":"escalada","calificacion":8.3926},{"familia":"MLP","perdida":"l1","ventana":10,"entrada":"ambas","calificacion":8.3902},{"familia":"Transformer","perdida":"l1","ventana":50,"entrada":"ambas","calificacion":8.386},{"familia":"Transformer","perdida":"l1","ventana":50,"entrada":"multihot","calificacion":8.3848},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"ambas","calificacion":8.381200000000002},{"familia":"LSTM","perdida":"mse","ventana":10,"entrada":"escalada","calificacion":8.38},{"familia":"MLP","perdida":"mse","ventana":10,"entrada":"escalada","calificacion":8.375200000000001},{"familia":"GRU","perdida":"mse","ventana":10,"entrada":"escalada","calificacion":8.375200000000001},{"familia":"MLP","perdida":"l1","ventana":5,"entrada":"ambas","calificacion":8.3674},{"familia":"Transformer","perdida":"mse","ventana":10,"entrada":"escalada","calificacion":8.365},{"familia":"Transformer","perdida":"l1","ventana":20,"entrada":"multihot","calificacion":8.3542}],"por_familia":[{"familia":"CNN","count":43,"max":8.4544,"median":8.4448},{"familia":"GRU","count":49,"max":8.4592,"median":8.4424},{"familia":"LSTM","count":48,"max":8.4526,"median":8.4475},{"familia":"MLP","count":60,"max":8.4556,"median":8.437},{"familia":"Transformer","count":40,"max":8.4514,"median":8.4424}],"por_perdida":[{"perdida":"clase","count":124,"max":8.4592,"median":8.4478},{"perdida":"l1","count":111,"max":8.4526,"median":8.4358},{"perdida":"mse","count":5,"max":8.3926,"median":8.3752}],"top10":[{"id":107,"nombre":"GRU-CLASE k=50 ambas h=16x2 do=0.4 lr=0.001 wd=0.001","calificacion":8.459200000000001},{"id":164,"nombre":"GRU-CLASE k=5 ambas h=32x2 do=0.4 lr=0.001 wd=0.001","calificacion":8.4556},{"id":187,"nombre":"MLP-CLASE k=5 escalada h=32x2 do=0.0 lr=0.001 wd=0.0","calificacion":8.4556},{"id":133,"nombre":"CNN-CLASE k=20 escalada h=128x2 do=0.4 lr=0.001 wd=0.0","calificacion":8.4544},{"id":47,"nombre":"CNN-CLASE k=5 ambas h=64x2 do=0.2 lr=0.003 wd=0.0001","calificacion":8.453800000000001},{"id":40,"nombre":"MLP-CLASE k=20 multihot h=32x1 do=0.2 lr=0.001 wd=0.0001","calificacion":8.4532},{"id":134,"nombre":"LSTM-L1 k=10 multihot h=128x2 do=0.0 lr=0.003 wd=0.001","calificacion":8.4526},{"id":166,"nombre":"CNN-L1 k=10 multihot h=16x2 do=0.4 lr=0.003 wd=0.0","calificacion":8.4526},{"id":198,"nombre":"GRU-CLASE k=5 multihot h=128x1 do=0.2 lr=0.001 wd=0.0001","calificacion":8.4526},{"id":95,"nombre":"MLP-CLASE k=10 escalada h=32x1 do=0.4 lr=0.003 wd=0.0","calificacion":8.452599999999999}],"config":{"semillas_busqueda":[0,1],"reentrenar_busqueda":250,"semillas_final":[0,1,2],"reentrenar_final":100,"espacio":{"familia":["MLP","LSTM","GRU","CNN","Transformer"],"perdida":["l1","clase"],"ventana":[5,10,20,50],"entrada":["escalada","multihot","ambas"],"oculto":[16,32,64,128],"capas":[1,2],"dropout":[0.0,0.2,0.4],"lr":[0.001,0.003],"weight_decay":[0.0,0.0001,0.001]},"rapido":false}},"prueba":{"desde":"2023-08-11","hasta":"2026-10-18","n":500,"tabla":[{"metodo":"MLP-Clasif. k=5 (#187)","tipo":"Deep Learning","clave":"187","validacion":8.4556,"calificacion":8.525799999999998,"error_abs":4.914,"dif_vs_ref":0.002399999999999988,"ic_bajo":-0.01140000000000001,"ic_alto":0.016199999999999992,"moda":6,"pct_moda":0.728,"rango":[5,7]},{"metodo":"Constante 6 (teoría)","tipo":"Estadístico","clave":null,"validacion":8.447799999999999,"calificacion":8.523399999999999,"error_abs":4.922,"dif_vs_ref":0.0,"ic_bajo":0.0,"ic_alto":0.0,"moda":6,"pct_moda":1.0,"rango":[6,6]},{"metodo":"Mediana histórica","tipo":"Estadístico","clave":null,"validacion":8.447799999999999,"calificacion":8.523399999999999,"error_abs":4.922,"dif_vs_ref":0.0,"ic_bajo":0.0,"ic_alto":0.0,"moda":6,"pct_moda":1.0,"rango":[6,6]},{"metodo":"CNN-Clasif. k=20 (#133)","tipo":"Deep Learning","clave":"133","validacion":8.4544,"calificacion":8.5216,"error_abs":4.928,"dif_vs_ref":-0.0018000000000000132,"ic_bajo":-0.009600000000000032,"ic_alto":0.005999999999999993,"moda":6,"pct_moda":0.91,"rango":[6,7]},{"metodo":"Números calientes (Dirichlet)","tipo":"Estadístico","clave":null,"validacion":8.4382,"calificacion":8.5216,"error_abs":4.928,"dif_vs_ref":-0.0018000000000000114,"ic_bajo":-0.007200000000000022,"ic_alto":0.003599999999999996,"moda":6,"pct_moda":0.954,"rango":[5,7]},{"metodo":"Ensamble top-5 (mediana)","tipo":"Deep Learning","clave":"ensamble","validacion":8.459200000000001,"calificacion":8.5186,"error_abs":4.938,"dif_vs_ref":-0.00480000000000001,"ic_bajo":-0.012000000000000009,"ic_alto":0.002399999999999988,"moda":6,"pct_moda":0.928,"rango":[6,7]},{"metodo":"GRU-Clasif. k=5 (#164)","tipo":"Deep Learning","clave":"164","validacion":8.4556,"calificacion":8.5168,"error_abs":4.944,"dif_vs_ref":-0.006600000000000007,"ic_bajo":-0.014399999999999994,"ic_alto":0.0011999999999999832,"moda":6,"pct_moda":0.918,"rango":[6,7]},{"metodo":"Transformer-Clasif. k=5 (#223)","tipo":"Deep Learning","clave":"223","validacion":8.451400000000001,"calificacion":8.516200000000001,"error_abs":4.946,"dif_vs_ref":-0.007199999999999978,"ic_bajo":-0.02039999999999999,"ic_alto":0.0060000000000000305,"moda":6,"pct_moda":0.744,"rango":[5,6]},{"metodo":"Campeón: GRU-Clasif. k=50 (#107)","tipo":"Deep Learning","clave":"107","validacion":8.459200000000001,"calificacion":8.5162,"error_abs":4.946,"dif_vs_ref":-0.007200000000000012,"ic_bajo":-0.018000000000000006,"ic_alto":0.0035999999999999817,"moda":6,"pct_moda":0.858,"rango":[5,8]},{"metodo":"CNN-Clasif. k=5 (#47)","tipo":"Deep Learning","clave":"47","validacion":8.453800000000001,"calificacion":8.5156,"error_abs":4.948,"dif_vs_ref":-0.007800000000000024,"ic_bajo":-0.020400000000000022,"ic_alto":0.004799999999999973,"moda":6,"pct_moda":0.77,"rango":[5,7]},{"metodo":"LSTM-L1 k=10 (#134)","tipo":"Deep Learning","clave":"134","validacion":8.4526,"calificacion":8.5156,"error_abs":4.948,"dif_vs_ref":-0.007799999999999999,"ic_bajo":-0.021,"ic_alto":0.0053999999999999986,"moda":6,"pct_moda":0.75,"rango":[5,7]},{"metodo":"Cadena de Markov","tipo":"Estadístico","clave":null,"validacion":8.449,"calificacion":8.5138,"error_abs":4.954,"dif_vs_ref":-0.009600000000000039,"ic_bajo":-0.024600000000000014,"ic_alto":0.005399999999999958,"moda":6,"pct_moda":0.68,"rango":[6,7]},{"metodo":"Mediana últimos 50","tipo":"Estadístico","clave":null,"validacion":8.423800000000002,"calificacion":8.506,"error_abs":4.98,"dif_vs_ref":-0.017400000000000027,"ic_bajo":-0.045000000000000054,"ic_alto":0.010799999999999995,"moda":6,"pct_moda":0.38,"rango":[4,8]},{"metodo":"Gradient boosting (L1)","tipo":"ML clásico","clave":null,"validacion":8.450800000000001,"calificacion":8.5042,"error_abs":4.986,"dif_vs_ref":-0.019200000000000023,"ic_bajo":-0.03480000000000003,"ic_alto":-0.003600000000000028,"moda":6,"pct_moda":0.672,"rango":[5,8]},{"metodo":"Media histórica","tipo":"Estadístico","clave":null,"validacion":8.401,"calificacion":8.455,"error_abs":5.15,"dif_vs_ref":-0.06840000000000003,"ic_bajo":-0.11880000000000003,"ic_alto":-0.016800000000000034,"moda":8,"pct_moda":1.0,"rango":[8,8]},{"metodo":"CNN-MSE k=10 (#10)","tipo":"Deep Learning","clave":"10","validacion":8.3926,"calificacion":8.4538,"error_abs":5.154,"dif_vs_ref":-0.06960000000000002,"ic_bajo":-0.11881500000000005,"ic_alto":-0.019185000000000223,"moda":8,"pct_moda":0.836,"rango":[7,9]},{"metodo":"Mediana últimos 10","tipo":"Estadístico","clave":null,"validacion":8.338,"calificacion":8.4394,"error_abs":5.202,"dif_vs_ref":-0.08400000000000009,"ic_bajo":-0.1332000000000001,"ic_alto":-0.03420000000000012,"moda":6,"pct_moda":0.196,"rango":[2,12]},{"metodo":"Último R1","tipo":"Estadístico","clave":null,"validacion":7.7968,"calificacion":7.9366,"error_abs":6.878,"dif_vs_ref":-0.5868,"ic_bajo":-0.7326,"ic_alto":-0.44578500000000026,"moda":1,"pct_moda":0.124,"rango":[1,37]}],"campeon":{"metodo":"Campeón: GRU-Clasif. k=50 (#107)","tipo":"Deep Learning","clave":"107","validacion":8.459200000000001,"calificacion":8.5162,"error_abs":4.946,"dif_vs_ref":-0.007200000000000012,"ic_bajo":-0.018000000000000006,"ic_alto":0.0035999999999999817,"moda":6,"pct_moda":0.858,"rango":[5,8]},"gana":false,"serie":{"real":[1,11,6,2,19,4,4,13,4,25,8,3,1,13,2,21,2,5,8,13,11,2,6,22,9,11,14,25,1,7,5,8,5,4,10,5,9,5,9,16,3,5,5,4,8,12,19,13,7,2,10,13,3,4,8,13,30,7,10,10,8,2,10,17,17,19,2,5,10,8,6,3,2,11,13,22,1,7,14,2,9,1,26,5,1,6,5,7,4,1,2,7,12,1,9,22,14,4,3,7,2,7,13,5,20,6,1,8,5,5,11,4,6,20,17,14,9,1,1,10],"Campeón":[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,7,7,6,6,6,7,7,7,7,6,6,6,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,5,5,5,5,6,6,6,5,6,6,6,6,6,6,6,6,6,6,7,7,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,5,6,6,6,6,6,6,6,6,6,6,6,7,8,8,8,7,7,6,6,6,6,6,6],"Mejor MSE":[8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,7,8,8,8,8,8,8,8,8,8,8,7,7,8,7,7,7,8,8,8,8,8,8,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,7,8,7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8]},"corrida_anterior":{"n_configs":160,"campeon":"Campeón: Ensamble top-5 (mediana)","dif_vs_ref":-0.0072000000000000085,"ic_bajo":-0.015000000000000027,"ic_alto":0.0011999999999999708,"gana":false}},"redes":{"finalistas":[{"id":"107","nombre":"GRU-Clasif. k=50","campeon":true,"familia":"GRU","perdida":"clase","ventana":50,"entrada":"ambas","oculto":16,"capas":2,"dropout":0.4,"lr":0.001,"weight_decay":0.001,"capas_red":[{"tipo":"entrada","nombre":"Entrada","unidades":62,"params":0,"detalle":"los últimos 50 sorteos; de cada uno, 62 valores (R1..R6 y qué bolas salieron)"},{"tipo":"recurrente","nombre":"GRU, capa 1","unidades":16,"params":3840,"detalle":"16 neuronas con memoria; leen los 50 sorteos uno tras otro"},{"tipo":"recurrente","nombre":"GRU, capa 2","unidades":16,"params":1632,"detalle":"16 neuronas con memoria; leen los 50 sorteos uno tras otro"},{"tipo":"salida","nombre":"Salida","unidades":51,"params":867,"detalle":"51 probabilidades, una por cada valor posible de R1; se predice la mediana"}],"parametros":6339,"curva":[[3.9163952070413175,3.843918561935425],[3.840748992408674,3.771590232849121],[3.753725153146331,3.6876628398895264],[3.68848342600557,3.6007981300354004],[3.6041937120182,3.524116277694702],[3.5243073365123,3.456728219985962],[3.4773543298858955,3.394904136657715],[3.4215562353429108,3.3386268615722656],[3.352769399426647,3.2880191802978516],[3.292007483157915,3.2427148818969727],[3.2460757752054747,3.205787181854248],[3.199458351331888,3.178093910217285],[3.181445663491475,3.1574866771698],[3.14873162888989,3.143834352493286],[3.16349830479966,3.1340878009796143],[3.12837929725647,3.126185178756714],[3.125348828502537,3.1218411922454834],[3.106639697871257,3.1190176010131836],[3.1166478638796464,3.115985155105591],[3.0937203186074482,3.113572120666504],[3.102944740806658,3.110769271850586],[3.0892317811238397,3.109342336654663],[3.102026001448484,3.1083016395568848],[3.0675247285783906,3.1063530445098877],[3.0809399427826873,3.1045589447021484],[3.1063827760440788,3.1030173301696777],[3.104372630660067,3.1017026901245117],[3.069326186917492,3.100825071334839],[3.092670593065085,3.0983731746673584],[3.0804366269062475,3.097829818725586],[3.0814390339802222,3.0973713397979736],[3.075824080300085,3.0955209732055664],[3.0763408016912717,3.0946335792541504],[3.066141720408017,3.0939016342163086],[3.0790383614215653,3.093122959136963],[3.0721321882660857,3.0929160118103027],[3.0645326663538355,3.0936336517333984],[3.079296504345137,3.092796564102173],[3.0639865550798238,3.0922632217407227],[3.0505448429854876,3.0927093029022217],[3.0391715221798297,3.0921854972839355],[3.0526520719233248,3.0907671451568604],[3.0463229975749537,3.0900254249572754],[3.064049791552357,3.090614080429077],[3.0480177156703987,3.0895750522613525],[3.033982482890493,3.089405059814453],[3.062612490801467,3.088707208633423],[3.07213522036051,3.08878231048584],[3.0531751150937425,3.089566230773926],[3.0270509941061747,3.0892350673675537],[3.0330560192619402,3.0886642932891846],[3.0601164739156506,3.087341070175171],[3.023276017375828,3.087221622467041],[3.0566684796638097,3.0869996547698975],[3.0352926259188306,3.087567090988159],[3.0391046081621624,3.0873069763183594],[3.011538940115073,3.0878565311431885],[3.03444380563559,3.0887632369995117],[3.028541237054412,3.090604543685913],[3.0495168921873743,3.090778112411499],[3.031539228282024,3.0896294116973877],[3.0274780946908537,3.089240550994873],[3.0463650521543837,3.0880417823791504],[3.0314241104519244,3.0880396366119385],[3.040759807272056,3.0886926651000977],[3.0298432704099674,3.088580369949341],[3.0129572681544983,3.0898642539978027],[3.0137855308572044,3.090052366256714],[3.0376071934847486,3.089160919189453],[3.0236012399811107,3.088608503341675],[3.0259336574790403,3.0882036685943604],[3.013653183966568,3.088836669921875],[3.022270911501855,3.0894527435302734],[3.019081072463203,3.0891404151916504]],"mejor_epoca":54,"epocas":74,"cal_entreno":8.514185639229423,"cal_no_vistos":8.446600000000002,"n_entreno":1142,"ventaja_entreno":0.00262697022767,"ventaja_no_vistos":-0.0011999999999972033},{"id":"133","nombre":"CNN-Clasif. k=20","campeon":false,"familia":"CNN","perdida":"clase","ventana":20,"entrada":"escalada","oculto":128,"capas":2,"dropout":0.4,"lr":0.001,"weight_decay":0.0,"capas_red":[{"tipo":"entrada","nombre":"Entrada","unidades":6,"params":0,"detalle":"los últimos 20 sorteos; de cada uno, 6 valores (R1..R6 de cada sorteo)"},{"tipo":"conv","nombre":"Convolución 1","unidades":128,"params":2432,"detalle":"128 filtros que miran 3 sorteos a la vez (de 1 en 1)"},{"tipo":"conv","nombre":"Convolución 2","unidades":128,"params":49280,"detalle":"128 filtros que miran 3 sorteos a la vez (de 2 en 2)"},{"tipo":"resumen","nombre":"Promedio","unidades":128,"params":0,"detalle":"resume toda la ventana en un solo vector"},{"tipo":"salida","nombre":"Salida","unidades":51,"params":6579,"detalle":"51 probabilidades, una por cada valor posible de R1; se predice la mediana"}],"parametros":58291,"curva":[[3.7682989440013452,3.5329749584198],[3.3003682480644936,3.2211217880249023],[3.0876861247819725,3.183380126953125],[3.0360861153946708,3.1370255947113037],[3.0196421225046373,3.1016597747802734],[3.0102460718646493,3.1082873344421387],[3.0060372500075507,3.0938544273376465],[3.0051301700552715,3.0889370441436768],[2.998301614682699,3.0980582237243652],[2.995543984285335,3.0938634872436523],[3.0000206627796606,3.097139835357666],[3.0001503860827574,3.084028720855713],[2.9988819628646692,3.0846686363220215],[2.9981579746167686,3.0886621475219727],[2.9968363634089834,3.089275360107422],[2.9948628322365356,3.0846426486968994],[2.998284447561834,3.092238664627075],[2.997932397213179,3.090465545654297],[3.0011082865528222,3.084221124649048],[2.9965438700213873,3.0875513553619385],[2.9939025588871275,3.085179090499878],[2.99675616529799,3.08833384513855],[2.9964313398931446,3.0902068614959717],[2.991436586183371,3.0872671604156494],[2.9908359566914666,3.089071273803711],[2.9910798721706744,3.0951480865478516],[2.9902226526712634,3.0908093452453613],[2.9927997299076354,3.091038465499878],[2.9976263341215468,3.0812056064605713],[2.9999955364109314,3.0952422618865967],[2.993294748325938,3.0871219635009766],[2.991514639018737,3.085679531097412],[2.9918523793367995,3.0930116176605225],[2.9892370189588093,3.088057518005371],[2.9937279509514876,3.081890106201172],[2.9982924785810647,3.079572916030884],[2.9906747729507916,3.0977251529693604],[2.987616908181574,3.091697931289673],[2.991541871827902,3.0934536457061768],[2.988642755980344,3.087724208831787],[2.9915289043151225,3.0830795764923096],[2.9862368264149146,3.0772416591644287],[2.9890247074599117,3.085329532623291],[2.985930737760878,3.096562147140503],[2.988305363704249,3.0868117809295654],[2.988377393152296,3.080045223236084],[2.988779094538738,3.0823638439178467],[2.984823373912536,3.095390796661377],[2.995950145328168,3.0974221229553223],[2.984334182739258,3.080505132675171],[2.988706914174188,3.082244634628296],[2.9855646620091703,3.084754467010498],[2.9840515107223666,3.0931503772735596],[2.9858997669416603,3.0802156925201416],[2.987466204535101,3.091243028640747],[2.98450703866703,3.0849251747131348],[2.9911528169494312,3.0857455730438232],[2.9833252587269263,3.0926318168640137],[2.989766551047256,3.095893383026123],[2.9845368291913847,3.085251569747925],[2.9859221999178227,3.091651439666748],[2.9892450897964005,3.0868706703186035]],"mejor_epoca":42,"epocas":62,"cal_entreno":8.513134851138354,"cal_no_vistos":8.451400000000001,"n_entreno":1142,"ventaja_entreno":0.0015761821366009343,"ventaja_no_vistos":0.003600000000002268},{"id":"47","nombre":"CNN-Clasif. k=5","campeon":false,"familia":"CNN","perdida":"clase","ventana":5,"entrada":"ambas","oculto":64,"capas":2,"dropout":0.2,"lr":0.003,"weight_decay":0.0001,"capas_red":[{"tipo":"entrada","nombre":"Entrada","unidades":62,"params":0,"detalle":"los últimos 5 sorteos; de cada uno, 62 valores (R1..R6 y qué bolas salieron)"},{"tipo":"conv","nombre":"Convolución 1","unidades":64,"params":11968,"detalle":"64 filtros que miran 3 sorteos a la vez (de 1 en 1)"},{"tipo":"conv","nombre":"Convolución 2","unidades":64,"params":12352,"detalle":"64 filtros que miran 3 sorteos a la vez (de 2 en 2)"},{"tipo":"resumen","nombre":"Promedio","unidades":64,"params":0,"detalle":"resume toda la ventana en un solo vector"},{"tipo":"salida","nombre":"Salida","unidades":51,"params":3315,"detalle":"51 probabilidades, una por cada valor posible de R1; se predice la mediana"}],"parametros":27635,"curva":[[3.7469129242847874,3.283595561981201],[3.159730626627342,3.1889233589172363],[3.0555638947437718,3.1211633682250977],[3.0201209225605443,3.1062493324279785],[2.99214095135325,3.085261821746826],[2.9752784026037786,3.107095718383789],[2.9667872502631747,3.0905368328094482],[2.952749691304472,3.1018190383911133],[2.9383155773595435,3.1071696281433105],[2.91409385081419,3.105468511581421],[2.899285849345099,3.103436231613159],[2.8801200006425995,3.112157106399536],[2.8325579294224377,3.150592803955078],[2.805848892447875,3.1437880992889404],[2.7924613977215955,3.181302547454834],[2.7522718606535923,3.1708242893218994],[2.7181725688816347,3.1969451904296875],[2.671175133813288,3.2231924533843994],[2.6456303414610245,3.256532907485962],[2.6000161284023955,3.2907888889312744],[2.5397879005707416,3.296821117401123],[2.497053377898698,3.3523073196411133],[2.4656430480406457,3.3614540100097656],[2.4444282379347024,3.433685541152954],[2.390267491094845,3.4149577617645264]],"mejor_epoca":5,"epocas":25,"cal_entreno":8.528371278458843,"cal_no_vistos":8.4442,"n_entreno":1142,"ventaja_entreno":0.016812609457090844,"ventaja_no_vistos":-0.0035999999999987153},{"id":"10","nombre":"CNN-MSE k=10","campeon":false,"familia":"CNN","perdida":"mse","ventana":10,"entrada":"escalada","oculto":32,"capas":2,"dropout":0.2,"lr":0.001,"weight_decay":0.0001,"capas_red":[{"tipo":"entrada","nombre":"Entrada","unidades":6,"params":0,"detalle":"los últimos 10 sorteos; de cada uno, 6 valores (R1..R6 de cada sorteo)"},{"tipo":"conv","nombre":"Convolución 1","unidades":32,"params":608,"detalle":"32 filtros que miran 3 sorteos a la vez (de 1 en 1)"},{"tipo":"conv","nombre":"Convolución 2","unidades":32,"params":3104,"detalle":"32 filtros que miran 3 sorteos a la vez (de 2 en 2)"},{"tipo":"resumen","nombre":"Promedio","unidades":32,"params":0,"detalle":"resume toda la ventana en un solo vector"},{"tipo":"salida","nombre":"Salida","unidades":1,"params":33,"detalle":"un solo número: el R1 estimado"}],"parametros":3745,"curva":[[0.03153758896418761,0.014265581965446472],[0.017048374694032767,0.014797230251133442],[0.014667877625942845,0.015182333998382092],[0.015075734818411856,0.015376964583992958],[0.014588553880907825,0.014163292944431305],[0.014452657353171368,0.014196757227182388],[0.014312590092190148,0.014382791705429554],[0.014449333925683474,0.014409448020160198],[0.014146991588712968,0.014326845295727253],[0.014229209463774543,0.014278708957135677],[0.014236258911256938,0.014443352818489075],[0.014533647422477142,0.014220209792256355],[0.01435892962149738,0.014334987848997116],[0.014486086347438011,0.01443632785230875],[0.014327384462368857,0.014148564077913761],[0.014386532098515746,0.014342487789690495],[0.014314363324611458,0.01437914278358221],[0.014468519988748216,0.01414578314870596],[0.014256602615962937,0.014376400969922543],[0.014475516287475516,0.01432508323341608],[0.014322425279113435,0.014169525355100632],[0.01414736413502509,0.01432185247540474],[0.014312194066947883,0.01424387190490961],[0.014541476137321634,0.014268746599555016],[0.01426885063884799,0.014215714298188686],[0.0142822608735758,0.014244061894714832],[0.014601420626505135,0.014208301901817322],[0.014265896833127307,0.014279339462518692],[0.014289228107357763,0.014217234216630459],[0.013994083211747641,0.014235248789191246],[0.014407272542798027,0.014216054230928421],[0.014402352991638724,0.01434013620018959],[0.014023933361870113,0.014169962145388126],[0.014274169435513389,0.014205684885382652],[0.014199442074624534,0.014222171157598495],[0.014209438318905141,0.014119897969067097],[0.014320975520945701,0.014241738244891167],[0.014056417603314537,0.014278803952038288],[0.014240283845472582,0.014148254878818989],[0.014176757937085997,0.014309820719063282],[0.01424002216111139,0.014155598357319832],[0.01413490854818182,0.014125574380159378],[0.01436152737971741,0.01428780984133482],[0.014185442821573965,0.0141697833314538],[0.014195974150038872,0.0144017543643713],[0.014138545197693957,0.014140550047159195],[0.014359096610515388,0.014326314441859722],[0.014293885544019261,0.014179311692714691],[0.014263875649992338,0.014215528033673763],[0.014210793775381501,0.014165895991027355],[0.014220370336906197,0.014311063103377819],[0.014221178776747787,0.01425060536712408],[0.014287608431786607,0.014189244247972965],[0.01416411208200086,0.014217302203178406],[0.014275001899636899,0.01427276711910963],[0.014138128666072777,0.01412682794034481]],"mejor_epoca":36,"epocas":56,"cal_entreno":8.44956217162872,"cal_no_vistos":8.3992,"n_entreno":1142,"ventaja_entreno":-0.061996497373032255,"ventaja_no_vistos":-0.048599999999998644},{"id":"164","nombre":"GRU-Clasif. k=5","campeon":false,"familia":"GRU","perdida":"clase","ventana":5,"entrada":"ambas","oculto":32,"capas":2,"dropout":0.4,"lr":0.001,"weight_decay":0.001,"capas_red":[{"tipo":"entrada","nombre":"Entrada","unidades":62,"params":0,"detalle":"los últimos 5 sorteos; de cada uno, 62 valores (R1..R6 y qué bolas salieron)"},{"tipo":"recurrente","nombre":"GRU, capa 1","unidades":32,"params":9216,"detalle":"32 neuronas con memoria; leen los 5 sorteos uno tras otro"},{"tipo":"recurrente","nombre":"GRU, capa 2","unidades":32,"params":6336,"detalle":"32 neuronas con memoria; leen los 5 sorteos uno tras otro"},{"tipo":"salida","nombre":"Salida","unidades":51,"params":1683,"detalle":"51 probabilidades, una por cada valor posible de R1; se predice la mediana"}],"parametros":17235,"curva":[[3.896973788861147,3.8771812915802],[3.822681568086762,3.8082876205444336],[3.735931719947107,3.6990089416503906],[3.5905891969031893,3.5337257385253906],[3.420064698543745,3.358283519744873],[3.2516329961953705,3.24717116355896],[3.1536983504737774,3.188178539276123],[3.1074822121059773,3.156608819961548],[3.1134010462416817,3.136539936065674],[3.1217275801393174,3.122206211090088],[3.1124777656240563,3.1171512603759766],[3.087488317981209,3.112405776977539],[3.074547181670199,3.1089181900024414],[3.082159008439054,3.1075031757354736],[3.072805821035326,3.1060144901275635],[3.0587967130326734,3.102078437805176],[3.072905034625653,3.101881980895996],[3.059767600678906,3.099802017211914],[3.075467414954274,3.0969643592834473],[3.0374227391075843,3.0954184532165527],[3.0669563563828617,3.0938706398010254],[3.038829231753792,3.0946044921875],[3.034682334329664,3.0955142974853516],[3.0376860869299507,3.093644142150879],[3.041370589954337,3.0930495262145996],[3.0467445540673954,3.092541456222534],[3.037742323236367,3.0936477184295654],[3.0155183851104423,3.094959259033203],[3.045533213172991,3.0918025970458984],[3.028863128190188,3.093906879425049],[3.0209797598652,3.0932979583740234],[3.020208432993938,3.0913922786712646],[3.0237696844277924,3.0918638706207275],[3.0421503720824252,3.0907042026519775],[3.0251363464237486,3.090994119644165],[3.0204254460088986,3.0914111137390137],[3.0356510948889035,3.0938010215759277],[3.0103418925373826,3.09299373626709],[3.015322796339841,3.094181776046753],[3.0210046163539297,3.0947649478912354],[3.0186452949169986,3.094142198562622],[3.0056678889952986,3.0940375328063965],[3.005121934536806,3.0966062545776367],[3.0069948815807854,3.1001174449920654],[2.9963280225537487,3.099179744720459],[2.988692749652666,3.0980348587036133],[2.999123540367048,3.096410036087036],[2.9953060204220803,3.098414659500122],[2.991011890922625,3.1041131019592285],[2.9914291544058886,3.1025969982147217],[2.998569082476429,3.101576805114746],[2.9952507348404716,3.1013474464416504],[2.9917108186741466,3.1029105186462402],[2.9848388907835655,3.101973056793213]],"mejor_epoca":34,"epocas":54,"cal_entreno":8.5215411558669,"cal_no_vistos":8.4472,"n_entreno":1142,"ventaja_entreno":0.009982486865148132,"ventaja_no_vistos":-0.0005999999999986017},{"id":"134","nombre":"LSTM-L1 k=10","campeon":false,"familia":"LSTM","perdida":"l1","ventana":10,"entrada":"multihot","oculto":128,"capas":2,"dropout":0.0,"lr":0.003,"weight_decay":0.001,"capas_red":[{"tipo":"entrada","nombre":"Entrada","unidades":56,"params":0,"detalle":"los últimos 10 sorteos; de cada uno, 56 valores (qué bolas salieron (56 casillas))"},{"tipo":"recurrente","nombre":"LSTM, capa 1","unidades":128,"params":95232,"detalle":"128 neuronas con memoria; leen los 10 sorteos uno tras otro"},{"tipo":"recurrente","nombre":"LSTM, capa 2","unidades":128,"params":132096,"detalle":"128 neuronas con memoria; leen los 10 sorteos uno tras otro"},{"tipo":"salida","nombre":"Salida","unidades":1,"params":129,"detalle":"un solo número: el R1 estimado"}],"parametros":227457,"curva":[[0.09483300266192131,0.09274168312549591],[0.0883915338626842,0.09368512034416199],[0.08775852148987583,0.09205667674541473],[0.08677324373083016,0.0925484299659729],[0.08615888180499225,0.09412240982055664],[0.08592742406523105,0.09669283777475357],[0.08535585951866563,0.09511779248714447],[0.08567885484584828,0.09761431068181992],[0.08727499346450432,0.09375117719173431],[0.08539607094735215,0.09437280148267746],[0.0846586107132361,0.09585970640182495],[0.08398848358810562,0.09598679095506668],[0.08478751357683201,0.09567060321569443],[0.0838870956725681,0.09594795107841492],[0.0845244243433795,0.09580432623624802],[0.08513737892367176,0.09680087119340897],[0.08763867300195792,0.0942104160785675],[0.08613972631619149,0.09427068382501602],[0.08544349140420403,0.09455349296331406],[0.08468941371772708,0.09522024542093277],[0.08457535726507914,0.09529901295900345],[0.08372215688535847,0.09539277106523514],[0.08388609227138696,0.09564409404993057]],"mejor_epoca":3,"epocas":23,"cal_entreno":8.533887915936951,"cal_no_vistos":8.4466,"n_entreno":1142,"ventaja_entreno":0.022329246935198555,"ventaja_no_vistos":-0.0011999999999989797},{"id":"187","nombre":"MLP-Clasif. k=5","campeon":false,"familia":"MLP","perdida":"clase","ventana":5,"entrada":"escalada","oculto":32,"capas":2,"dropout":0.0,"lr":0.001,"weight_decay":0.0,"capas_red":[{"tipo":"entrada","nombre":"Entrada","unidades":30,"params":0,"detalle":"5 sorteos × 6 valores = 30 números en una fila (R1..R6 de cada sorteo)"},{"tipo":"densa","nombre":"Capa densa 1","unidades":32,"params":992,"detalle":"32 neuronas conectadas con todo lo anterior"},{"tipo":"densa","nombre":"Capa densa 2","unidades":32,"params":1056,"detalle":"32 neuronas conectadas con todo lo anterior"},{"tipo":"salida","nombre":"Salida","unidades":51,"params":1683,"detalle":"51 probabilidades, una por cada valor posible de R1; se predice la mediana"}],"parametros":3731,"curva":[[3.9244387356276365,3.8904824256896973],[3.874863905759202,3.8330326080322266],[3.7971316342501296,3.74064564704895],[3.6804361643250454,3.6045570373535156],[3.509224631122707,3.4324944019317627],[3.316575344321654,3.2734198570251465],[3.155753106677655,3.190042495727539],[3.0754811950565615,3.1723406314849854],[3.0477845024816768,3.1643154621124268],[3.0344611821715364,3.1453604698181152],[3.0230759487938634,3.1338624954223633],[3.0156213514583627,3.1203298568725586],[3.0124206238186235,3.113123655319214],[3.0084492555598623,3.109985113143921],[3.004870706735198,3.1075403690338135],[3.0028423776331636,3.104351043701172],[3.0024417842786337,3.105390787124634],[3.0006634151812683,3.1027681827545166],[2.99958908779105,3.099490165710449],[2.9987747860938003,3.099799156188965],[2.9976233310306197,3.0968291759490967],[2.9963519297924237,3.09696888923645],[2.9964210318535875,3.0999858379364014],[2.9959241478713516,3.0982666015625],[2.9947619000661003,3.0976502895355225],[2.9954876398302845,3.097553014755249],[2.9938977261179502,3.09623122215271],[2.993034236455701,3.097015619277954],[2.993210380593526,3.09309983253479],[2.992841199009689,3.094489097595215],[2.9920585160402906,3.0944910049438477],[2.9908379869362745,3.093182325363159],[2.991183709606682,3.093618631362915],[2.991187979019794,3.0923311710357666],[2.990724027279726,3.0915281772613525],[2.990380875597295,3.090972661972046],[2.9898120732651545,3.094038248062134],[2.9897473168127315,3.0935325622558594],[2.989789664376642,3.0948143005371094],[2.9890579621816418,3.0952343940734863],[2.9889014253911284,3.0924458503723145],[2.988226442238719,3.0869271755218506],[2.987617809747912,3.087843179702759],[2.9873425793401975,3.0925309658050537],[2.9887482554642197,3.091136932373047],[2.9874288637613513,3.089839220046997],[2.9872634130654876,3.087761163711548],[2.986118558018478,3.089686632156372],[2.9875143449331065,3.0960335731506348],[2.98608985930374,3.0929465293884277],[2.9854763581580723,3.089029312133789],[2.985547335614863,3.086245059967041],[2.9850235064005113,3.088752269744873],[2.984639871243349,3.0885751247406006],[2.9844186025796478,3.091636896133423],[2.984959010979564,3.0914559364318848],[2.9842225767902493,3.090756893157959],[2.98343622709058,3.0906646251678467],[2.984452667432962,3.094520092010498],[2.983806704491684,3.0933425426483154],[2.982950218436644,3.0922582149505615],[2.9833605363196933,3.0899949073791504],[2.982740939523756,3.0879740715026855],[2.9818656125019505,3.089907169342041],[2.9817579603686775,3.0914902687072754],[2.9808708603849117,3.0906457901000977],[2.9806977724291617,3.0924019813537598],[2.980521990097675,3.094856023788452],[2.979982019699726,3.093090295791626],[2.9802901803832693,3.090106964111328],[2.9796720750553094,3.089912176132202],[2.9802680521896203,3.091094732284546]],"mejor_epoca":52,"epocas":72,"cal_entreno":8.506042031523643,"cal_no_vistos":8.4478,"n_entreno":1142,"ventaja_entreno":-0.005516637478109487,"ventaja_no_vistos":1.7763568394002505e-15},{"id":"223","nombre":"Transformer-Clasif. k=5","campeon":false,"familia":"Transformer","perdida":"clase","ventana":5,"entrada":"multihot","oculto":128,"capas":2,"dropout":0.4,"lr":0.001,"weight_decay":0.0,"capas_red":[{"tipo":"entrada","nombre":"Entrada","unidades":56,"params":0,"detalle":"los últimos 5 sorteos; de cada uno, 56 valores (qué bolas salieron (56 casillas))"},{"tipo":"proyeccion","nombre":"Proyección","unidades":128,"params":7936,"detalle":"convierte cada sorteo en 128 números y le suma su posición"},{"tipo":"atencion","nombre":"Atención 1","unidades":128,"params":132480,"detalle":"4 cabezas de atención (cada sorteo consulta a los demás) + 256 neuronas"},{"tipo":"atencion","nombre":"Atención 2","unidades":128,"params":132480,"detalle":"4 cabezas de atención (cada sorteo consulta a los demás) + 256 neuronas"},{"tipo":"salida","nombre":"Salida","unidades":51,"params":6579,"detalle":"51 probabilidades, una por cada valor posible de R1; se predice la mediana"}],"parametros":279475,"curva":[[3.5197109015946535,3.289517879486084],[3.1106440745678143,3.1769468784332275],[3.0267167179854875,3.1449971199035645],[3.0119569449080634,3.1383705139160156],[2.982920601933273,3.116701602935791],[2.955695108040092,3.148679256439209],[2.888116268767524,3.203357458114624],[2.8118247931765525,3.318222999572754],[2.7069535166946883,3.394456386566162],[2.6319597617867068,3.4235219955444336],[2.556006265915546,3.4743196964263916],[2.4582684221955917,3.5666091442108154],[2.358812616780861,3.579641342163086],[2.269055766174474,3.6630780696868896],[2.150917265587246,3.722099781036377],[2.061728762105568,3.793287515640259],[1.9660146634603284,3.8200910091400146],[1.8705694468979983,3.9381613731384277],[1.7872090924646435,4.02833890914917],[1.679283369939352,4.1322784423828125],[1.5809684202843106,4.171114921569824],[1.467618641902491,4.253022193908691],[1.3785964378376596,4.310824871063232],[1.3013752376910337,4.413630485534668],[1.232920327874803,4.452805042266846]],"mejor_epoca":5,"epocas":25,"cal_entreno":8.521278458844133,"cal_no_vistos":8.438799999999999,"n_entreno":1142,"ventaja_entreno":0.009719789842380422,"ventaja_no_vistos":-0.009000000000000341}],"sobreentrenada":{"capas_red":[{"tipo":"entrada","nombre":"Entrada","unidades":3100,"params":0,"detalle":"50 sorteos × 62 valores = 3100 números en una fila (R1..R6 y qué bolas salieron)"},{"tipo":"densa","nombre":"Capa densa 1","unidades":256,"params":793856,"detalle":"256 neuronas conectadas con todo lo anterior"},{"tipo":"densa","nombre":"Capa densa 2","unidades":256,"params":65792,"detalle":"256 neuronas conectadas con todo lo anterior"},{"tipo":"salida","nombre":"Salida","unidades":1,"params":257,"detalle":"un solo número: el R1 estimado"}],"parametros":859905,"curva":[[0.18092305578829088,0.09882312268018723],[0.09205603324568148,0.09550114721059799],[0.08546880517423767,0.09253725409507751],[0.0781638389856545,0.09408366680145264],[0.06812249456637913,0.09705132991075516],[0.05726389333452146,0.09974983334541321],[0.048627044352673995,0.10066767781972885],[0.041419033644740116,0.10112089663743973],[0.032237671722763594,0.10396598279476166],[0.029362905689889623,0.10289936512708664],[0.024975459792257584,0.10275579243898392],[0.021946461836701816,0.10028409957885742],[0.021623641045130405,0.10324940830469131],[0.023322404982502928,0.10557989776134491],[0.02144525317263972,0.10601766407489777],[0.018642846306728335,0.1007213369011879],[0.014803359784262697,0.10307132452726364],[0.015935331548458522,0.09995319694280624],[0.012994709574454224,0.09984639286994934],[0.011384173425048896,0.10113334655761719],[0.010703454909788579,0.10044064372777939],[0.013598941086032957,0.10052437335252762],[0.016894457308748334,0.10014011710882187],[0.018265839881196465,0.09992694109678268],[0.014130126899972404,0.09947682172060013],[0.010773809023739136,0.09937075525522232],[0.010903994504784801,0.10092207789421082],[0.011266744340357092,0.10123042017221451],[0.01126669771662078,0.1015443354845047],[0.013635028449376833,0.09969216585159302],[0.013693220600408992,0.10124776512384415],[0.012887701305762394,0.10055091977119446],[0.01312788230626239,0.10003311932086945],[0.01213585366254922,0.1018817275762558],[0.01080382660261749,0.10067228972911835],[0.008717160320543137,0.09992826730012894],[0.008068383686705349,0.09981684386730194],[0.007884779219160375,0.0990360826253891],[0.007689143790258575,0.09969384223222733],[0.007110564624794672,0.09941234439611435],[0.006928516494244644,0.10024049878120422],[0.006726850846724719,0.10125165432691574],[0.007487417022054343,0.1012805700302124],[0.007417586866343759,0.10025980323553085],[0.007939664229328177,0.09933634847402573],[0.008942145884958739,0.0995163694024086],[0.008566202732167908,0.10013330727815628],[0.00880202564036416,0.10078439861536026],[0.008647499882529691,0.10004635900259018],[0.008399908981986882,0.10056919604539871],[0.008572988181384569,0.10112971812486649],[0.009015355032590247,0.10103493183851242],[0.008057817761046984,0.10058703273534775],[0.00720382836004047,0.09971530735492706],[0.006248205662080922,0.10002636164426804],[0.0064680235421995524,0.09941024333238602],[0.006318933340077547,0.10065573453903198],[0.005829273960217066,0.10020005702972412],[0.005352432665789558,0.10040973871946335],[0.006349792989143698,0.1006663590669632],[0.006629080566356784,0.09946215152740479],[0.006542645035714833,0.09989195317029953],[0.00606217052518707,0.10000305622816086],[0.005992491764122063,0.10017744451761246],[0.005922747394742117,0.10060446709394455],[0.006803672547576968,0.10005317628383636],[0.006408175257677885,0.10014472156763077],[0.005638612472673052,0.10050399601459503],[0.0056403671458517156,0.10086977481842041],[0.005321976650967119,0.10012133419513702],[0.005539271589752632,0.10050796717405319],[0.006106655612664739,0.10070137679576874],[0.006290223733666017,0.10027389973402023],[0.005547812044351679,0.10030116885900497],[0.005414479829793431,0.09990069270133972],[0.006810214349366341,0.1001097783446312],[0.006414498974444326,0.10043251514434814],[0.0066437269772220515,0.10043582320213318],[0.006157276485614555,0.10157483071088791],[0.0060109144825603545,0.10081173479557037],[0.00614131297628136,0.09981949627399445],[0.005631639903468877,0.10053859651088715],[0.00544817930989966,0.10050982981920242],[0.007000342276446598,0.10025685280561447],[0.006553690808527556,0.10012049973011017],[0.006519233756074586,0.10037000477313995],[0.0053407694145883484,0.09967324137687683],[0.005268674971747029,0.099646657705307],[0.006172125500425236,0.10041829198598862],[0.0060725509505910975,0.10033278167247772],[0.006006727796816027,0.09989795088768005],[0.00539546320886956,0.10065796226263046],[0.0050609778103985125,0.09975317865610123],[0.0053357043322751815,0.09999876469373703],[0.00545066318657134,0.10085830837488174],[0.005790809618750798,0.10036057978868484],[0.005178230114703633,0.10014481097459793],[0.005450694231297245,0.09961305558681488],[0.0057161553263587435,0.10009347647428513],[0.00695957607330428,0.09982038289308548],[0.007288936055121348,0.09936513751745224],[0.005831050064376335,0.10028718411922455],[0.005708206677329295,0.10048230737447739],[0.0053526183321457544,0.1010969877243042],[0.005405811176241673,0.10176427662372589],[0.007567639627791557,0.1007818877696991],[0.0068136219607339696,0.09934169054031372],[0.0062009916333577685,0.09965142607688904],[0.005513105897674548,0.10058026760816574],[0.005649011174082449,0.10108920931816101],[0.007129597964398947,0.09878237545490265],[0.009104810211538654,0.10017749667167664],[0.00807352944171613,0.0990404337644577],[0.007049706354545256,0.10030053555965424],[0.007838787197989902,0.10044526308774948],[0.006908010479216416,0.10101623088121414],[0.007709863653272083,0.09989015758037567],[0.007330625604108437,0.09934382885694504],[0.007511928889746826,0.0996723622083664],[0.008090111081363614,0.1009838879108429],[0.006278869358957121,0.10027365386486053],[0.005887275460877062,0.09948842227458954],[0.006372179531674717,0.09960505366325378],[0.006491639691683435,0.09971770644187927],[0.006728462460114784,0.10027508437633514],[0.005595309008873001,0.10028731822967529],[0.004724634304335437,0.10011932253837585],[0.004656341460715864,0.09927590936422348],[0.004355632870928528,0.09964415431022644],[0.004737233874608868,0.10021999478340149],[0.0055829006756089395,0.10046682506799698],[0.005907996722794685,0.09938955307006836],[0.005281434824555805,0.10104244947433472],[0.006581420885379782,0.09996730089187622],[0.006424980134386377,0.09911065548658371],[0.005945234612283325,0.09947161376476288],[0.005620131585939029,0.09894407540559769],[0.005326937544207598,0.09960255771875381],[0.004137845020549199,0.10023477673530579],[0.004177780664458717,0.09966057538986206],[0.005175709487275057,0.09943469613790512],[0.004799731812180625,0.09988373517990112],[0.006001931595011163,0.09878421574831009],[0.006506514248735819,0.10023137181997299],[0.005228090270892861,0.10079328715801239],[0.004967433941003281,0.10108836740255356],[0.004818790917736046,0.10207461565732956],[0.005399195476406321,0.10034139454364777],[0.004311855948654954,0.0994015708565712],[0.0041542102352322375,0.0998072400689125]],"mejor_epoca":3,"epocas":150,"error_entreno_inicio":10.13169112414429,"error_entreno_fin":0.2326357731730053,"error_val_mejor":5.182086229324341,"error_val_fin":5.5892054438591},"constante_entreno":8.511558669001753,"constante_no_vistos":8.447799999999999,"max_ventaja_entreno":0.022329246935198555},"tres_sorteos":{"prediccion":6,"esperada":8.503392833581513,"p_9_o_mas":0.35764253308360067,"p_8_o_mas":0.7805713317770402,"p_menos_de_7":0.057069701221661724,"p10":7.300000000000001,"p50":8.7,"p90":9.4,"histograma":[{"hasta":10.0,"prob":0.03685238644517991},{"hasta":9.5,"prob":0.25368422325287204},{"hasta":9.0,"prob":0.2867769337024974},{"hasta":8.5,"prob":0.1760462176158087},{"hasta":8.0,"prob":0.11355995650256981},{"hasta":7.5,"prob":0.06683998103313527},{"hasta":7.0,"prob":0.03572782068597614},{"hasta":6.5,"prob":0.017398115846171458},{"hasta":6.0,"prob":0.007797962608557054},{"hasta":5.5,"prob":0.0032761468356113264},{"hasta":5.0,"prob":0.00130437188031669},{"hasta":4.5,"prob":0.0004878118650710464},{"hasta":4.0,"prob":0.00016988312585197696},{"hasta":3.5,"prob":5.512215437815567e-05},{"hasta":3.0,"prob":1.671297470721538e-05}],"por_prediccion":[{"prediccion":2,"esperada":8.092857142857143},{"prediccion":3,"esperada":8.27012987012987},{"prediccion":4,"esperada":8.394372294372294},{"prediccion":5,"esperada":8.47058727436086},{"prediccion":6,"esperada":8.503392833581513},{"prediccion":7,"esperada":8.497044797599736},{"prediccion":8,"esperada":8.455458525935775},{"prediccion":9,"esperada":8.382229756924541},{"prediccion":10,"esperada":8.280654584039711},{"prediccion":11,"esperada":8.153748582161459},{"prediccion":12,"esperada":8.004265102267322}]},"prediccion":{"final":6,"metodo":"Constante 6 (mediana teórica)","razon":"el campeón de Deep Learning no le ganó a la constante en la prueba final","campeon_predice":6,"por_metodo":{"GRU-Clasif. k=50 (#107)":6,"GRU-Clasif. k=5 (#164)":6,"MLP-Clasif. k=5 (#187)":6,"CNN-Clasif. k=20 (#133)":6,"CNN-Clasif. k=5 (#47)":6,"LSTM-L1 k=10 (#134)":6,"Transformer-Clasif. k=5 (#223)":6,"CNN-MSE k=10 (#10)":8,"Ensamble top-5 (mediana)":6,"Constante 6 (teoría)":6,"Mediana histórica":6},"coinciden":["CNN-Clasif. k=20 (#133)","CNN-Clasif. k=5 (#47)","Constante 6 (teoría)","Ensamble top-5 (mediana)","GRU-Clasif. k=5 (#164)","GRU-Clasif. k=50 (#107)","LSTM-L1 k=10 (#134)","MLP-Clasif. k=5 (#187)","Mediana histórica","Transformer-Clasif. k=5 (#223)"],"datos_hasta":"2026-10-18","ultimo_concurso":4280,"busqueda_hasta":"2026-10-18","calif_esperada":8.503392833581515}}</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById("carga-datos").textContent);
+  const $ = (id) => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+  const fmt = (x, d = 0) => Number(x).toLocaleString("es-MX", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const pct = (x, d = 0) => fmt(100 * x, d) + " %";
+  const pfmt = (p) => (p < 0.001 ? "< 0.001" : fmt(p, 3));
+  const fecha = (s) => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("es-MX", { day: "numeric", month: "short", year: "numeric" }); };
+  const anio = (s) => s.slice(0, 4);
+  const css = (v) => `var(--${v})`;
+  const PRED = D.prediccion.final;
+  const MED = D.distribucion.mediana_teorica;
+
+  // ---------- utilidades SVG ----------
+  function el(tag, attrs = {}, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function txt(parent, x, y, s, attrs = {}) { const t = el("text", { x, y, ...attrs }, parent); t.textContent = s; return t; }
+  const lin = (d0, d1, r0, r1) => (v) => r0 + ((v - d0) / (d1 - d0)) * (r1 - r0);
+  function frame(svg, { l = 46, r = 16, t = 14, b = 34 } = {}) {
+    const [, , W, H] = svg.getAttribute("viewBox").split(" ").map(Number);
+    svg.innerHTML = "";
+    return { W, H, l, r, t, b, x0: l, x1: W - r, y0: H - b, y1: t };
+  }
+  function yAxis(svg, f, y, ticks, fmtT = (v) => v) {
+    for (const v of ticks) {
+      el("line", { x1: f.x0, x2: f.x1, y1: y(v), y2: y(v), class: "axis", "stroke-dasharray": "2 4" }, svg);
+      txt(svg, f.x0 - 6, y(v) + 4, fmtT(v), { "text-anchor": "end" });
+    }
+  }
+  function xTicks(svg, f, x, ticks, fmtT = (v) => v) {
+    el("line", { x1: f.x0, x2: f.x1, y1: f.y0, y2: f.y0, class: "axis" }, svg);
+    for (const v of ticks) txt(svg, x(v), f.y0 + 18, fmtT(v), { "text-anchor": "middle" });
+  }
+  function pathLen(p) { try { return Math.ceil(p.getTotalLength()); } catch { return 1200; } }
+  function line(svg, pts, attrs) {
+    const p = el("path", { d: "M" + pts.map((q) => q.join(",")).join("L"), fill: "none", class: "ln", ...attrs }, svg);
+    p.style.setProperty("--len", pathLen(p));
+    return p;
+  }
+  const niceTicks = (a, b, n) => { const step = Math.pow(10, Math.floor(Math.log10((b - a) / n))); const m = [1, 2, 5, 10].find((k) => (b - a) / (k * step) <= n) * step; const out = []; for (let v = Math.ceil(a / m) * m; v <= b + 1e-9; v += m) out.push(+v.toFixed(6)); return out; };
+
+  // ---------- bolas ----------
+  function ball(n, { r1 = false, cls = "" } = {}) {
+    const b = document.createElement("div");
+    b.className = `ball ${cls} ${r1 ? "r1" : ""}`;
+    b.textContent = n;
+    return b;
+  }
+  function drawBalls(nums, cls = "small") {
+    const box = document.createElement("div");
+    box.className = "balls";
+    const min = Math.min(...nums);
+    for (const n of [...nums].sort((a, b) => a - b)) box.appendChild(ball(n, { r1: n === min, cls }));
+    return box;
+  }
+
+  // ---------- 1. Portada: seis bolas salen en desorden, se ordenan y la menor se vuelve R1 ----------
+  const ult = D.datos.ultimos[D.datos.ultimos.length - 1];
+  const ultFecha = D.datos.ultimas_fechas[D.datos.ultimas_fechas.length - 1];
+  const nat = ["R1", "R2", "R3", "R4", "R5", "R6"].map((k) => ult[k]);
+  const hero = $("heroBalls");
+  const ordenSalida = [3, 0, 5, 1, 4, 2].map((i) => nat[i]);   // un orden de salida ilustrativo
+  const heroBallEls = ordenSalida.map((n) => hero.appendChild(ball(n)));
+  $("heroCaption").textContent = `Sorteo ${fmt(ult.CONCURSO)} (${fecha(ultFecha)}). Salen seis bolas; la Lotería las publica ordenadas, y la más chica es R1.`;
+  $("heroMeta1").textContent = `${fmt(D.datos.era_n)} sorteos con las reglas actuales`;
+  $("spoiler").innerHTML = D.prueba.gana
+    ? `<b>Spoiler:</b> una red sí logró ganarle a enviar siempre ${MED}. Les mostramos cómo y por cuánto.`
+    : `<b>Spoiler:</b> ninguna red le gana a enviar siempre ${MED}. Les mostramos por qué.`;
+  $("heroMeta2").textContent = `${D.busqueda.n_configs} configuraciones de redes neuronales`;
+  function heroSequence() {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const sorted = [...heroBallEls].sort((a, b) => +a.textContent - +b.textContent);
+    if (reduce) { sorted.forEach((b) => hero.appendChild(b)); sorted[0].classList.add("r1"); return; }
+    heroBallEls.forEach((b) => { b.classList.remove("r1"); b.style.transform = ""; hero.appendChild(b); });   // vuelven al orden de salida
+    heroBallEls.forEach((b, i) => b.animate([{ transform: "translateY(-60px) scale(.3)", opacity: 0 }, { transform: "none", opacity: 1 }],
+      { duration: 520, delay: 180 * i, easing: "cubic-bezier(.2,.9,.3,1.25)", fill: "backwards" }));
+    setTimeout(() => {   // FLIP: medir, reordenar, animar hacia la nueva posición
+      const z = parseFloat(hero.closest(".wrap").style.zoom) || 1;   // con zoom, getBoundingClientRect mide en pixeles ya reducidos
+      const before = new Map(heroBallEls.map((b) => [b, b.getBoundingClientRect().left]));
+      sorted.forEach((b) => hero.appendChild(b));
+      sorted.forEach((b) => { const dx = (before.get(b) - b.getBoundingClientRect().left) / z; b.animate([{ transform: `translateX(${dx}px)` }, { transform: "none" }], { duration: 700, easing: "cubic-bezier(.3,.8,.3,1)" }); });
+      setTimeout(() => sorted[0].classList.add("r1"), 650);
+    }, 180 * 6 + 600);
+  }
+  // Estado en reposo: ya ordenadas, con R1 marcada (lo que ve una miniatura o un lector rápido)
+  [...heroBallEls].sort((a, b) => +a.textContent - +b.textContent).forEach((b) => hero.appendChild(b));
+  hero.firstChild.classList.add("r1");
+
+  // ---------- 3. Últimos sorteos ----------
+  $("ordenTxt").textContent = `En los ${fmt(D.datos.n_sorteos)} sorteos del histórico, R1 < R2 < R3 < R4 < R5 < R6 siempre. La columna R1 es el número más chico del sorteo.`;
+  const ultBox = $("ultimos");
+  D.datos.ultimos.slice(-5).reverse().forEach((r, i) => {
+    const row = document.createElement("div");
+    row.className = "draw-row rise";
+    row.style.setProperty("--i", i);
+    row.innerHTML = `<span class="num">${fecha(D.datos.ultimas_fechas[D.datos.ultimas_fechas.length - 1 - i])}</span>`;
+    row.appendChild(drawBalls(["R1", "R2", "R3", "R4", "R5", "R6"].map((k) => r[k])));
+    const g = document.createElement("span"); g.className = "grade hl"; g.textContent = `R1 = ${r.R1}`; row.appendChild(g);
+    ultBox.appendChild(row);
+  });
+  $("ultimosCap").textContent = "Los cinco sorteos más recientes del histórico, como los publica la Lotería Nacional.";
+
+  // ---------- 4. Datos ----------
+  const cf = D.datos.cambios_formato;
+  // "Mesetas": máximos que se sostuvieron 100 sorteos o más. Los saltos 36 → 38 → 39 de los primeros sorteos de 1984
+  // son azar (todavía no había salido el número más alto), no cambios de reglas.
+  const mesetas = cf.filter((c, i) => (cf[i + 1] ? cf[i + 1].concurso : D.datos.ultimo_concurso + 1) - c.concurso >= 100);
+  $("datosTitulo").textContent = `${fmt(D.datos.n_sorteos)} sorteos desde ${anio(D.datos.primera_fecha)}, pero el universo de números creció de ${mesetas[0].maximo} a ${mesetas[mesetas.length - 1].maximo}`;
+  $("fTotal").textContent = fmt(D.datos.n_sorteos);
+  $("fTotalTxt").textContent = `sorteos en el histórico oficial, del ${fecha(D.datos.primera_fecha)} al ${fecha(D.datos.ultima_fecha)}`;
+  $("fEra").textContent = fmt(D.datos.era_n);
+  $("fEraTxt").textContent = `sorteos con el universo actual de 56 números (desde el concurso ${fmt(D.datos.era_inicio_concurso)}, ${fecha(D.datos.era_inicio_fecha)}). Solo usamos estos: con otro universo, R1 tiene otra distribución.`;
+  (function () {
+    const svg = $("chFormato"); const f = frame(svg);
+    const t = (s) => new Date(s).getTime();
+    const tEnd = t(D.datos.ultima_fecha);
+    const x = lin(t(cf[0].fecha), tEnd, f.x0, f.x1), y = lin(34, 58, f.y0, f.y1);
+    yAxis(svg, f, y, [36, 40, 44, 48, 52, 56]);
+    xTicks(svg, f, (v) => x(new Date(`${v}-01-01`).getTime()), [1985, 1995, 2005, 2015, 2025]);
+    el("rect", { x: x(t(D.datos.era_inicio_fecha)), y: f.y1, width: f.x1 - x(t(D.datos.era_inicio_fecha)), height: f.y0 - f.y1, fill: css("ball"), opacity: 0.18 }, svg);
+    txt(svg, x(t(D.datos.era_inicio_fecha)) + 8, f.y1 + 16, `época actual: ${fmt(D.datos.era_n)} sorteos`, { class: "t-ink" });
+    const pts = [];
+    cf.forEach((c, i) => { pts.push([x(t(c.fecha)), y(c.maximo)]); const next = cf[i + 1] ? t(cf[i + 1].fecha) : tEnd; pts.push([x(next), y(c.maximo)]); });
+    line(svg, pts, { stroke: css("data"), "stroke-width": 3 });
+    mesetas.forEach((c, i) => {
+      el("circle", { cx: x(t(c.fecha)), cy: y(c.maximo), r: 4.5, fill: css("data"), class: "pp", style: `--i:${i * 8}` }, svg);
+      const pegado = x(t(c.fecha)) < f.x0 + 40;   // junto al eje, la etiqueta va a la derecha del punto
+      txt(svg, x(t(c.fecha)) + (pegado ? 8 : -4), y(c.maximo) - 9, c.maximo, { "text-anchor": pegado ? "start" : "end", class: "t-ink" });
+    });
+  })();
+
+  // ---------- 5. Distribución ----------
+  const dist = D.distribucion;
+  $("distTitulo").textContent = `La mitad de las veces R1 vale ${MED} o menos`;
+  $("dMed").textContent = MED;
+  $("leyMed").textContent = `R1 de ${MED} o menos (${pct(dist.p_r1_hasta_mediana)})`;
+  $("dMean").textContent = fmt(dist.media_observada, 1);
+  // El valor p se explica hasta la diapositiva 7; aquí solo se dice lo que significa
+  $("dChi").textContent = dist.chi2_r1.p > 0.05 ? "Coinciden" : "Difieren";
+  $("dChiTxt").textContent = "la fórmula y los datos reales (comprobado con una prueba chi-cuadrada)";
+  (function () {
+    const svg = $("chDist"); const f = frame(svg);
+    const K = 30, emp = dist.pmf_empirica.slice(0, K), teo = dist.pmf_teorica.slice(0, K);
+    const ymax = Math.max(...emp, ...teo) * 1.12;
+    const x = lin(0.5, K + 0.5, f.x0, f.x1), y = lin(0, ymax, f.y0, f.y1);
+    yAxis(svg, f, y, niceTicks(0, ymax, 4), (v) => fmt(v * 100) + "%");
+    xTicks(svg, f, x, [1, 5, 10, 15, 20, 25, 30]);
+    const bw = (f.x1 - f.x0) / K * 0.72;
+    emp.forEach((p, i) => el("rect", { x: x(i + 1) - bw / 2, y: y(p), width: bw, height: f.y0 - y(p), fill: i + 1 <= MED ? css("ball") : css("data"), opacity: i + 1 <= MED ? 0.9 : 0.75, class: "gy", style: `--i:${i}`, rx: 2 }, svg));
+    line(svg, teo.map((p, i) => [x(i + 1), y(p)]), { stroke: css("theory"), "stroke-width": 2.5 });
+    el("line", { x1: x(MED + 0.5), x2: x(MED + 0.5), y1: f.y1, y2: f.y0, stroke: css("ball"), "stroke-dasharray": "5 4", "stroke-width": 1.5 }, svg);
+    txt(svg, x(MED + 0.5) + 6, f.y1 + 14, `${pct(dist.p_r1_hasta_mediana)} vale ${MED} o menos`, { class: "t-ink" });
+    txt(svg, f.x1, f.y0 + 30, "R1", { "text-anchor": "end" });
+  })();
+
+  // ---------- 6. Curva de calificación + slider ----------
+  const curva = dist.curva_calificacion;
+  const ccMax = Math.max(...curva.map((c) => c.teorica));
+  const svgC = $("chCurva");
+  let marker;
+  (function () {
+    const f = frame(svgC);
+    const lo = Math.min(...curva.map((c) => c.teorica)) - 0.05;
+    const x = lin(1, 25, f.x0, f.x1), y = lin(lo, ccMax + 0.08, f.y0, f.y1);
+    svgC._x = x; svgC._y = y;
+    yAxis(svgC, f, y, niceTicks(lo, ccMax + 0.08, 5), (v) => fmt(v, 1));
+    xTicks(svgC, f, x, [1, 5, 10, 15, 20, 25]);
+    line(svgC, curva.map((c) => [x(c.prediccion), y(c.teorica)]), { stroke: css("theory"), "stroke-width": 3 });
+    curva.forEach((c, i) => el("circle", { cx: x(c.prediccion), cy: y(c.empirica), r: 3.2, fill: css("data"), class: "pp", style: `--i:${i * 3}` }, svgC));
+    txt(svgC, f.x1, f.y0 + 30, "predicción", { "text-anchor": "end" });
+    const mean = curva.reduce((a, c) => (Math.abs(c.prediccion - Math.round(dist.media_teorica)) < Math.abs(a.prediccion - Math.round(dist.media_teorica)) ? c : a));
+    // la media se anota debajo de la curva para no chocar con la etiqueta del máximo
+    el("line", { x1: x(mean.prediccion), x2: x(mean.prediccion), y1: y(mean.teorica) + 8, y2: y(mean.teorica) + 34, stroke: css("muted") }, svgC);
+    txt(svgC, x(mean.prediccion), y(mean.teorica) + 50, `promedio ≈ ${fmt(dist.media_teorica, 1)}`, { "text-anchor": "middle" });
+    const pico = curva.reduce((a, c) => (c.teorica > a.teorica ? c : a));
+    txt(svgC, x(pico.prediccion), y(pico.teorica) - 16, `máximo: ${pico.prediccion} → ${fmt(pico.teorica, 2)}`, { "text-anchor": "middle", class: "t-ink" });
+    txt(svgC, f.x1, f.y1 + 14, "calificación esperada por sorteo", { "text-anchor": "end" });
+    marker = el("g", {}, svgC);
+    el("line", { y1: f.y1, y2: f.y0, stroke: css("ball"), "stroke-width": 1.5, "stroke-dasharray": "4 4" }, marker);
+    el("circle", { r: 7, fill: css("ball"), stroke: css("panel"), "stroke-width": 2 }, marker);
+  })();
+  function setPred(v) {
+    const c = curva.find((q) => q.prediccion === v);
+    $("predOut").textContent = v;
+    $("predCal").textContent = fmt(c.teorica, 2);
+    const g = marker; const x = svgC._x(v), y = svgC._y(c.teorica);
+    g.children[0].setAttribute("x1", x); g.children[0].setAttribute("x2", x);
+    g.children[1].setAttribute("cx", x); g.children[1].setAttribute("cy", y);
+    const best = curva.reduce((a, q) => (q.teorica > a.teorica ? q : a));
+    $("predTxt").textContent = v === best.prediccion
+      ? `${v} es el máximo: ninguna otra constante espera más de ${fmt(best.teorica, 2)} por sorteo.`
+      : `Predecir ${v} cuesta ${fmt(best.teorica - c.teorica, 2)} puntos por sorteo frente a ${best.prediccion}.`;
+  }
+  $("defSiempre").innerHTML = `De aquí en adelante llamamos <b>"siempre ${MED}"</b> a enviar ${MED} sin ningún modelo. Es la vara contra la que medimos cada red.`;
+  const predInicial =curva.some((q) => q.prediccion === 15) ? 15 : curva[curva.length - 1].prediccion;
+  $("pred").value = predInicial; setPred(predInicial);
+  $("pred").addEventListener("input", (e) => setPred(+e.target.value));
+
+  const N_BOLAS = 56;
+  // ---------- 7. Memoria ----------
+  const pr = D.pruebas;
+  const tests = [
+    ["¿Algún número sale más que otros?", pr.chi2_bolas.p, "Cuenta cuántas veces salió cada bola del 1 al 56 (prueba chi-cuadrada).",
+      "No: todas salen igual de seguido."],
+    ["¿R1 se parece a los R1 anteriores?", pr.ljung_box_p["20"], "Revisa a la vez los 20 sorteos previos (prueba de Ljung-Box).",
+      "No: conocer los anteriores no ayuda."],
+    ["¿Hay rachas de R1 altos o bajos?", pr.rachas.p, `Cuenta cuántas veces R1 pasa de "bajo" (${MED} o menos) a "alto" y al revés (prueba de rachas).`,
+      "No: cambia tanto como lo haría el azar."],
+    ["¿Un R1 bajo hace más probable otro bajo?", pr.independencia.p, "Compara cada R1 con el del sorteo siguiente (tabla de contingencia).",
+      "No: el siguiente no depende del anterior."],
+  ];
+  const sinMemoria = tests.every((t) => t[1] > 0.05);
+  $("memTitulo").textContent = sinMemoria ? "Cuatro pruebas, ninguna encuentra memoria" : "Cuatro pruebas de memoria";
+  tests.forEach(([pregunta, p, como, si], i) => {
+    const d = document.createElement("div"); d.className = "test rise"; d.style.setProperty("--i", i);
+    d.innerHTML = `<span class="q">${pregunta}</span><span class="p">p = ${pfmt(p)}</span>` +
+      `<span class="verdict"><b>${p > 0.05 ? si : "Sí: el resultado es raro para puro azar."}</b> ${como}</span>`;
+    $("tests").appendChild(d);
+  });
+  (function () {
+    const svg = $("chAcf"); const f = frame(svg, { l: 58, b: 44, t: 26 });
+    const m = Math.max(0.08, ...pr.acf.map(Math.abs)) * 1.15;
+    const x = lin(0.5, 20.5, f.x0, f.x1), y = lin(-m, m, f.y0, f.y1);
+    el("rect", { x: f.x0, y: y(pr.banda), width: f.x1 - f.x0, height: y(-pr.banda) - y(pr.banda), fill: css("theory"), opacity: 0.2 }, svg);
+    yAxis(svg, f, y, [-0.06, -0.03, 0, 0.03, 0.06].filter((v) => Math.abs(v) < m), (v) => fmt(v, 2));
+    xTicks(svg, f, x, [1, 5, 10, 15, 20]);
+    txt(svg, f.x0 - 50, f.y1 - 10, "parecido con sorteos anteriores", {});
+    txt(svg, f.x1, f.y0 + 36, "sorteos atrás", { "text-anchor": "end" });
+    txt(svg, f.x1 - 4, y(pr.banda) - 6, "zona del puro azar", { "text-anchor": "end", class: "t-ink" });
+    const bw = (f.x1 - f.x0) / 20 * 0.55;
+    pr.acf.forEach((a, i) => el("rect", { x: x(i + 1) - bw / 2, y: Math.min(y(a), y(0)), width: bw, height: Math.abs(y(a) - y(0)), fill: Math.abs(a) > pr.banda ? css("bad") : css("data"), rx: 2, class: "gy", style: `--i:${i * 3}` }, svg));
+    $("acfCap").textContent = `Cada barra mide qué tanto se parece R1 a sí mismo 1, 2, … 20 sorteos atrás. Si el sorteo tuviera memoria, alguna barra saldría de la franja verde, que marca lo que produce el puro azar el 95 % de las veces. ` +
+      (pr.acf_fuera === 0 ? "Ninguna sale." : `Salen ${pr.acf_fuera} de 20; por azar se espera alrededor de 1.`);
+  })();
+
+  // Nombre legible de un método de la tabla, p. ej. "CNN-Clasif. k=20 (#133)" -> "CNN · probabilidades · 20 sorteos (#133)"
+  function etiqueta(metodo) {
+    const s = metodo.replace("Campeón: ", "");
+    const m = s.match(/^(\w+)-(Clasif\.|L1|MSE) k=(\d+)( \(#\d+\))?$/);
+    if (m) return `${m[1]} · ${m[2] === "Clasif." ? "probabilidades" : m[2]} · ${m[3]} sorteos${m[4] || ""}`;
+    if (s.startsWith("Ensamble")) return "Combinación de las 5 mejores redes";
+    if (s.startsWith("Constante")) return `Siempre ${MED} (sin modelo)`;
+    return s;
+  }
+  const nombreRed = (r) => `${r.familia} · ${r.perdida === "clase" ? "probabilidades" : r.perdida.toUpperCase()} · ${r.ventana} sorteos`;
+
+  // ---------- 8. Modelos ----------
+  $("zooTitulo").textContent = `Probamos 5 familias de redes y ${D.busqueda.n_configs} configuraciones`;
+
+  // ---------- 9 y 13. Arquitectura y curvas: una pestaña por red finalista ----------
+  const redes = D.redes.finalistas;
+  let redActual = 0;
+  function pestañas(caja, alElegir) {
+    redes.forEach((r, i) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.setAttribute("role", "tab");
+      b.textContent = `${r.campeon ? "★ " : ""}${nombreRed(r)}`;
+      b.addEventListener("click", () => alElegir(i));
+      caja.appendChild(b);
+    });
+  }
+  function elegirRed(i) {
+    redActual = i;
+    [...$("tabsArq").children].forEach((b, j) => { b.setAttribute("aria-selected", j === i); b.classList.toggle("on", j === i); });
+    $("selCurva").value = i;
+    dibujarArquitectura(redes[i]);
+    dibujarCurva(redes[i]);
+  }
+  function dibujarArquitectura(r) {
+    const svg = $("chArq"); const f = frame(svg, { l: 30, r: 30, t: 30, b: 78 });
+    const capas = r.capas_red, n = capas.length, MAXV = 10;
+    const xc = (i) => f.x0 + (i + 0.5) * (f.x1 - f.x0) / n;
+    const pos = capas.map((c, i) => {
+      const v = Math.min(c.unidades, MAXV), gap = Math.min(24, (f.y0 - f.y1) / (v + 1)), y0 = (f.y0 + f.y1) / 2 - gap * (v - 1) / 2;
+      return Array.from({ length: v }, (_, j) => [xc(i), y0 + j * gap]);
+    });
+    const conexiones = el("g", { class: "fade" }, svg);
+    for (let i = 0; i < n - 1; i++)
+      for (const [x1, y1] of pos[i]) for (const [x2, y2] of pos[i + 1])
+        el("line", { x1, y1, x2, y2, stroke: css("muted"), "stroke-width": 1, opacity: 0.45 }, conexiones);
+    capas.forEach((c, i) => {
+      const color = { entrada: "data", salida: "ball", resumen: "muted" }[c.tipo] || "net";
+      pos[i].forEach(([x, y], j) => {
+        const attrs = { fill: css(color), class: "pp", style: `--i:${i * 10 + j}` };
+        if (c.tipo === "entrada") el("rect", { x: x - 6, y: y - 6, width: 12, height: 12, rx: 2, ...attrs }, svg);
+        else if (c.tipo === "conv") el("rect", { x: x - 7, y: y - 7, width: 14, height: 14, rx: 3, ...attrs }, svg);
+        else if (c.tipo === "atencion") el("path", { d: `M${x},${y - 8} l8,8 l-8,8 l-8,-8 z`, ...attrs }, svg);
+        else el("circle", { cx: x, cy: y, r: 7, ...attrs }, svg);
+      });
+      if (c.tipo === "recurrente") {   // la flecha circular marca la memoria: la capa se vuelve a leer a sí misma
+        const [x, y] = pos[i][0];
+        el("path", { d: `M${x - 9},${y - 12} a 11 11 0 1 1 18 0`, fill: "none", stroke: css("net"), "stroke-width": 2 }, svg);
+        el("path", { d: `M${x + 9},${y - 12} l-1,-7 l6,4 z`, fill: css("net") }, svg);
+      }
+      const yb = f.y0 + 22;
+      txt(svg, xc(i), yb, c.nombre, { "text-anchor": "middle", class: "t-ink" });
+      txt(svg, xc(i), yb + 17, c.tipo === "entrada" ? `${fmt(c.unidades)} valores` : `${fmt(c.unidades)} ${c.tipo === "conv" ? "filtros" : "neuronas"}`, { "text-anchor": "middle" });
+      if (c.unidades > MAXV) txt(svg, xc(i), pos[i][pos[i].length - 1][1] + 22, "⋮", { "text-anchor": "middle" });
+      if (c.params) txt(svg, xc(i), yb + 34, `${fmt(c.params)} parámetros`, { "text-anchor": "middle" });
+    });
+    const chips = [["Parámetros", fmt(r.parametros)], ["Ve", `${r.ventana} sorteos`], ["Responde", r.perdida === "clase" ? "probabilidades" : "un número"],
+      ["Error al entrenar", r.perdida === "clase" ? "entropía cruzada" : r.perdida.toUpperCase()], ["Dropout", pct(r.dropout)],
+      ["Velocidad de aprendizaje", r.lr], ["Weight decay", r.weight_decay], ["Se detuvo en la época", `${r.mejor_epoca} (de ${r.epocas})`]];
+    $("arqChips").innerHTML = chips.map(([k, v]) => `<span><small>${k}</small><b>${v}</b></span>`).join("");
+    $("arqCapas").innerHTML = r.capas_red.map((c) => `<li><b>${c.nombre}</b> ${c.detalle}${c.params ? ` <small class="num">(${fmt(c.params)} parámetros)</small>` : ""}</li>`).join("");
+    svgPlay(svg);
+  }
+  function curvaEn(svg, curva, { escala = 1, unidad, paro, titulo }) {
+    const f = frame(svg, { l: 54, b: 40, t: 34 });
+    const ent = curva.map((h) => h[0] * escala), val = curva.map((h) => h[1] * escala);
+    const lo = Math.min(...ent, ...val), hi = Math.max(...ent, ...val), pad = (hi - lo) * 0.08;
+    const x = lin(1, curva.length, f.x0, f.x1), y = lin(Math.max(0, lo - pad), hi + pad, f.y0, f.y1);
+    yAxis(svg, f, y, niceTicks(Math.max(0, lo - pad), hi + pad, 5), (v) => fmt(v, hi < 1 ? 3 : hi < 10 ? 2 : 1));
+    xTicks(svg, f, x, niceTicks(1, curva.length, 6).filter((v) => v >= 1));
+    el("rect", { x: x(paro), y: f.y1, width: Math.max(0, f.x1 - x(paro)), height: f.y0 - f.y1, fill: css("muted"), opacity: 0.08 }, svg);
+    el("line", { x1: x(paro), x2: x(paro), y1: f.y1, y2: f.y0, stroke: css("theory"), "stroke-width": 2, "stroke-dasharray": "5 4" }, svg);
+    const cercaDerecha = x(paro) > f.x1 - 260;   // la etiqueta no debe salirse por la derecha
+    txt(svg, cercaDerecha ? x(paro) - 6 : x(paro) + 6, f.y1 + 28, titulo, { class: "t-ink", "text-anchor": cercaDerecha ? "end" : "start" });
+    line(svg, ent.map((v, i) => [x(i + 1), y(v)]), { stroke: css("muted"), "stroke-width": 2.5 });
+    line(svg, val.map((v, i) => [x(i + 1), y(v)]), { stroke: css("net"), "stroke-width": 3 });
+    txt(svg, f.x0 - 44, f.y1 - 14, unidad, {});
+    txt(svg, f.x1, f.y0 + 32, "época (pasada completa por los sorteos de entrenamiento)", { "text-anchor": "end" });
+  }
+  function dibujarCurva(r) {
+    curvaEn($("chCurva2"), r.curva, {
+      escala: r.perdida === "clase" ? 1 : N_BOLAS,
+      unidad: r.perdida === "clase" ? "error (entropía cruzada)" : "error promedio (números)",
+      paro: r.mejor_epoca, titulo: `se queda con la época ${r.mejor_epoca}`,
+    });
+    const pac = r.epocas - r.mejor_epoca;
+    $("curvaCap").textContent = `${r.campeon ? "El campeón" : "Esta red"} (${nombreRed(r)}) dejó de mejorar con los sorteos nuevos en la época ${r.mejor_epoca}. ` +
+      `Siguió ${pac} épocas más por si mejoraba, no mejoró, y se detuvo: se queda con los parámetros de la época ${r.mejor_epoca}. ` +
+      cierreCurva(r);
+    svgPlay($("chCurva2"));
+  }
+  // La frase final depende de la red: no todas terminan con las dos curvas pegadas
+  function cierreCurva(r) {
+    const [e, v] = r.curva[r.mejor_epoca - 1];
+    const brecha = (v - e) / v;
+    return brecha < 0.05
+      ? "En esa época las dos curvas están casi pegadas: aprendió lo poco que había que aprender sin memorizar."
+      : `En esa época el error con sorteos nuevos ya era ${pct(brecha)} mayor que con los que vio: empezaba a memorizar, y por eso se detuvo ahí.`;
+  }
+  // Repite la animación de una diapositiva al cambiar de red, pero solo si ya se vio: no anima nada fuera de pantalla.
+  function svgPlay(svg) {
+    const s = svg.closest(".slide");
+    if (!s.dataset.visto) return;
+    s.classList.remove("play"); void svg.getBoundingClientRect(); s.classList.add("play");
+  }
+  const redCampeona = redes.find((r) => r.campeon) || redes[0];
+  $("arqTitulo").textContent = `Por dentro: el campeón es una ${redCampeona.familia} de ${fmt(redCampeona.parametros)} parámetros`;
+  pestañas($("tabsArq"), elegirRed);
+  $("selCurva").innerHTML = redes.map((r, i) => `<option value="${i}">${r.campeon ? "★ " : ""}${nombreRed(r)}</option>`).join("");
+  $("selCurva").addEventListener("change", (e) => elegirRed(+e.target.value));
+  elegirRed(0);
+  (function () {
+    const s = D.redes.sobreentrenada;
+    curvaEn($("chSobre"), s.curva, { escala: N_BOLAS, unidad: "error promedio (números)", paro: s.mejor_epoca,
+      titulo: `aquí la habría detenido el early stopping (época ${s.mejor_epoca})` });
+    $("sobreCap").textContent = `Contraejemplo hecho a propósito: una red de ${fmt(s.parametros)} parámetros, sin dropout y sin early stopping, entrenada ${s.epocas} épocas. ` +
+      `Con los sorteos que ya vio, su error baja de ${fmt(s.error_entreno_inicio, 1)} a ${fmt(s.error_entreno_fin, 2)} números: se los aprendió de memoria. ` +
+      `Con sorteos nuevos, su mejor momento fue la época ${s.mejor_epoca} (${fmt(s.error_val_mejor, 2)} números de error) y terminó peor (${fmt(s.error_val_fin, 2)}). Eso es sobreentrenar.`;
+  })();
+
+  // ---------- 10. Protocolo ----------
+  $("protoTitulo").textContent = `Con ${D.busqueda.n_configs} intentos, alguno le gana al azar por suerte`;
+  const anterior = D.prueba.corrida_anterior;
+  $("paso3").innerHTML = `<b>Un examen final que no se usa para elegir.</b> Los últimos ${fmt(D.prueba.n)} sorteos no participan en ninguna decisión: solo se consultan al terminar una búsqueda.` +
+    (anterior ? ` Hicimos dos búsquedas (${anterior.n_configs} y ${D.busqueda.n_configs} configuraciones), así que se consultó dos veces${anterior.gana === D.prueba.gana ? ", y las dos llegaron a la misma conclusión" : ""}.` : "");
+  $("protoPlain").innerHTML =`Es como un alumno que resuelve ${D.busqueda.n_configs} exámenes de práctica: alguno le va a salir bien por suerte. Por eso el examen que cuenta tiene que ser uno que <b>nunca haya visto</b>.`;
+  (function () {
+    const bq = D.busqueda, pu = D.prueba;
+    const t = (s) => new Date(s).getTime();
+    const a = t(D.datos.era_inicio_fecha), b = t(bq.validacion_desde), c = t(pu.desde), d = t(pu.hasta);
+    const seg = [["Estudio · entrenamiento", b - a, "data"], ["Exámenes de práctica · validación", c - b, "muted"], ["Examen final · prueba", d - c, "ink"]];
+    $("tlBar").innerHTML = seg.map(([n, w, col], i) => `<div class="gx" style="flex:${w};background:var(--${col});--i:${i}">${n}</div>`).join("");
+    $("tlDates").innerHTML = [D.datos.era_inicio_fecha, bq.validacion_desde, pu.desde, pu.hasta].map((s) => `<span>${fecha(s)}</span>`).join("");
+  })();
+
+  // ---------- 11. Búsqueda ----------
+  (function () {
+    const bq = D.busqueda, pts = bq.puntos;
+    $("busqTitulo").textContent = `${bq.le_ganan_en_validacion} de ${bq.n_configs} configuraciones le ganan a "siempre ${bq.constante}" en los exámenes de práctica`;
+    const svg = $("chBusq"); const f = frame(svg, { l: 150, b: 36 });
+    const vals = pts.map((p) => p.calificacion).concat([bq.ref_validacion]);
+    const lo = Math.min(...vals) - 0.01, hi = Math.max(...vals) + 0.01;
+    const x = lin(lo, hi, f.x0, f.x1);
+    const filas = [["l1", "L1 (distancia)", "net"], ["clase", "Probabilidades", "net"], ["mse", "MSE (cuadrado)", "bad"]];
+    const y = (i) => f.y1 + (i + 0.5) * (f.y0 - f.y1) / 3;
+    xTicks(svg, f, x, niceTicks(lo, hi, 6), (v) => fmt(v, 2));
+    const puntos = el("g", { class: "fade" }, svg);   // cientos de puntos: una sola animación para el grupo
+    filas.forEach(([key, lab, col], i) => {
+      txt(svg, f.x0 - 12, y(i) + 4, lab, { "text-anchor": "end", class: "t-ink" });
+      el("line", { x1: f.x0, x2: f.x1, y1: y(i), y2: y(i), class: "axis", "stroke-dasharray": "2 5" }, svg);
+      pts.filter((p) => p.perdida === key).forEach((p, j) => {
+        const jit = (((j * 7919) % 97) / 97 - 0.5) * (f.y0 - f.y1) / 4.2;
+        el("circle", { cx: x(p.calificacion), cy: y(i) + jit, r: 5, fill: css(col), opacity: 0.75 }, puntos);
+      });
+    });
+    el("line", { x1: x(bq.ref_validacion), x2: x(bq.ref_validacion), y1: f.y1 - 4, y2: f.y0, stroke: css("theory"), "stroke-width": 2.5 }, svg);
+    txt(svg, x(bq.ref_validacion) + 6, f.y1 + 8, `siempre ${bq.constante} en la práctica: ${fmt(bq.ref_validacion, 3)}`, { class: "t-ink" });
+    txt(svg, f.x1, f.y0 + 32, "calificación promedio en los exámenes de práctica →  mejor", { "text-anchor": "end" });
+    const best = Math.max(...pts.map((p) => p.calificacion));
+    $("busqCap").textContent = `Cada punto es una configuración, calificada en ${fmt(bq.n_validacion)} sorteos de práctica (${fecha(bq.validacion_desde)} a ${fecha(bq.validacion_hasta)}); más a la derecha es mejor. La línea verde es lo que saca predecir siempre ${bq.constante}. ` +
+      `Las redes que miden su error con L1 o con probabilidades se amontonan pegadas a esa línea: aprendieron a decir casi siempre ${bq.constante}. Las de MSE quedan a la izquierda porque apuntan al promedio. ` +
+      `La mejor configuración individual saca ${fmt(best, 3)}, apenas ${fmt(best - bq.ref_validacion, 3)} más que la línea. ¿Talento o suerte? Eso lo decide el examen final.`;
+  })();
+
+  // ---------- 12. Qué aprendió ----------
+  (function () {
+    const dm = D.demo;
+    const svg = $("chDemo"); const f = frame(svg);
+    const e = dm.salida_bordes, h = dm.salida_hist, hmax = Math.max(...h) * 1.1;
+    const x = lin(Math.min(e[0], MED - 1), Math.max(e[e.length - 1], MED + 1), f.x0, f.x1), y = lin(0, hmax, f.y0, f.y1);
+    yAxis(svg, f, y, niceTicks(0, hmax, 4));
+    xTicks(svg, f, x, niceTicks(Math.min(e[0], MED - 1), Math.max(e[e.length - 1], MED + 1), 6), (v) => fmt(v, 1));
+    h.forEach((c, i) => el("rect", { x: x(e[i]) + 1, y: y(c), width: Math.max(1, x(e[i + 1]) - x(e[i]) - 2), height: f.y0 - y(c), fill: css("net"), class: "gy", style: `--i:${i * 2}`, rx: 2 }, svg));
+    txt(svg, f.x1, f.y0 + 30, "lo que respondió la red, antes de redondear", { "text-anchor": "end" });
+    $("demoCap").textContent = `Respuestas de una red sencilla (MLP con error L1) en ${fmt(dm.n)} sorteos de práctica, antes de redondear: todas caen entre ${fmt(dm.salida_min, 1)} y ${fmt(dm.salida_max, 1)}, mientras el R1 real va de 1 a más de 30.`;
+    const dl = D.prueba.tabla.filter((r) => r.tipo === "Deep Learning");
+    const enMediana = dl.filter((r) => r.moda === MED).length;
+    const camp = D.prueba.campeon;
+    $("aprTxt").textContent = `Cuando el pasado no da pistas, lo más inteligente que puede hacer una red es responder casi siempre el número que deja menos error: la mediana, ${MED}. Eso hicieron: aunque les cambies los sorteos de entrada, su respuesta casi no se mueve.`;
+    $("aprFacts").innerHTML = `
+      <div class="fact net"><span class="big num">${enMediana} de ${dl.length}</span><small>finalistas de Deep Learning (incluida la combinación de las 5 mejores) cuya respuesta más frecuente en el examen final fue ${MED}</small></div>
+      <div class="fact accent"><span class="big num">${pct(camp.pct_moda)}</span><small>de los sorteos del examen final el campeón respondió ${camp.moda}</small></div>`;
+  })();
+
+  // ---------- 14. Ventaja en sorteos vistos contra no vistos ----------
+  (function () {
+    const R = D.redes, rows = R.finalistas;
+    const maxEnt = R.max_ventaja_entreno;
+    $("memoTitulo").textContent = maxEnt < 0.05 ? "Las redes casi no memorizaron" : "Algunas redes memorizaron";
+    $("memoPlain").innerHTML = `Si una red memorizara, le iría mucho mejor con los sorteos que ya vio que con los nuevos. Para medirlo comparamos cada red contra "siempre ${D.busqueda.constante}" <b>en el mismo periodo</b>, porque los periodos no califican igual ni para la constante: "siempre ${D.busqueda.constante}" saca ${fmt(R.constante_entreno, 3)} con los sorteos de 2007-${anio(D.busqueda.validacion_desde)} y ${fmt(R.constante_no_vistos, 3)} con los de ${anio(D.busqueda.validacion_desde)}-${anio(D.busqueda.validacion_hasta)}.`;
+    const svg = $("chMemo");
+    svg.setAttribute("viewBox", `0 0 960 ${rows.length * 32 + 70}`);
+    const f = frame(svg, { l: 330, r: 30, t: 14, b: 44 });
+    const vals = rows.flatMap((r) => [r.ventaja_entreno, r.ventaja_no_vistos]);
+    const lo = Math.min(-0.03, ...vals) - 0.01, hi = Math.max(0.03, ...vals) + 0.01;
+    const x = lin(lo, hi, f.x0, f.x1), y = (i) => f.y1 + (i + 0.5) * (f.y0 - f.y1) / rows.length;
+    xTicks(svg, f, x, niceTicks(lo, hi, 6), (v) => (Math.abs(v) < 1e-9 ? "0" : (v > 0 ? "+" : "−") + fmt(Math.abs(v), 2)));
+    el("line", { x1: x(0), x2: x(0), y1: f.y1, y2: f.y0, stroke: css("theory"), "stroke-width": 2 }, svg);
+    rows.forEach((r, i) => {
+      txt(svg, f.x0 - 12, y(i) + 4, `${r.campeon ? "★ " : ""}${nombreRed(r)}`, { "text-anchor": "end", class: r.campeon ? "t-ink" : "" });
+      el("line", { x1: x(r.ventaja_entreno), x2: x(r.ventaja_no_vistos), y1: y(i), y2: y(i), stroke: css("line"), "stroke-width": 4 }, svg);
+      el("circle", { cx: x(r.ventaja_entreno), cy: y(i), r: 6.5, fill: css("muted"), class: "pp", style: `--i:${i * 5}` }, svg);
+      el("circle", { cx: x(r.ventaja_no_vistos), cy: y(i), r: 6.5, fill: css("net"), class: "pp", style: `--i:${i * 5 + 2}` }, svg);
+    });
+    txt(svg, f.x1, f.y0 + 34, `puntos por sorteo arriba (+) o abajo (−) de "siempre ${D.busqueda.constante}", mismo periodo`, { "text-anchor": "end" });
+    const sinMse = rows.filter((r) => r.perdida !== "mse");
+    const maxNo = Math.max(...sinMse.map((r) => r.ventaja_no_vistos));
+    $("memoCap").textContent = `Con los sorteos que ya vieron, la ventaja más grande fue de ${fmt(maxEnt, 3)} puntos por sorteo: memorizaron casi nada, gracias al dropout y al early stopping. ` +
+      `Con sorteos nuevos quedan pegadas al cero (la mejor, ${maxNo >= 0 ? "+" : "−"}${fmt(Math.abs(maxNo), 3)}): no hay patrón que aprender. La red con MSE queda abajo en ambos periodos porque apunta al promedio, no porque memorice.`;
+  })();
+
+  // ---------- 15. Prueba final: diferencia contra "siempre 6" con IC ----------
+  (function () {
+    const pu = D.prueba;
+    const camp = pu.campeon;
+    // Menos renglones que la tabla completa: el campeón, la mejor otra red, la combinación y la red de MSE, más los
+    // métodos sin redes. "Mediana histórica" se omite porque predice lo mismo que "siempre 6" (sale idéntica).
+    const esDL = (r) => r.tipo === "Deep Learning";
+    const otraRed = pu.tabla.find((r) => esDL(r) && r.metodo !== camp.metodo && !r.metodo.startsWith("Ensamble") && !/-MSE /.test(r.metodo));
+    const rows = pu.tabla.filter((r) => r.metodo === camp.metodo || r === otraRed
+      || (esDL(r) && (r.metodo.startsWith("Ensamble") || /-MSE /.test(r.metodo)))
+      || (!esDL(r) && !["Mediana histórica", "Mediana últimos 50"].includes(r.metodo)));
+    const signo = (v) => (v >= 0 ? "+" : "−") + fmt(Math.abs(v), 3);
+    const siempre = `"siempre ${D.busqueda.constante}"`;
+    $("pruTitulo").textContent = pu.gana
+      ? `En el examen final, el campeón le gana a ${siempre}`
+      : `En el examen final, el campeón no se distingue de ${siempre}`;
+    const svg = $("chPrueba");
+    svg.setAttribute("viewBox", `0 0 960 ${rows.length * 24 + 56}`);
+    const f = frame(svg, { l: 430, r: 110, t: 10, b: 40 });
+    // El eje se corta en CORTE: un método mucho peor (p. ej. "Último R1") aplastaría a todos los demás.
+    const CORTE = -0.16;
+    const lo = Math.max(CORTE, Math.min(...rows.map((r) => r.ic_bajo)) - 0.01), hi = Math.max(...rows.map((r) => r.ic_alto)) + 0.01;
+    const x = (v) => lin(lo, hi, f.x0, f.x1)(Math.max(lo, v));
+    const y = (i) => f.y1 + (i + 0.5) * (f.y0 - f.y1) / rows.length;
+    xTicks(svg, f, x, niceTicks(lo, hi, 6), (v) => (Math.abs(v) < 1e-9 ? "0" : (v > 0 ? "+" : "−") + fmt(Math.abs(v), 2)));
+    el("line", { x1: x(0), x2: x(0), y1: f.y1, y2: f.y0, stroke: css("theory"), "stroke-width": 2 }, svg);
+    txt(svg, f.x1 + 100, f.y1 + 2, "calificación", { "text-anchor": "end" });
+    rows.forEach((r, i) => {
+      const isC = r === camp || r.metodo === camp.metodo;
+      const col = isC ? "ball" : r.tipo === "Deep Learning" ? "net" : "muted";
+      if (isC) el("rect", { x: 0, y: y(i) - 12, width: f.W, height: 24, fill: css("ball"), opacity: 0.1 }, svg);
+      txt(svg, f.x0 - 12, y(i) + 5, (isC ? "★ campeón: " : "") + etiqueta(r.metodo).replace(/ \(#\d+\)/, ""), { "text-anchor": "end", class: isC ? "t-ink" : "" });
+      el("line", { x1: x(r.ic_bajo), x2: x(r.ic_alto), y1: y(i), y2: y(i), stroke: css(col), "stroke-width": 2.5, class: "gx", style: `--i:${i}` }, svg);
+      if (r.dif_vs_ref < lo) {
+        el("path", { d: `M${f.x0 + 2},${y(i)} l10,-6 v12 z`, fill: css(col) }, svg);
+        txt(svg, f.x0 + 18, y(i) + 4, `fuera de la gráfica: ${fmt(r.dif_vs_ref, 2)}`, {});
+      } else {
+        el("circle", { cx: x(r.dif_vs_ref), cy: y(i), r: 5.5, fill: css(col), class: "pp", style: `--i:${i * 6}` }, svg);
+      }
+      txt(svg, f.x1 + 100, y(i) + 4, fmt(r.calificacion, 3), { "text-anchor": "end", class: isC ? "t-ink" : "" });
+    });
+    txt(svg, f.x1, f.y0 + 34, `puntos por sorteo arriba (+) o abajo (−) de "siempre ${D.busqueda.constante}"`, { "text-anchor": "end" });
+    const enVal = camp.validacion - D.busqueda.ref_validacion;
+    $("pruFacts").innerHTML = `
+      <div class="fact net rise" style="--i:0"><span class="big num">${signo(enVal)}</span><small>ventaja del campeón sobre "siempre ${D.busqueda.constante}" en los exámenes de práctica, donde se eligió entre ${D.busqueda.n_configs}</small></div>
+      <div class="fact accent rise" style="--i:1"><span class="big num">${signo(camp.dif_vs_ref)}</span><small>la misma comparación en ${fmt(pu.n)} sorteos del examen final${Math.abs(camp.dif_vs_ref) < 0.01 ? " (menos de una centésima de punto sobre 10)" : ""}: ${pu.gana ? "la ventaja se sostiene" : "la ventaja era suerte de haber elegido al mejor de muchos"}</small></div>`;
+    const ant = pu.corrida_anterior;
+    const notaAnterior = ant ? ` En la búsqueda anterior (${ant.n_configs} configuraciones) el campeón quedó en ${signo(ant.dif_vs_ref)}; este examen se usó una vez por búsqueda.` : "";
+    $("pruCap").textContent = `Cómo leerla: el punto es cuánto ganó o perdió cada método por sorteo frente a "siempre ${D.busqueda.constante}", en ${fmt(pu.n)} sorteos nuevos (${fecha(pu.desde)} a ${fecha(pu.hasta)}); ` +
+      `la línea es el rango probable de su ventaja real (intervalo de confianza de 95 %). Si toca la vertical verde, no se distingue de "siempre ${D.busqueda.constante}".${notaAnterior}`;
+  })();
+
+  // ---------- 16. Serie ----------
+  (function () {
+    const s = D.prueba.serie, n = s.real.length;
+    const [cmin, cmax] = D.prueba.campeon.rango;
+    $("serieTitulo").textContent = `R1 salta entre ${Math.min(...s.real)} y ${Math.max(...s.real)}; ` +
+      (cmax - cmin <= 2 ? `el campeón no sale de ${cmin === cmax ? cmin : `${cmin}-${cmax}`}` : `el campeón se mueve entre ${cmin} y ${cmax}`);
+    const svg = $("chSerie"); const f = frame(svg);
+    const ymax = Math.max(...s.real) + 2;
+    const x = lin(0, n - 1, f.x0, f.x1), y = lin(0, ymax, f.y0, f.y1);
+    yAxis(svg, f, y, niceTicks(0, ymax, 5));
+    xTicks(svg, f, x, [0, Math.round(n / 4), Math.round(n / 2), Math.round(3 * n / 4), n - 1], (v) => v + 1);
+    const reales = el("g", { class: "fade" }, svg);
+    s.real.forEach((v, i) => el("circle", { cx: x(i), cy: y(v), r: 3.6, fill: css("data"), opacity: 0.75 }, reales));
+    const step = (arr) => arr.flatMap((v, i) => [[x(Math.max(0, i - 0.5)), y(v)], [x(Math.min(n - 1, i + 0.5)), y(v)]]);
+    if (s["Mejor MSE"]) line(svg, step(s["Mejor MSE"]), { stroke: css("net"), "stroke-width": 2.5 });
+    line(svg, step(s["Campeón"]), { stroke: css("ball"), "stroke-width": 3 });
+    txt(svg, f.x1, f.y0 + 30, `últimos ${n} sorteos del examen final`, { "text-anchor": "end" });
+    $("serieCap").textContent = `Esta es la gráfica de "lo real contra lo que calculó la red". Si hubiera un patrón, las líneas seguirían a los puntos. ` +
+      `No lo hacen: no hay nada que perseguir, y quedarse cerca de ${MED} es lo que menos error deja. La red de MSE se queda más arriba porque apunta al promedio.`;
+  })();
+
+  // ---------- 17. Tres sorteos ----------
+  (function () {
+    const tr = D.tres_sorteos;
+    $("suerteTitulo").textContent = `Enviando ${tr.prediccion}, 8 de cada 10 veces la calificación final queda entre ${fmt(tr.p10, 1)} y ${fmt(tr.p90, 1)}`;
+    const h = [...tr.histograma].reverse();
+    const svg = $("chTres"); const f = frame(svg, { b: 40 });
+    const pmax = Math.max(...h.map((q) => q.prob)) * 1.12;
+    const x = lin(0, h.length, f.x0, f.x1), y = lin(0, pmax, f.y0, f.y1);
+    yAxis(svg, f, y, niceTicks(0, pmax, 4), (v) => fmt(v * 100) + "%");
+    el("line", { x1: f.x0, x2: f.x1, y1: f.y0, y2: f.y0, class: "axis" }, svg);
+    const bw = (f.x1 - f.x0) / h.length * 0.78;
+    h.forEach((q, i) => {
+      el("rect", { x: x(i + 0.5) - bw / 2, y: y(q.prob), width: bw, height: f.y0 - y(q.prob), fill: css("data"), opacity: 0.8, rx: 2, class: "gy", style: `--i:${i * 4}` }, svg);
+      if (i % 2 === 1) txt(svg, x(i + 0.5), f.y0 + 16, fmt(q.hasta, 1), { "text-anchor": "middle" });
+    });
+    txt(svg, f.x1, f.y0 + 34, "calificación final (promedio de los 3 sorteos)", { "text-anchor": "end" });
+    $("tresCap").textContent = `Probabilidad de cada calificación final si enviamos ${tr.prediccion}, calculada con la fórmula exacta. En promedio sacaríamos ${fmt(tr.esperada, 2)}: ${pct(tr.p_9_o_mas)} de las veces 9 o más, ${pct(tr.p_8_o_mas)} 8 o más y solo ${pct(tr.p_menos_de_7)} menos de 7. Ningún método puede reducir esta variación: depende de qué bolas salgan.`;
+  })();
+  // Sorteos simulados: se etiquetan "Simulación", no con las fechas reales, para que no se confundan con el resultado.
+  function sortear(animar = true) {
+    const box = $("simDraws"); box.innerHTML = "";
+    const fechas = ["Simulación 1", "Simulación 2", "Simulación 3"], notas = [];
+    fechas.forEach((fch, i) => {
+      const bolas = []; while (bolas.length < 6) { const b = 1 + Math.floor(Math.random() * 56); if (!bolas.includes(b)) bolas.push(b); }
+      const r1 = Math.min(...bolas), nota = 10 - 0.3 * Math.abs(r1 - PRED); notas.push(nota);
+      const row = document.createElement("div"); row.className = "draw-row rise"; row.style.setProperty("--i", i);
+      row.innerHTML = `<span class="num">${fch}</span>`;
+      row.appendChild(drawBalls(bolas));
+      const g = document.createElement("span"); g.className = "grade"; g.textContent = fmt(nota, 1); row.appendChild(g);
+      box.appendChild(row);
+    });
+    if (animar) { box.parentElement.classList.remove("play"); void box.offsetWidth; box.parentElement.classList.add("play"); }
+    $("simFinal").innerHTML = `${fmt(notas.reduce((a, b) => a + b) / 3, 1)} <small style="font-size:.45em;color:var(--muted)">calificación de esta simulación, enviando ${PRED}</small>`;
+  }
+  $("btnSortear").addEventListener("click", () => sortear(true));
+  sortear(false);
+
+  // ---------- 18. Predicción ----------
+  (function () {
+    const p = D.prediccion;
+    $("finalBall").textContent = p.final;
+    $("finalTitulo").textContent = `R1 = ${p.final}`;
+    const campeon = etiqueta(D.prueba.campeon.metodo).replace(/ \(#\d+\)/, "");
+    const porque = D.prueba.gana
+      ? `El campeón de Deep Learning (${campeon}) le ganó a "siempre ${MED}" en el examen final, así que enviamos su número.`
+      : `Ninguna red le ganó a "siempre ${MED}" en el examen final por más de lo que explica la suerte, así que enviamos la mediana. ${p.campeon_predice === p.final ? `El campeón de Deep Learning (${campeon}) también dice ${p.final}.` : `El campeón de Deep Learning (${campeon}) habría dicho ${p.campeon_predice}.`}`;
+    $("finalTxt").textContent = `${porque} Calificación esperada: ${fmt(p.calif_esperada, 2)} por sorteo. Datos hasta el ${fecha(p.datos_hasta)}.`;
+    $("agree").innerHTML = Object.entries(p.por_metodo).map(([k, v]) => `<span class="${v === p.final ? "yes" : ""}">${etiqueta(k).replace(/ \(#\d+\)/, "")}: <b>${v}</b></span>`).join("");
+    // Si el histórico ya trae los sorteos calificados (al regenerar después del 23 de octubre), se muestra el resultado real
+    const reales = ["2026-10-23", "2026-10-25", "2026-10-28"].map((f) => {
+      const i = D.datos.ultimas_fechas.indexOf(f);
+      return i < 0 ? null : { f, r1: D.datos.ultimos[i].R1, nota: 10 - 0.3 * Math.abs(D.datos.ultimos[i].R1 - p.final) };
+    }).filter(Boolean);
+    if (reales.length) {
+      $("reales").hidden = false;
+      $("reales").innerHTML = `<span class="eyebrow">Resultado real</span>` + reales.map((x) =>
+        `<span>${fecha(x.f)}: R1 = <b>${x.r1}</b> → ${fmt(x.nota, 1)}</span>`).join("") +
+        (reales.length === 3 ? `<span>Calificación final: <b>${fmt(reales.reduce((a, x) => a + x.nota, 0) / 3, 2)}</b></span>` : "");
+    }
+  })();
+
+  // ---------- 19. Conclusiones ----------
+  (function () {
+    const camp = D.prueba.campeon;
+    const items = [
+      D.prueba.gana
+        ? `<b>Enviamos ${PRED}</b>, lo que dice el campeón, porque le ganó a "siempre ${MED}" en el examen final.`
+        : `<b>Enviamos ${PRED}</b> porque es la mediana de R1: el número que en promedio queda más cerca del resultado, y el examen castiga justo la distancia.`,
+      `${sinMemoria ? "Ninguna prueba estadística encontró memoria en el sorteo" : "Las pruebas estadísticas encontraron poca estructura"}, y ${D.prueba.gana ? "una red sí logró aprovecharla" : `${D.busqueda.n_configs} configuraciones de redes neuronales tampoco`}: en el examen final el campeón quedó a ${camp.dif_vs_ref >= 0 ? "+" : "−"}${fmt(Math.abs(camp.dif_vs_ref), 3)} puntos por sorteo de "siempre ${MED}". Y no fue por memorizar: el early stopping y el dropout las frenaron a tiempo.`,
+      `La forma de medir el error define lo que aprende la red: con L1 aprende la mediana; con MSE aprende el promedio y saca menos en este examen.`,
+      `Elegir entre muchos modelos siempre produce un "ganador". Solo un examen con datos nuevos dice si ganó por talento o por suerte.`,
+    ];
+    $("takeaways").innerHTML = items.map((s, i) => `<p class="rise" style="--i:${i}">${s}</p>`).join("");
+  })();
+
+  // ---------- 20. Glosario ----------
+  (function () {
+    const g = [
+      ["Mediana", `el valor de en medio: la mitad de las veces R1 sale igual o menor (${MED}) y la otra mitad mayor.`],
+      ["Valor p", "qué tan raro sería un resultado si todo fuera puro azar. Mayor que 0.05: nada raro."],
+      ["Red neuronal", "una fórmula con miles de parámetros (perillas) que se ajustan con ejemplos."],
+      ["Neurona y capa", "una neurona combina números y pasa el resultado; una capa es un grupo de neuronas que trabajan a la vez."],
+      ["Parámetro", "cada número que la red ajusta al entrenar; cada línea del diagrama es uno."],
+      ["Época", "una pasada completa por todos los sorteos de entrenamiento."],
+      ["Error o pérdida", "qué tan lejos quedó la red; entrenar es hacerlo más chico."],
+      ["L1 y MSE", "dos formas de medir el error: la distancia, o la distancia al cuadrado."],
+      ["Sobreentrenar", "memorizar los ejemplos en vez de aprender; le va bien con lo visto y mal con lo nuevo."],
+      ["Early stopping", "detener el entrenamiento cuando el error con datos nuevos deja de bajar."],
+      ["Dropout", "apagar neuronas al azar mientras entrena, para que no dependa de memorizar."],
+      ["Validación y prueba", "los exámenes de práctica (para elegir) y el examen final (para confirmar)."],
+      ["Intervalo de confianza", "el rango donde probablemente está el valor real, considerando la suerte."],
+    ];
+    $("glosarioLista").innerHTML = g.map(([t, d]) => `<div><dt>${t}</dt><dd>${d}</dd></div>`).join("");
+    $("fuente").textContent = `Fuente: histórico oficial de resultados del Melate, Lotería Nacional (loterianacional.gob.mx), datos hasta el ${fecha(D.prediccion.datos_hasta)}. Código: melate_r1.ipynb, experimentos.py, melate_nucleo.py.`;
+  })();
+
+  // ---------- navegación, animaciones al entrar, tema ----------
+  const slides = [...document.querySelectorAll(".slide")];
+  let current = 0;
+  // La diapositiva "actual" es la que cruza la línea media de la pantalla. Se calcula en cada scroll y no con
+  // IntersectionObserver + rootMargin: dentro del visor de Claude (un iframe de otro origen) el navegador ignora
+  // rootMargin, el contador apuntaba a la diapositiva equivocada y "anterior" no hacía nada.
+  function actualizar() {
+    const medio = innerHeight / 2;
+    let i = slides.findIndex((s) => { const r = s.getBoundingClientRect(); return r.top <= medio && r.bottom > medio; });
+    if (i < 0) i = scrollY < 10 ? 0 : slides.length - 1;
+    current = i;
+    $("counter").textContent = `${i + 1} / ${slides.length}`;
+    $("progress").style.width = `${((i + 1) / slides.length) * 100}%`;
+    const s = slides[i];
+    if (!s.dataset.visto) {   // cada diapositiva se anima una sola vez: reiniciar cientos de animaciones en cada visita causaba lag
+      s.dataset.visto = "1";
+      s.classList.add("play");
+      if (s.id === "inicio") heroSequence();
+    }
+  }
+  let cuadroPendiente = false;
+  addEventListener("scroll", () => {
+    if (cuadroPendiente) return;
+    cuadroPendiente = true;
+    requestAnimationFrame(() => { cuadroPendiente = false; actualizar(); });
+  }, { passive: true });
+
+  // En pantallas de computadora, una diapositiva más alta que la pantalla se reduce (hasta 70 %) para que quepa
+  // completa. En teléfono no: ahí se desplaza normalmente. Primero se limpian todas, luego se mide todo y al final
+  // se escribe todo, para no forzar un recálculo de página por diapositiva.
+  function ajustar() {
+    const wraps = slides.map((s) => s.querySelector(".wrap"));
+    wraps.forEach((w) => { w.style.zoom = ""; });
+    if (innerWidth >= 900) {
+      const medidas = slides.map((s, i) => {
+        const cs = getComputedStyle(s);
+        return [innerHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom), wraps[i].scrollHeight];
+      });
+      medidas.forEach(([disponible, alto], i) => { if (alto > disponible) wraps[i].style.zoom = Math.max(0.7, disponible / alto).toFixed(3); });
+      // Con zoom, las gráficas de ancho 100 % no se encogen en la misma proporción: se mide lo que de verdad se ve
+      // y se corrige, hasta tres veces.
+      for (let vuelta = 0; vuelta < 3; vuelta++) {
+        const vistas = wraps.map((w) => w.getBoundingClientRect().height);
+        let cambio = false;
+        vistas.forEach((alto, i) => {
+          const disponible = medidas[i][0], z = parseFloat(wraps[i].style.zoom) || 1;
+          const nuevo = Math.max(0.7, z * disponible / alto);
+          if (alto > disponible + 1 && nuevo < z - 0.001) { wraps[i].style.zoom = nuevo.toFixed(3); cambio = true; }
+        });
+        if (!cambio) break;
+      }
+    }
+    actualizar();
+  }
+  ajustar();
+  document.fonts?.ready.then(ajustar);
+  document.querySelectorAll("details").forEach((d) => d.addEventListener("toggle", ajustar));   // abrir "Todo lo que variamos" cambia la altura
+  let espera;
+  addEventListener("resize", () => { clearTimeout(espera); espera = setTimeout(ajustar, 150); });
+
+  const suave = () => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
+  const go = (i) => slides[Math.max(0, Math.min(slides.length - 1, i))].scrollIntoView({ behavior: suave() });
+  // Avanzar o retroceder: si a la diapositiva actual le queda contenido abajo (o arriba), primero se recorre ese
+  // contenido; en la primera y en la última no se hace nada más (antes, ↓ en la última regresaba a su inicio).
+  function paso(dir) {
+    const r = slides[current].getBoundingClientRect();
+    if (dir > 0 && r.bottom > innerHeight + 8) return scrollBy({ top: Math.min(innerHeight * 0.85, r.bottom - innerHeight), behavior: suave() });
+    if (dir < 0 && r.top < -8) return scrollBy({ top: Math.max(-innerHeight * 0.85, r.top), behavior: suave() });
+    if (current + dir < 0 || current + dir >= slides.length) return;
+    go(current + dir);
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;                        // Alt+← / Alt+→ siguen siendo del navegador
+    const tag = e.target.tagName;
+    if (["INPUT", "SELECT", "TEXTAREA"].includes(tag)) return;             // la barra y el menú usan sus flechas
+    if (tag === "BUTTON" && (e.key === " " || e.key === "Enter")) return;  // Espacio sobre un botón lo presiona
+    const adelante = ["ArrowDown", "ArrowRight", "PageDown"].includes(e.key) || (e.key === " " && !e.shiftKey);
+    const atras = ["ArrowUp", "ArrowLeft", "PageUp"].includes(e.key) || (e.key === " " && e.shiftKey);
+    if (adelante) { e.preventDefault(); paso(1); }
+    if (atras) { e.preventDefault(); paso(-1); }
+    if (e.key === "Home") { e.preventDefault(); go(0); }
+    if (e.key === "End") { e.preventDefault(); go(slides.length - 1); }
+  });
+  // Al soltar la barra o elegir en el menú, el foco sale del control para que las flechas vuelvan a cambiar de diapositiva
+  $("pred").addEventListener("change", (e) => e.target.blur());
+  $("selCurva").addEventListener("change", (e) => e.target.blur());
+  $("btnNext").addEventListener("click", () => paso(1));
+  $("btnPrev").addEventListener("click", () => paso(-1));
+  if (!document.fullscreenEnabled) $("btnFull").hidden = true;   // en el visor de Claude la pantalla completa no está permitida
+  $("btnTheme").addEventListener("click", () => {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("tema", root.dataset.theme); } catch {}
+  });
+  try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.theme = t; } catch {}
+  $("btnFull").addEventListener("click", () => {
+    const d = document;
+    (d.fullscreenElement ? d.exitFullscreen() : d.documentElement.requestFullscreen?.())?.catch?.(() => {});
+  });
+})();
+</script>
+
+</body></html>

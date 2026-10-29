@@ -1,0 +1,5994 @@
+{
+ "generado": "2026-10-22 09:07",
+ "datos": {
+  "fuente": "descarga previa (2 sorteos nuevos)",
+  "n_sorteos": 4281,
+  "primer_concurso": 1,
+  "primera_fecha": "1984-08-19",
+  "ultimo_concurso": 4281,
+  "ultima_fecha": "2026-10-21",
+  "validacion": {
+   "producto_unico": true,
+   "concursos_consecutivos": true,
+   "concurso_inicia_en_1": true,
+   "fechas_no_decrecientes": true,
+   "r1_a_r6_ordenados": true,
+   "r7_distinto_de_r1_r6": true
+  },
+  "cambios_formato": [
+   {
+    "concurso": 1,
+    "fecha": "1984-08-19",
+    "maximo": 36
+   },
+   {
+    "concurso": 2,
+    "fecha": "1984-08-26",
+    "maximo": 38
+   },
+   {
+    "concurso": 5,
+    "fecha": "1984-09-16",
+    "maximo": 39
+   },
+   {
+    "concurso": 557,
+    "fecha": "1993-04-07",
+    "maximo": 42
+   },
+   {
+    "concurso": 563,
+    "fecha": "1993-04-28",
+    "maximo": 44
+   },
+   {
+    "concurso": 1548,
+    "fecha": "2002-10-06",
+    "maximo": 47
+   },
+   {
+    "concurso": 1878,
+    "fecha": "2005-12-04",
+    "maximo": 48
+   },
+   {
+    "concurso": 1881,
+    "fecha": "2005-12-14",
+    "maximo": 50
+   },
+   {
+    "concurso": 1891,
+    "fecha": "2006-01-18",
+    "maximo": 51
+   },
+   {
+    "concurso": 2089,
+    "fecha": "2007-12-12",
+    "maximo": 56
+   }
+  ],
+  "era_inicio_concurso": 2089,
+  "era_inicio_fecha": "2007-12-12",
+  "era_n": 2193,
+  "p_sorteo_sin_52_56": 0.4992083388309803,
+  "ultimos": [
+   {
+    "CONCURSO": 4274,
+    "R1": 20,
+    "R2": 27,
+    "R3": 32,
+    "R4": 38,
+    "R5": 43,
+    "R6": 54,
+    "R7": 26
+   },
+   {
+    "CONCURSO": 4275,
+    "R1": 17,
+    "R2": 20,
+    "R3": 22,
+    "R4": 26,
+    "R5": 33,
+    "R6": 45,
+    "R7": 32
+   },
+   {
+    "CONCURSO": 4276,
+    "R1": 14,
+    "R2": 19,
+    "R3": 21,
+    "R4": 47,
+    "R5": 54,
+    "R6": 55,
+    "R7": 41
+   },
+   {
+    "CONCURSO": 4277,
+    "R1": 9,
+    "R2": 15,
+    "R3": 18,
+    "R4": 32,
+    "R5": 39,
+    "R6": 46,
+    "R7": 6
+   },
+   {
+    "CONCURSO": 4278,
+    "R1": 1,
+    "R2": 4,
+    "R3": 7,
+    "R4": 41,
+    "R5": 43,
+    "R6": 51,
+    "R7": 42
+   },
+   {
+    "CONCURSO": 4279,
+    "R1": 1,
+    "R2": 12,
+    "R3": 27,
+    "R4": 29,
+    "R5": 41,
+    "R6": 55,
+    "R7": 47
+   },
+   {
+    "CONCURSO": 4280,
+    "R1": 10,
+    "R2": 18,
+    "R3": 20,
+    "R4": 31,
+    "R5": 34,
+    "R6": 45,
+    "R7": 15
+   },
+   {
+    "CONCURSO": 4281,
+    "R1": 13,
+    "R2": 31,
+    "R3": 34,
+    "R4": 39,
+    "R5": 44,
+    "R6": 55,
+    "R7": 18
+   }
+  ],
+  "ultimas_fechas": [
+   "2026-10-04",
+   "2026-10-07",
+   "2026-10-09",
+   "2026-10-11",
+   "2026-10-14",
+   "2026-10-16",
+   "2026-10-18",
+   "2026-10-21"
+  ]
+ },
+ "distribucion": {
+  "pmf_teorica": [
+   0.10714285714285714,
+   0.09740259740259741,
+   0.08838383838383838,
+   0.08004574042309891,
+   0.07234903461318555,
+   0.06525599200404972,
+   0.05873039280364475,
+   0.05273749557878304,
+   0.04724400645599314,
+   0.04221804832237685,
+   0.03762913002646632,
+   0.03344811557908117,
+   0.029647193354185586,
+   0.0261998452897454,
+   0.023080816088585233,
+   0.02026608241924557,
+   0.017732822116839873,
+   0.015459383383911686,
+   0.013425253991291727,
+   0.011611030478955007,
+   0.009998387356877922,
+   0.008570046305895362,
+   0.0073097453785578095,
+   0.006202208199988444,
+   0.005233113168740249,
+   0.0043890626576531125,
+   0.003657552214710927,
+   0.0030269397638986984,
+   0.002486414806059645,
+   0.0020259676197523033,
+   0.0016363584621076298,
+   0.0013090867696861038,
+   0.0010363603593348321,
+   0.0008110646290446512,
+   0.0006267317588072305,
+   0.0004775099114721756,
+   0.0003581324336041317,
+   0.0002638870563398865,
+   0.0001905850962454736,
+   0.0001345306561732755,
+   9.24898261191269e-05,
+   6.165988407941794e-05,
+   3.963849690819724e-05,
+   2.4392921174275225e-05,
+   1.4229204018327215e-05,
+   7.761384009996662e-06,
+   3.880692004998331e-06,
+   1.7247520022214806e-06,
+   6.467820008330552e-07,
+   1.847948573808729e-07,
+   3.0799142896812156e-08
+  ],
+  "pmf_empirica": [
+   0.11399908800729594,
+   0.09758321933424532,
+   0.08755129958960328,
+   0.07797537619699042,
+   0.07979936160510716,
+   0.05927952576379389,
+   0.05563155494756042,
+   0.050159598723210214,
+   0.04879160966712266,
+   0.044231646146830825,
+   0.0364797081623347,
+   0.03419972640218878,
+   0.03511171910624715,
+   0.02188782489740082,
+   0.024623803009575923,
+   0.019151846785225718,
+   0.012767897856817145,
+   0.015047879616963064,
+   0.01094391244870041,
+   0.01094391244870041,
+   0.010487916096671226,
+   0.009575923392612859,
+   0.006383948928408573,
+   0.009575923392612859,
+   0.005471956224350205,
+   0.0031919744642042863,
+   0.001823985408116735,
+   0.002279981760145919,
+   0.004103967168262654,
+   0.0027359781121751026,
+   0.0027359781121751026,
+   0.0,
+   0.0009119927040583675,
+   0.00045599635202918376,
+   0.001823985408116735,
+   0.0,
+   0.001823985408116735,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.00045599635202918376,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "mediana_teorica": 6,
+  "media_teorica": 8.142857142857142,
+  "mediana_observada": 6.0,
+  "media_observada": 8.098039215686274,
+  "p_r1_hasta_10": 0.7115100031304249,
+  "p_r1_hasta_mediana": 0.5105800599696271,
+  "curva_calificacion": [
+   {
+    "prediccion": 1,
+    "teorica": 7.857142857142857,
+    "empirica": 7.870588235294118
+   },
+   {
+    "prediccion": 2,
+    "teorica": 8.092857142857143,
+    "empirica": 8.10218878248974
+   },
+   {
+    "prediccion": 3,
+    "teorica": 8.270129870129868,
+    "empirica": 8.275239398084814
+   },
+   {
+    "prediccion": 4,
+    "teorica": 8.394372294372296,
+    "empirica": 8.39575923392613
+   },
+   {
+    "prediccion": 5,
+    "teorica": 8.470587274360861,
+    "empirica": 8.469493844049248
+   },
+   {
+    "prediccion": 6,
+    "teorica": 8.503392833581515,
+    "empirica": 8.495348837209304
+   },
+   {
+    "prediccion": 7,
+    "teorica": 8.497044797599736,
+    "empirica": 8.485636114911081
+   },
+   {
+    "prediccion": 8,
+    "teorica": 8.455458525935772,
+    "empirica": 8.442544459644322
+   },
+   {
+    "prediccion": 9,
+    "teorica": 8.38222975692454,
+    "empirica": 8.369357045143639
+   },
+   {
+    "prediccion": 10,
+    "teorica": 8.280654584039713,
+    "empirica": 8.266894664842681
+   },
+   {
+    "prediccion": 11,
+    "teorica": 8.153748582161457,
+    "empirica": 8.137893296853626
+   },
+   {
+    "prediccion": 12,
+    "teorica": 8.004265102267324,
+    "empirica": 7.987004103967168
+   },
+   {
+    "prediccion": 13,
+    "teorica": 7.834712753025738,
+    "empirica": 7.815595075239397
+   },
+   {
+    "prediccion": 14,
+    "teorica": 7.647372087771644,
+    "empirica": 7.623119015047879
+   },
+   {
+    "prediccion": 15,
+    "teorica": 7.444311515343701,
+    "empirica": 7.41751025991792
+   },
+   {
+    "prediccion": 16,
+    "teorica": 7.2274024532626076,
+    "empirica": 7.197127222982216
+   },
+   {
+    "prediccion": 17,
+    "teorica": 6.998333741729968,
+    "empirica": 6.965253077975377
+   },
+   {
+    "prediccion": 18,
+    "teorica": 6.758625336927224,
+    "empirica": 6.725718194254446
+   },
+   {
+    "prediccion": 19,
+    "teorica": 6.509641302094131,
+    "empirica": 6.477154582763338
+   },
+   {
+    "prediccion": 20,
+    "teorica": 6.252602114866265,
+    "empirica": 6.22202462380301
+   },
+   {
+    "prediccion": 21,
+    "teorica": 5.988596309351026,
+    "empirica": 5.960328317373461
+   },
+   {
+    "prediccion": 22,
+    "teorica": 5.718591471421661,
+    "empirica": 5.692339261285909
+   },
+   {
+    "prediccion": 23,
+    "teorica": 5.443444605708756,
+    "empirica": 5.4186046511627906
+   },
+   {
+    "prediccion": 24,
+    "teorica": 5.163911892768718,
+    "empirica": 5.141039671682626
+   },
+   {
+    "prediccion": 25,
+    "teorica": 4.880657854908689,
+    "empirica": 4.857729138166895
+   }
+  ],
+  "mejor_constante": 6,
+  "calif_mejor_constante": 8.503392833581515,
+  "chi2_r1": {
+   "estadistico": 24.20282471001039,
+   "gl": 29,
+   "p": 0.7188687888722054
+  }
+ },
+ "pruebas": {
+  "frecuencias": [
+   250,
+   236,
+   242,
+   238,
+   254,
+   231,
+   217,
+   239,
+   221,
+   226,
+   220,
+   252,
+   246,
+   237,
+   251,
+   222,
+   228,
+   245,
+   256,
+   236,
+   259,
+   224,
+   220,
+   252,
+   246,
+   219,
+   209,
+   226,
+   262,
+   226,
+   219,
+   242,
+   242,
+   211,
+   235,
+   240,
+   209,
+   209,
+   236,
+   238,
+   233,
+   225,
+   240,
+   245,
+   236,
+   217,
+   221,
+   232,
+   242,
+   261,
+   223,
+   242,
+   219,
+   258,
+   241,
+   252
+  ],
+  "esperado_por_bola": 234.96428571428572,
+  "chi2_bolas": {
+   "estadistico": 47.63246694026448,
+   "gl": 55,
+   "p": 0.7492659727573154
+  },
+  "acf": [
+   0.007557001896951864,
+   -0.03176611001615577,
+   0.000447074008860381,
+   0.016470097728731297,
+   -0.010985278417127483,
+   -0.02818356291351966,
+   0.015053971588935284,
+   8.007950594231168e-06,
+   -0.019497048204375745,
+   0.009498044496859176,
+   0.0088793441222054,
+   0.0007780719119448244,
+   -0.003962646593194903,
+   -0.010449678159917132,
+   0.018621940617128553,
+   -0.003298182583075733,
+   -0.006174502097640346,
+   -0.018963046403057005,
+   0.01667383033479854,
+   -0.007912317485622615
+  ],
+  "banda": 0.04185397933238024,
+  "acf_fuera": 0,
+  "ljung_box_p": {
+   "10": 0.7726527083656661,
+   "20": 0.978281264283588
+  },
+  "rachas": {
+   "observadas": 1081,
+   "esperadas": 1096.3506611947105,
+   "z": -0.6564361983601245,
+   "p": 0.5115435061280529
+  },
+  "independencia": {
+   "estadistico": 5.682316611766074,
+   "gl": 9,
+   "p": 0.7712440023504952,
+   "filas": [
+    "1-3",
+    "4-6",
+    "7-10",
+    "11+"
+   ],
+   "pct": [
+    [
+     32.2,
+     22.1,
+     18.3,
+     27.4
+    ],
+    [
+     27.5,
+     22.1,
+     21.0,
+     29.4
+    ],
+    [
+     29.8,
+     20.2,
+     19.3,
+     30.7
+    ],
+    [
+     29.5,
+     22.1,
+     21.0,
+     27.4
+    ]
+   ]
+  }
+ },
+ "demo": {
+  "curva": [
+   [
+    0.16064022166077066,
+    0.10450735688209534
+   ],
+   [
+    0.10731672233183524,
+    0.09384465962648392
+   ],
+   [
+    0.09530649949574937,
+    0.09538274258375168
+   ],
+   [
+    0.09342617319031675,
+    0.09323699027299881
+   ],
+   [
+    0.09249919943749352,
+    0.09312421083450317
+   ],
+   [
+    0.08992485035245376,
+    0.09332258999347687
+   ],
+   [
+    0.09103890614302101,
+    0.09405837953090668
+   ],
+   [
+    0.09024030683767414,
+    0.09351189434528351
+   ],
+   [
+    0.09193657794401403,
+    0.09333927929401398
+   ],
+   [
+    0.08986213721189146,
+    0.09398101270198822
+   ],
+   [
+    0.08965704034549692,
+    0.09377622604370117
+   ],
+   [
+    0.08949197722113587,
+    0.09364357590675354
+   ],
+   [
+    0.09021585631106589,
+    0.09351692348718643
+   ],
+   [
+    0.08972264661326099,
+    0.09382752329111099
+   ],
+   [
+    0.08855213947693916,
+    0.09378769248723984
+   ],
+   [
+    0.08856135879928126,
+    0.09367772936820984
+   ],
+   [
+    0.08895691833338949,
+    0.09400839358568192
+   ],
+   [
+    0.08910079505275378,
+    0.09385927021503448
+   ],
+   [
+    0.08766968169246717,
+    0.0938015878200531
+   ],
+   [
+    0.08947681247359324,
+    0.09398258477449417
+   ],
+   [
+    0.08834089552858954,
+    0.09417051821947098
+   ],
+   [
+    0.08937145803357742,
+    0.09444388747215271
+   ],
+   [
+    0.08856597773723082,
+    0.09440609812736511
+   ],
+   [
+    0.0877363459810415,
+    0.09453210234642029
+   ],
+   [
+    0.08845811433913656,
+    0.09464168548583984
+   ]
+  ],
+  "n": 500,
+  "salida_min": 5.358691692352295,
+  "salida_max": 8.456094741821289,
+  "salida_std": 0.5140475630760193,
+  "salida_hist": [
+   3,
+   2,
+   8,
+   15,
+   19,
+   39,
+   39,
+   52,
+   61,
+   56,
+   54,
+   43,
+   40,
+   27,
+   19,
+   12,
+   8,
+   2,
+   0,
+   1
+  ],
+  "salida_bordes": [
+   5.358691692352295,
+   5.513561725616455,
+   5.668432235717773,
+   5.823302268981934,
+   5.978172302246094,
+   6.133042335510254,
+   6.287912368774414,
+   6.442782878875732,
+   6.597652912139893,
+   6.752522945404053,
+   6.907393455505371,
+   7.062263488769531,
+   7.217133522033691,
+   7.372003555297852,
+   7.526873588562012,
+   7.68174409866333,
+   7.83661413192749,
+   7.99148416519165,
+   8.146354675292969,
+   8.301224708557129,
+   8.456094741821289
+  ]
+ },
+ "busqueda": {
+  "n_configs": 240,
+  "n_validacion": 500,
+  "constante": 6,
+  "ref_validacion": 8.447799999999999,
+  "validacion_desde": "2019-05-15",
+  "validacion_hasta": "2023-08-09",
+  "le_ganan_en_validacion": 42,
+  "mejor": 8.459200000000001,
+  "peor": 8.3542,
+  "puntos": [
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.459200000000001
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4556
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.4556
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.4544
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.453800000000001
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4532
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4526
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4526
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4526
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.452599999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.452
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.452
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.451400000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.451400000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4514
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4514
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.450800000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4508
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4508
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4508
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4508
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4508
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.4502
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.4496
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.449599999999998
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.449
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.449
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.449
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.449
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.448400000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.448400000000001
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.448400000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.448400000000001
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.448400000000001
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.448400000000001
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4478
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.4478
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.447799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4472
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4472
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4472
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.447199999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.446600000000002
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4466
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4466
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4466
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.446599999999998
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.446599999999998
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.446000000000002
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.446
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.446
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.446
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.446
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.446
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.445400000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.445400000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.445400000000001
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.445400000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4454
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.4454
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4454
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4454
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.444799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.444799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.444799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.444799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4442
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.4442
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4442
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4442
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4442
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4436
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4436
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4436
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4436
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4436
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4436
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.443
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.443
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.443
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.443
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.443
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.443
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.442400000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.442400000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.442400000000001
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.442400000000001
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.442400000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.442400000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4424
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.4424
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4424
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4418
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4418
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.441799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4412
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.4412
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.4406
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.4406
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4406
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.440599999999998
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.440599999999998
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.440599999999998
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.44
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.44
+   },
+   {
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.44
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.44
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.44
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.44
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.439400000000001
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.439400000000001
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.439400000000001
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4394
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.4394
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.438799999999999
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.438799999999999
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.438799999999999
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4382
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4382
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.4376
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4376
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.4376
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.437599999999998
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.437599999999998
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.437
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.437
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.437
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.437
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.4364
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4364
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.436399999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.436399999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4358
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.435799999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.435799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4352
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4352
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4346
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4346
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.434
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "escalada",
+    "calificacion": 8.432799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.432799999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.4322
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4322
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.4322
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4316
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.4316
+   },
+   {
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.431599999999998
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.431599999999998
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.431
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.431
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.431
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.430400000000002
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.430400000000002
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.430399999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.429799999999998
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.429200000000002
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.429200000000002
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.429199999999998
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4274
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.4268
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.4268
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.426200000000001
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4232
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.422
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.422
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4214
+   },
+   {
+    "familia": "CNN",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.419599999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "ambas",
+    "calificacion": 8.419
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.418400000000002
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4184
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "escalada",
+    "calificacion": 8.417200000000001
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4166
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.416599999999999
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4148
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.414200000000001
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.413599999999999
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.413
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.412400000000002
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "multihot",
+    "calificacion": 8.4106
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.41
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.4076
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.407599999999999
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "escalada",
+    "calificacion": 8.4052
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.404
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.4034
+   },
+   {
+    "familia": "GRU",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "calificacion": 8.4028
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.401599999999998
+   },
+   {
+    "familia": "CNN",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.3926
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "ambas",
+    "calificacion": 8.3902
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "ambas",
+    "calificacion": 8.386
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 50,
+    "entrada": "multihot",
+    "calificacion": 8.3848
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.381200000000002
+   },
+   {
+    "familia": "LSTM",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.38
+   },
+   {
+    "familia": "MLP",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.375200000000001
+   },
+   {
+    "familia": "GRU",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.375200000000001
+   },
+   {
+    "familia": "MLP",
+    "perdida": "l1",
+    "ventana": 5,
+    "entrada": "ambas",
+    "calificacion": 8.3674
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "calificacion": 8.365
+   },
+   {
+    "familia": "Transformer",
+    "perdida": "l1",
+    "ventana": 20,
+    "entrada": "multihot",
+    "calificacion": 8.3542
+   }
+  ],
+  "por_familia": [
+   {
+    "familia": "CNN",
+    "count": 43,
+    "max": 8.4544,
+    "median": 8.4448
+   },
+   {
+    "familia": "GRU",
+    "count": 49,
+    "max": 8.4592,
+    "median": 8.4424
+   },
+   {
+    "familia": "LSTM",
+    "count": 48,
+    "max": 8.4526,
+    "median": 8.4475
+   },
+   {
+    "familia": "MLP",
+    "count": 60,
+    "max": 8.4556,
+    "median": 8.437
+   },
+   {
+    "familia": "Transformer",
+    "count": 40,
+    "max": 8.4514,
+    "median": 8.4424
+   }
+  ],
+  "por_perdida": [
+   {
+    "perdida": "clase",
+    "count": 124,
+    "max": 8.4592,
+    "median": 8.4478
+   },
+   {
+    "perdida": "l1",
+    "count": 111,
+    "max": 8.4526,
+    "median": 8.4358
+   },
+   {
+    "perdida": "mse",
+    "count": 5,
+    "max": 8.3926,
+    "median": 8.3752
+   }
+  ],
+  "top10": [
+   {
+    "id": 107,
+    "nombre": "GRU-CLASE k=50 ambas h=16x2 do=0.4 lr=0.001 wd=0.001",
+    "calificacion": 8.459200000000001
+   },
+   {
+    "id": 164,
+    "nombre": "GRU-CLASE k=5 ambas h=32x2 do=0.4 lr=0.001 wd=0.001",
+    "calificacion": 8.4556
+   },
+   {
+    "id": 187,
+    "nombre": "MLP-CLASE k=5 escalada h=32x2 do=0.0 lr=0.001 wd=0.0",
+    "calificacion": 8.4556
+   },
+   {
+    "id": 133,
+    "nombre": "CNN-CLASE k=20 escalada h=128x2 do=0.4 lr=0.001 wd=0.0",
+    "calificacion": 8.4544
+   },
+   {
+    "id": 47,
+    "nombre": "CNN-CLASE k=5 ambas h=64x2 do=0.2 lr=0.003 wd=0.0001",
+    "calificacion": 8.453800000000001
+   },
+   {
+    "id": 40,
+    "nombre": "MLP-CLASE k=20 multihot h=32x1 do=0.2 lr=0.001 wd=0.0001",
+    "calificacion": 8.4532
+   },
+   {
+    "id": 134,
+    "nombre": "LSTM-L1 k=10 multihot h=128x2 do=0.0 lr=0.003 wd=0.001",
+    "calificacion": 8.4526
+   },
+   {
+    "id": 166,
+    "nombre": "CNN-L1 k=10 multihot h=16x2 do=0.4 lr=0.003 wd=0.0",
+    "calificacion": 8.4526
+   },
+   {
+    "id": 198,
+    "nombre": "GRU-CLASE k=5 multihot h=128x1 do=0.2 lr=0.001 wd=0.0001",
+    "calificacion": 8.4526
+   },
+   {
+    "id": 95,
+    "nombre": "MLP-CLASE k=10 escalada h=32x1 do=0.4 lr=0.003 wd=0.0",
+    "calificacion": 8.452599999999999
+   }
+  ],
+  "config": {
+   "semillas_busqueda": [
+    0,
+    1
+   ],
+   "reentrenar_busqueda": 250,
+   "semillas_final": [
+    0,
+    1,
+    2
+   ],
+   "reentrenar_final": 100,
+   "espacio": {
+    "familia": [
+     "MLP",
+     "LSTM",
+     "GRU",
+     "CNN",
+     "Transformer"
+    ],
+    "perdida": [
+     "l1",
+     "clase"
+    ],
+    "ventana": [
+     5,
+     10,
+     20,
+     50
+    ],
+    "entrada": [
+     "escalada",
+     "multihot",
+     "ambas"
+    ],
+    "oculto": [
+     16,
+     32,
+     64,
+     128
+    ],
+    "capas": [
+     1,
+     2
+    ],
+    "dropout": [
+     0.0,
+     0.2,
+     0.4
+    ],
+    "lr": [
+     0.001,
+     0.003
+    ],
+    "weight_decay": [
+     0.0,
+     0.0001,
+     0.001
+    ]
+   },
+   "rapido": false
+  }
+ },
+ "prueba": {
+  "desde": "2023-08-11",
+  "hasta": "2026-10-18",
+  "n": 500,
+  "tabla": [
+   {
+    "metodo": "MLP-Clasif. k=5 (#187)",
+    "tipo": "Deep Learning",
+    "clave": "187",
+    "validacion": 8.4556,
+    "calificacion": 8.525799999999998,
+    "error_abs": 4.914,
+    "dif_vs_ref": 0.002399999999999988,
+    "ic_bajo": -0.01140000000000001,
+    "ic_alto": 0.016199999999999992,
+    "moda": 6,
+    "pct_moda": 0.728,
+    "rango": [
+     5,
+     7
+    ]
+   },
+   {
+    "metodo": "Constante 6 (teoría)",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.447799999999999,
+    "calificacion": 8.523399999999999,
+    "error_abs": 4.922,
+    "dif_vs_ref": 0.0,
+    "ic_bajo": 0.0,
+    "ic_alto": 0.0,
+    "moda": 6,
+    "pct_moda": 1.0,
+    "rango": [
+     6,
+     6
+    ]
+   },
+   {
+    "metodo": "Mediana histórica",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.447799999999999,
+    "calificacion": 8.523399999999999,
+    "error_abs": 4.922,
+    "dif_vs_ref": 0.0,
+    "ic_bajo": 0.0,
+    "ic_alto": 0.0,
+    "moda": 6,
+    "pct_moda": 1.0,
+    "rango": [
+     6,
+     6
+    ]
+   },
+   {
+    "metodo": "CNN-Clasif. k=20 (#133)",
+    "tipo": "Deep Learning",
+    "clave": "133",
+    "validacion": 8.4544,
+    "calificacion": 8.5216,
+    "error_abs": 4.928,
+    "dif_vs_ref": -0.0018000000000000132,
+    "ic_bajo": -0.009600000000000032,
+    "ic_alto": 0.005999999999999993,
+    "moda": 6,
+    "pct_moda": 0.91,
+    "rango": [
+     6,
+     7
+    ]
+   },
+   {
+    "metodo": "Números calientes (Dirichlet)",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.4382,
+    "calificacion": 8.5216,
+    "error_abs": 4.928,
+    "dif_vs_ref": -0.0018000000000000114,
+    "ic_bajo": -0.007200000000000022,
+    "ic_alto": 0.003599999999999996,
+    "moda": 6,
+    "pct_moda": 0.954,
+    "rango": [
+     5,
+     7
+    ]
+   },
+   {
+    "metodo": "Ensamble top-5 (mediana)",
+    "tipo": "Deep Learning",
+    "clave": "ensamble",
+    "validacion": 8.459200000000001,
+    "calificacion": 8.5186,
+    "error_abs": 4.938,
+    "dif_vs_ref": -0.00480000000000001,
+    "ic_bajo": -0.012000000000000009,
+    "ic_alto": 0.002399999999999988,
+    "moda": 6,
+    "pct_moda": 0.928,
+    "rango": [
+     6,
+     7
+    ]
+   },
+   {
+    "metodo": "GRU-Clasif. k=5 (#164)",
+    "tipo": "Deep Learning",
+    "clave": "164",
+    "validacion": 8.4556,
+    "calificacion": 8.5168,
+    "error_abs": 4.944,
+    "dif_vs_ref": -0.006600000000000007,
+    "ic_bajo": -0.014399999999999994,
+    "ic_alto": 0.0011999999999999832,
+    "moda": 6,
+    "pct_moda": 0.918,
+    "rango": [
+     6,
+     7
+    ]
+   },
+   {
+    "metodo": "Transformer-Clasif. k=5 (#223)",
+    "tipo": "Deep Learning",
+    "clave": "223",
+    "validacion": 8.451400000000001,
+    "calificacion": 8.516200000000001,
+    "error_abs": 4.946,
+    "dif_vs_ref": -0.007199999999999978,
+    "ic_bajo": -0.02039999999999999,
+    "ic_alto": 0.0060000000000000305,
+    "moda": 6,
+    "pct_moda": 0.744,
+    "rango": [
+     5,
+     6
+    ]
+   },
+   {
+    "metodo": "Campeón: GRU-Clasif. k=50 (#107)",
+    "tipo": "Deep Learning",
+    "clave": "107",
+    "validacion": 8.459200000000001,
+    "calificacion": 8.5162,
+    "error_abs": 4.946,
+    "dif_vs_ref": -0.007200000000000012,
+    "ic_bajo": -0.018000000000000006,
+    "ic_alto": 0.0035999999999999817,
+    "moda": 6,
+    "pct_moda": 0.858,
+    "rango": [
+     5,
+     8
+    ]
+   },
+   {
+    "metodo": "CNN-Clasif. k=5 (#47)",
+    "tipo": "Deep Learning",
+    "clave": "47",
+    "validacion": 8.453800000000001,
+    "calificacion": 8.5156,
+    "error_abs": 4.948,
+    "dif_vs_ref": -0.007800000000000024,
+    "ic_bajo": -0.020400000000000022,
+    "ic_alto": 0.004799999999999973,
+    "moda": 6,
+    "pct_moda": 0.77,
+    "rango": [
+     5,
+     7
+    ]
+   },
+   {
+    "metodo": "LSTM-L1 k=10 (#134)",
+    "tipo": "Deep Learning",
+    "clave": "134",
+    "validacion": 8.4526,
+    "calificacion": 8.5156,
+    "error_abs": 4.948,
+    "dif_vs_ref": -0.007799999999999999,
+    "ic_bajo": -0.021,
+    "ic_alto": 0.0053999999999999986,
+    "moda": 6,
+    "pct_moda": 0.75,
+    "rango": [
+     5,
+     7
+    ]
+   },
+   {
+    "metodo": "Cadena de Markov",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.449,
+    "calificacion": 8.5138,
+    "error_abs": 4.954,
+    "dif_vs_ref": -0.009600000000000039,
+    "ic_bajo": -0.024600000000000014,
+    "ic_alto": 0.005399999999999958,
+    "moda": 6,
+    "pct_moda": 0.68,
+    "rango": [
+     6,
+     7
+    ]
+   },
+   {
+    "metodo": "Mediana últimos 50",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.423800000000002,
+    "calificacion": 8.506,
+    "error_abs": 4.98,
+    "dif_vs_ref": -0.017400000000000027,
+    "ic_bajo": -0.045000000000000054,
+    "ic_alto": 0.010799999999999995,
+    "moda": 6,
+    "pct_moda": 0.38,
+    "rango": [
+     4,
+     8
+    ]
+   },
+   {
+    "metodo": "Gradient boosting (L1)",
+    "tipo": "ML clásico",
+    "clave": null,
+    "validacion": 8.450800000000001,
+    "calificacion": 8.5042,
+    "error_abs": 4.986,
+    "dif_vs_ref": -0.019200000000000023,
+    "ic_bajo": -0.03480000000000003,
+    "ic_alto": -0.003600000000000028,
+    "moda": 6,
+    "pct_moda": 0.672,
+    "rango": [
+     5,
+     8
+    ]
+   },
+   {
+    "metodo": "Media histórica",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.401,
+    "calificacion": 8.455,
+    "error_abs": 5.15,
+    "dif_vs_ref": -0.06840000000000003,
+    "ic_bajo": -0.11880000000000003,
+    "ic_alto": -0.016800000000000034,
+    "moda": 8,
+    "pct_moda": 1.0,
+    "rango": [
+     8,
+     8
+    ]
+   },
+   {
+    "metodo": "CNN-MSE k=10 (#10)",
+    "tipo": "Deep Learning",
+    "clave": "10",
+    "validacion": 8.3926,
+    "calificacion": 8.4538,
+    "error_abs": 5.154,
+    "dif_vs_ref": -0.06960000000000002,
+    "ic_bajo": -0.11881500000000005,
+    "ic_alto": -0.019185000000000223,
+    "moda": 8,
+    "pct_moda": 0.836,
+    "rango": [
+     7,
+     9
+    ]
+   },
+   {
+    "metodo": "Mediana últimos 10",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 8.338,
+    "calificacion": 8.4394,
+    "error_abs": 5.202,
+    "dif_vs_ref": -0.08400000000000009,
+    "ic_bajo": -0.1332000000000001,
+    "ic_alto": -0.03420000000000012,
+    "moda": 6,
+    "pct_moda": 0.196,
+    "rango": [
+     2,
+     12
+    ]
+   },
+   {
+    "metodo": "Último R1",
+    "tipo": "Estadístico",
+    "clave": null,
+    "validacion": 7.7968,
+    "calificacion": 7.9366,
+    "error_abs": 6.878,
+    "dif_vs_ref": -0.5868,
+    "ic_bajo": -0.7326,
+    "ic_alto": -0.44578500000000026,
+    "moda": 1,
+    "pct_moda": 0.124,
+    "rango": [
+     1,
+     37
+    ]
+   }
+  ],
+  "campeon": {
+   "metodo": "Campeón: GRU-Clasif. k=50 (#107)",
+   "tipo": "Deep Learning",
+   "clave": "107",
+   "validacion": 8.459200000000001,
+   "calificacion": 8.5162,
+   "error_abs": 4.946,
+   "dif_vs_ref": -0.007200000000000012,
+   "ic_bajo": -0.018000000000000006,
+   "ic_alto": 0.0035999999999999817,
+   "moda": 6,
+   "pct_moda": 0.858,
+   "rango": [
+    5,
+    8
+   ]
+  },
+  "gana": false,
+  "serie": {
+   "real": [
+    1,
+    11,
+    6,
+    2,
+    19,
+    4,
+    4,
+    13,
+    4,
+    25,
+    8,
+    3,
+    1,
+    13,
+    2,
+    21,
+    2,
+    5,
+    8,
+    13,
+    11,
+    2,
+    6,
+    22,
+    9,
+    11,
+    14,
+    25,
+    1,
+    7,
+    5,
+    8,
+    5,
+    4,
+    10,
+    5,
+    9,
+    5,
+    9,
+    16,
+    3,
+    5,
+    5,
+    4,
+    8,
+    12,
+    19,
+    13,
+    7,
+    2,
+    10,
+    13,
+    3,
+    4,
+    8,
+    13,
+    30,
+    7,
+    10,
+    10,
+    8,
+    2,
+    10,
+    17,
+    17,
+    19,
+    2,
+    5,
+    10,
+    8,
+    6,
+    3,
+    2,
+    11,
+    13,
+    22,
+    1,
+    7,
+    14,
+    2,
+    9,
+    1,
+    26,
+    5,
+    1,
+    6,
+    5,
+    7,
+    4,
+    1,
+    2,
+    7,
+    12,
+    1,
+    9,
+    22,
+    14,
+    4,
+    3,
+    7,
+    2,
+    7,
+    13,
+    5,
+    20,
+    6,
+    1,
+    8,
+    5,
+    5,
+    11,
+    4,
+    6,
+    20,
+    17,
+    14,
+    9,
+    1,
+    1,
+    10
+   ],
+   "Campeón": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    7,
+    7,
+    6,
+    6,
+    6,
+    7,
+    7,
+    7,
+    7,
+    6,
+    6,
+    6,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    5,
+    5,
+    5,
+    5,
+    6,
+    6,
+    6,
+    5,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    7,
+    7,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    5,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    7,
+    8,
+    8,
+    8,
+    7,
+    7,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6
+   ],
+   "Mejor MSE": [
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    7,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    7,
+    7,
+    8,
+    7,
+    7,
+    7,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    7,
+    8,
+    7,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8,
+    8
+   ]
+  },
+  "corrida_anterior": {
+   "n_configs": 160,
+   "campeon": "Campeón: Ensamble top-5 (mediana)",
+   "dif_vs_ref": -0.0072000000000000085,
+   "ic_bajo": -0.015000000000000027,
+   "ic_alto": 0.0011999999999999708,
+   "gana": false
+  }
+ },
+ "redes": {
+  "finalistas": [
+   {
+    "id": "107",
+    "nombre": "GRU-Clasif. k=50",
+    "campeon": true,
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 50,
+    "entrada": "ambas",
+    "oculto": 16,
+    "capas": 2,
+    "dropout": 0.4,
+    "lr": 0.001,
+    "weight_decay": 0.001,
+    "capas_red": [
+     {
+      "tipo": "entrada",
+      "nombre": "Entrada",
+      "unidades": 62,
+      "params": 0,
+      "detalle": "los últimos 50 sorteos; de cada uno, 62 valores (R1..R6 y qué bolas salieron)"
+     },
+     {
+      "tipo": "recurrente",
+      "nombre": "GRU, capa 1",
+      "unidades": 16,
+      "params": 3840,
+      "detalle": "16 neuronas con memoria; leen los 50 sorteos uno tras otro"
+     },
+     {
+      "tipo": "recurrente",
+      "nombre": "GRU, capa 2",
+      "unidades": 16,
+      "params": 1632,
+      "detalle": "16 neuronas con memoria; leen los 50 sorteos uno tras otro"
+     },
+     {
+      "tipo": "salida",
+      "nombre": "Salida",
+      "unidades": 51,
+      "params": 867,
+      "detalle": "51 probabilidades, una por cada valor posible de R1; se predice la mediana"
+     }
+    ],
+    "parametros": 6339,
+    "curva": [
+     [
+      3.9065682834012376,
+      3.8437042236328125
+     ],
+     [
+      3.842316327453519,
+      3.7707650661468506
+     ],
+     [
+      3.763924185942425,
+      3.6867995262145996
+     ],
+     [
+      3.6673045993219566,
+      3.5993354320526123
+     ],
+     [
+      3.5832803946690506,
+      3.518584966659546
+     ],
+     [
+      3.5246109763576614,
+      3.4484188556671143
+     ],
+     [
+      3.455265949978028,
+      3.385544776916504
+     ],
+     [
+      3.3614997245010705,
+      3.3285224437713623
+     ],
+     [
+      3.33791859363552,
+      3.2815589904785156
+     ],
+     [
+      3.26384314572406,
+      3.242988348007202
+     ],
+     [
+      3.259334405345111,
+      3.213062047958374
+     ],
+     [
+      3.2052439891960547,
+      3.1876707077026367
+     ],
+     [
+      3.1866120700364746,
+      3.1690609455108643
+     ],
+     [
+      3.149776714837637,
+      3.1553285121917725
+     ],
+     [
+      3.1424510270265054,
+      3.145583391189575
+     ],
+     [
+      3.149967504947242,
+      3.138011932373047
+     ],
+     [
+      3.1237299722205965,
+      3.1313586235046387
+     ],
+     [
+      3.1163364308747155,
+      3.1266114711761475
+     ],
+     [
+      3.127208307032482,
+      3.122891902923584
+     ],
+     [
+      3.084813036216398,
+      3.120274782180786
+     ],
+     [
+      3.0750813498924248,
+      3.1194939613342285
+     ],
+     [
+      3.105881238204689,
+      3.117722272872925
+     ],
+     [
+      3.10318425092098,
+      3.1156318187713623
+     ],
+     [
+      3.092282444269355,
+      3.113967180252075
+     ],
+     [
+      3.1032950031033013,
+      3.1129181385040283
+     ],
+     [
+      3.0938809730734076,
+      3.1106340885162354
+     ],
+     [
+      3.1041509231013444,
+      3.1091527938842773
+     ],
+     [
+      3.0796558149811166,
+      3.1082732677459717
+     ],
+     [
+      3.073872358988046,
+      3.107814311981201
+     ],
+     [
+      3.0905616440561845,
+      3.1068434715270996
+     ],
+     [
+      3.089411128561725,
+      3.1063573360443115
+     ],
+     [
+      3.089526662129207,
+      3.1052515506744385
+     ],
+     [
+      3.089817704182084,
+      3.104905605316162
+     ],
+     [
+      3.0425353064964287,
+      3.104142665863037
+     ],
+     [
+      3.0786644557968597,
+      3.102731466293335
+     ],
+     [
+      3.077864040184217,
+      3.1031227111816406
+     ],
+     [
+      3.065984204426853,
+      3.102597236633301
+     ],
+     [
+      3.060896095851423,
+      3.1021392345428467
+     ],
+     [
+      3.044949958302334,
+      3.1027169227600098
+     ],
+     [
+      3.078393061792077,
+      3.1023900508880615
+     ],
+     [
+      3.0513477814062493,
+      3.101710081100464
+     ],
+     [
+      3.057112934169514,
+      3.1020803451538086
+     ],
+     [
+      3.0402033586826187,
+      3.1024162769317627
+     ],
+     [
+      3.052760852721398,
+      3.101238250732422
+     ],
+     [
+      3.0538472066087654,
+      3.1007165908813477
+     ],
+     [
+      3.0470596231466462,
+      3.1006736755371094
+     ],
+     [
+      3.0480797963579453,
+      3.0999720096588135
+     ],
+     [
+      3.028237314843002,
+      3.099545478820801
+     ],
+     [
+      3.0385581209534354,
+      3.0993194580078125
+     ],
+     [
+      3.031655371250502,
+      3.0989341735839844
+     ],
+     [
+      3.049263875344509,
+      3.10038161277771
+     ],
+     [
+      3.0451979011020995,
+      3.0989699363708496
+     ],
+     [
+      3.0309934780600143,
+      3.0976600646972656
+     ],
+     [
+      3.0376358677994704,
+      3.096531391143799
+     ],
+     [
+      3.0457276900200103,
+      3.096506118774414
+     ],
+     [
+      3.0451388142995315,
+      3.095963954925537
+     ],
+     [
+      3.0321258931400603,
+      3.0962424278259277
+     ],
+     [
+      3.014107170360341,
+      3.096128225326538
+     ],
+     [
+      3.024044442741559,
+      3.0972063541412354
+     ],
+     [
+      3.0309060346699646,
+      3.095738649368286
+     ],
+     [
+      3.0347561740482383,
+      3.0962655544281006
+     ],
+     [
+      3.0279262650270784,
+      3.0981345176696777
+     ],
+     [
+      3.0253260238777107,
+      3.0992422103881836
+     ],
+     [
+      3.029899858176156,
+      3.099363088607788
+     ],
+     [
+      3.0290265591579164,
+      3.098231077194214
+     ],
+     [
+      3.0281755747436616,
+      3.0975165367126465
+     ],
+     [
+      3.0350344139319123,
+      3.097344398498535
+     ],
+     [
+      3.0262350719326188,
+      3.096837282180786
+     ],
+     [
+      3.034098690250998,
+      3.0960772037506104
+     ],
+     [
+      3.0371254052732803,
+      3.095245599746704
+     ],
+     [
+      3.0227861880765023,
+      3.09722900390625
+     ],
+     [
+      3.012909720781289,
+      3.0973219871520996
+     ],
+     [
+      3.009634682618995,
+      3.0973751544952393
+     ],
+     [
+      3.021452284497655,
+      3.097118377685547
+     ],
+     [
+      3.016286323539506,
+      3.097181797027588
+     ],
+     [
+      3.003273351307878,
+      3.0983712673187256
+     ],
+     [
+      3.0183352341244323,
+      3.099464178085327
+     ],
+     [
+      2.99291029919311,
+      3.1013896465301514
+     ],
+     [
+      2.9986274983929557,
+      3.101285457611084
+     ],
+     [
+      3.0007562777286454,
+      3.103900671005249
+     ],
+     [
+      2.9966423693204147,
+      3.1037750244140625
+     ],
+     [
+      3.018502932252894,
+      3.103782892227173
+     ],
+     [
+      3.009742518777582,
+      3.1051621437072754
+     ],
+     [
+      2.9975820319414384,
+      3.1047871112823486
+     ],
+     [
+      3.001580161979589,
+      3.1044974327087402
+     ],
+     [
+      3.0162314244082733,
+      3.104797601699829
+     ],
+     [
+      3.01504840124034,
+      3.10659122467041
+     ],
+     [
+      3.0064118537058175,
+      3.1084048748016357
+     ],
+     [
+      3.017725690385954,
+      3.110595941543579
+     ],
+     [
+      3.0021572574650834,
+      3.1095616817474365
+     ]
+    ],
+    "mejor_epoca": 70,
+    "epocas": 90,
+    "cal_entreno": 8.532020997375328,
+    "cal_no_vistos": 8.4544,
+    "n_entreno": 1143,
+    "ventaja_entreno": 0.02152230971128688,
+    "ventaja_no_vistos": 0.0036000000000004917
+   },
+   {
+    "id": "133",
+    "nombre": "CNN-Clasif. k=20",
+    "campeon": false,
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 20,
+    "entrada": "escalada",
+    "oculto": 128,
+    "capas": 2,
+    "dropout": 0.4,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "capas_red": [
+     {
+      "tipo": "entrada",
+      "nombre": "Entrada",
+      "unidades": 6,
+      "params": 0,
+      "detalle": "los últimos 20 sorteos; de cada uno, 6 valores (R1..R6 de cada sorteo)"
+     },
+     {
+      "tipo": "conv",
+      "nombre": "Convolución 1",
+      "unidades": 128,
+      "params": 2432,
+      "detalle": "128 filtros que miran 3 sorteos a la vez (de 1 en 1)"
+     },
+     {
+      "tipo": "conv",
+      "nombre": "Convolución 2",
+      "unidades": 128,
+      "params": 49280,
+      "detalle": "128 filtros que miran 3 sorteos a la vez (de 2 en 2)"
+     },
+     {
+      "tipo": "resumen",
+      "nombre": "Promedio",
+      "unidades": 128,
+      "params": 0,
+      "detalle": "resume toda la ventana en un solo vector"
+     },
+     {
+      "tipo": "salida",
+      "nombre": "Salida",
+      "unidades": 51,
+      "params": 6579,
+      "detalle": "51 probabilidades, una por cada valor posible de R1; se predice la mediana"
+     }
+    ],
+    "parametros": 58291,
+    "curva": [
+     [
+      3.7774513627179007,
+      3.5579113960266113
+     ],
+     [
+      3.316368822457248,
+      3.2281782627105713
+     ],
+     [
+      3.0939110860029038,
+      3.188964605331421
+     ],
+     [
+      3.038499113460034,
+      3.138746738433838
+     ],
+     [
+      3.014067718592289,
+      3.1195785999298096
+     ],
+     [
+      2.999295730914932,
+      3.1200578212738037
+     ],
+     [
+      3.004999391327926,
+      3.103834390640259
+     ],
+     [
+      3.0053226515635405,
+      3.101666212081909
+     ],
+     [
+      3.004637963494361,
+      3.1133980751037598
+     ],
+     [
+      3.0054628063304047,
+      3.101983070373535
+     ],
+     [
+      2.994827494685117,
+      3.1029815673828125
+     ],
+     [
+      2.9956756450857367,
+      3.0954809188842773
+     ],
+     [
+      2.997998528819374,
+      3.098475694656372
+     ],
+     [
+      2.9941425765456917,
+      3.0960700511932373
+     ],
+     [
+      2.992995795702713,
+      3.0935370922088623
+     ],
+     [
+      2.9935723401982064,
+      3.0916757583618164
+     ],
+     [
+      2.9934719789899833,
+      3.0943427085876465
+     ],
+     [
+      2.9972145751379546,
+      3.0885612964630127
+     ],
+     [
+      2.9948726083419595,
+      3.0904905796051025
+     ],
+     [
+      2.996104004945372,
+      3.095322370529175
+     ],
+     [
+      2.9909571825414436,
+      3.104740858078003
+     ],
+     [
+      2.996024991653238,
+      3.099581241607666
+     ],
+     [
+      2.9914714725329383,
+      3.086207151412964
+     ],
+     [
+      2.997737546659523,
+      3.0946977138519287
+     ],
+     [
+      2.995100929611866,
+      3.104942560195923
+     ],
+     [
+      2.9978605384807016,
+      3.0890777111053467
+     ],
+     [
+      2.990359072091037,
+      3.0982143878936768
+     ],
+     [
+      2.9919387277687615,
+      3.098810911178589
+     ],
+     [
+      2.9929631551925233,
+      3.0962488651275635
+     ],
+     [
+      2.9945641465093766,
+      3.099505662918091
+     ],
+     [
+      2.994341694854438,
+      3.10544753074646
+     ],
+     [
+      2.9923804810560326,
+      3.0963127613067627
+     ],
+     [
+      2.9887588628165878,
+      3.093287229537964
+     ],
+     [
+      2.989236826263176,
+      3.0914306640625
+     ],
+     [
+      2.989752792059823,
+      3.093032121658325
+     ],
+     [
+      2.9915100926596643,
+      3.097818374633789
+     ],
+     [
+      2.9897381451544875,
+      3.0955469608306885
+     ],
+     [
+      2.9920853578958404,
+      3.1023619174957275
+     ],
+     [
+      2.9857781957278657,
+      3.1032440662384033
+     ],
+     [
+      2.9842382984966744,
+      3.092719554901123
+     ],
+     [
+      2.992926953136,
+      3.101818323135376
+     ],
+     [
+      2.988358908406738,
+      3.096113681793213
+     ],
+     [
+      2.9879350124500563,
+      3.0922625064849854
+     ]
+    ],
+    "mejor_epoca": 23,
+    "epocas": 43,
+    "cal_entreno": 8.511548556430446,
+    "cal_no_vistos": 8.4538,
+    "n_entreno": 1143,
+    "ventaja_entreno": 0.0010498687664046713,
+    "ventaja_no_vistos": 0.0030000000000001137
+   },
+   {
+    "id": "47",
+    "nombre": "CNN-Clasif. k=5",
+    "campeon": false,
+    "familia": "CNN",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "oculto": 64,
+    "capas": 2,
+    "dropout": 0.2,
+    "lr": 0.003,
+    "weight_decay": 0.0001,
+    "capas_red": [
+     {
+      "tipo": "entrada",
+      "nombre": "Entrada",
+      "unidades": 62,
+      "params": 0,
+      "detalle": "los últimos 5 sorteos; de cada uno, 62 valores (R1..R6 y qué bolas salieron)"
+     },
+     {
+      "tipo": "conv",
+      "nombre": "Convolución 1",
+      "unidades": 64,
+      "params": 11968,
+      "detalle": "64 filtros que miran 3 sorteos a la vez (de 1 en 1)"
+     },
+     {
+      "tipo": "conv",
+      "nombre": "Convolución 2",
+      "unidades": 64,
+      "params": 12352,
+      "detalle": "64 filtros que miran 3 sorteos a la vez (de 2 en 2)"
+     },
+     {
+      "tipo": "resumen",
+      "nombre": "Promedio",
+      "unidades": 64,
+      "params": 0,
+      "detalle": "resume toda la ventana en un solo vector"
+     },
+     {
+      "tipo": "salida",
+      "nombre": "Salida",
+      "unidades": 51,
+      "params": 3315,
+      "detalle": "51 probabilidades, una por cada valor posible de R1; se predice la mediana"
+     }
+    ],
+    "parametros": 27635,
+    "curva": [
+     [
+      3.7473264268448867,
+      3.284485101699829
+     ],
+     [
+      3.1510078290709505,
+      3.183962106704712
+     ],
+     [
+      3.0597322004339844,
+      3.126384973526001
+     ],
+     [
+      3.003554052231118,
+      3.107870101928711
+     ],
+     [
+      2.997297292143628,
+      3.106886148452759
+     ],
+     [
+      2.9781160305506416,
+      3.120242118835449
+     ],
+     [
+      2.9744437524145346,
+      3.114213705062866
+     ],
+     [
+      2.954699391808004,
+      3.1117000579833984
+     ],
+     [
+      2.9386928481741372,
+      3.1234943866729736
+     ],
+     [
+      2.920764863920752,
+      3.1140058040618896
+     ],
+     [
+      2.8959891039851273,
+      3.120115041732788
+     ],
+     [
+      2.875153594355873,
+      3.1470680236816406
+     ],
+     [
+      2.8374370050479407,
+      3.1415774822235107
+     ],
+     [
+      2.819029437280217,
+      3.1579384803771973
+     ],
+     [
+      2.782919909509645,
+      3.1535017490386963
+     ],
+     [
+      2.738959240004896,
+      3.1958436965942383
+     ],
+     [
+      2.6858754933923943,
+      3.2084155082702637
+     ],
+     [
+      2.6492510475410125,
+      3.237295389175415
+     ],
+     [
+      2.611071008364032,
+      3.2503201961517334
+     ],
+     [
+      2.5847312286879816,
+      3.2905819416046143
+     ],
+     [
+      2.539916880221617,
+      3.2883527278900146
+     ],
+     [
+      2.477144596628254,
+      3.343219757080078
+     ],
+     [
+      2.44461280629269,
+      3.3580198287963867
+     ],
+     [
+      2.399847446337542,
+      3.4145545959472656
+     ],
+     [
+      2.388308522630057,
+      3.393451452255249
+     ]
+    ],
+    "mejor_epoca": 5,
+    "epocas": 25,
+    "cal_entreno": 8.528608923884516,
+    "cal_no_vistos": 8.449599999999998,
+    "n_entreno": 1143,
+    "ventaja_entreno": 0.018110236220474363,
+    "ventaja_no_vistos": -0.001200000000000756
+   },
+   {
+    "id": "10",
+    "nombre": "CNN-MSE k=10",
+    "campeon": false,
+    "familia": "CNN",
+    "perdida": "mse",
+    "ventana": 10,
+    "entrada": "escalada",
+    "oculto": 32,
+    "capas": 2,
+    "dropout": 0.2,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "capas_red": [
+     {
+      "tipo": "entrada",
+      "nombre": "Entrada",
+      "unidades": 6,
+      "params": 0,
+      "detalle": "los últimos 10 sorteos; de cada uno, 6 valores (R1..R6 de cada sorteo)"
+     },
+     {
+      "tipo": "conv",
+      "nombre": "Convolución 1",
+      "unidades": 32,
+      "params": 608,
+      "detalle": "32 filtros que miran 3 sorteos a la vez (de 1 en 1)"
+     },
+     {
+      "tipo": "conv",
+      "nombre": "Convolución 2",
+      "unidades": 32,
+      "params": 3104,
+      "detalle": "32 filtros que miran 3 sorteos a la vez (de 2 en 2)"
+     },
+     {
+      "tipo": "resumen",
+      "nombre": "Promedio",
+      "unidades": 32,
+      "params": 0,
+      "detalle": "resume toda la ventana en un solo vector"
+     },
+     {
+      "tipo": "salida",
+      "nombre": "Salida",
+      "unidades": 1,
+      "params": 33,
+      "detalle": "un solo número: el R1 estimado"
+     }
+    ],
+    "parametros": 3745,
+    "curva": [
+     [
+      0.030530979801218737,
+      0.014260451309382915
+     ],
+     [
+      0.017111010478289623,
+      0.014900642447173595
+     ],
+     [
+      0.015056943004887578,
+      0.015469983220100403
+     ],
+     [
+      0.015121049319617412,
+      0.015282801352441311
+     ],
+     [
+      0.014554029544498906,
+      0.014292179606854916
+     ],
+     [
+      0.014250174847677979,
+      0.014227688312530518
+     ],
+     [
+      0.01442498071109598,
+      0.014634584076702595
+     ],
+     [
+      0.014545916487586547,
+      0.014571595005691051
+     ],
+     [
+      0.014331111501246292,
+      0.014290296472609043
+     ],
+     [
+      0.014165769864437693,
+      0.014359638094902039
+     ],
+     [
+      0.014332243741080395,
+      0.014505516737699509
+     ],
+     [
+      0.014395762601316774,
+      0.014458362013101578
+     ],
+     [
+      0.014521857605619791,
+      0.014391092583537102
+     ],
+     [
+      0.014366361933130192,
+      0.01451785583049059
+     ],
+     [
+      0.01432073029020972,
+      0.014302431605756283
+     ],
+     [
+      0.014418472776651751,
+      0.014422708190977573
+     ],
+     [
+      0.014342216611767896,
+      0.014495670795440674
+     ],
+     [
+      0.01440815964903602,
+      0.014336427673697472
+     ],
+     [
+      0.01437893402825055,
+      0.014399568550288677
+     ],
+     [
+      0.014264919178370467,
+      0.014467236585915089
+     ],
+     [
+      0.014547833311539355,
+      0.014266741462051868
+     ],
+     [
+      0.014259094657255557,
+      0.01474551297724247
+     ],
+     [
+      0.014416628650530604,
+      0.014235044829547405
+     ],
+     [
+      0.014410225210287422,
+      0.01447668019682169
+     ],
+     [
+      0.014294709891357088,
+      0.014432531781494617
+     ],
+     [
+      0.014222988324579385,
+      0.01420077309012413
+     ],
+     [
+      0.014223912074762932,
+      0.01436073798686266
+     ],
+     [
+      0.014466047791493663,
+      0.014313326217234135
+     ],
+     [
+      0.014119173148810005,
+      0.01433798298239708
+     ],
+     [
+      0.014397183237511024,
+      0.014229848980903625
+     ],
+     [
+      0.01423085427408545,
+      0.014535518363118172
+     ],
+     [
+      0.01410194501917652,
+      0.014208351261913776
+     ],
+     [
+      0.014148186286096102,
+      0.014291903004050255
+     ],
+     [
+      0.014342773602134045,
+      0.014286747202277184
+     ],
+     [
+      0.014168075499739632,
+      0.014373313635587692
+     ],
+     [
+      0.014355814297339207,
+      0.014205270446836948
+     ],
+     [
+      0.014369838246663248,
+      0.014345906674861908
+     ],
+     [
+      0.014328454054285887,
+      0.014355355873703957
+     ],
+     [
+      0.014248566849715432,
+      0.014163772575557232
+     ],
+     [
+      0.01437917357381629,
+      0.014519530348479748
+     ],
+     [
+      0.01414070837583343,
+      0.014193860813975334
+     ],
+     [
+      0.014364190577087209,
+      0.014332198537886143
+     ],
+     [
+      0.014298386445957649,
+      0.01420529093593359
+     ],
+     [
+      0.014276369974538914,
+      0.01438378170132637
+     ],
+     [
+      0.014076556511660683,
+      0.014237846247851849
+     ],
+     [
+      0.01410476569216756,
+      0.01432203408330679
+     ],
+     [
+      0.014111708348998695,
+      0.014299148693680763
+     ],
+     [
+      0.014416635667581022,
+      0.014292129315435886
+     ],
+     [
+      0.014301251186524066,
+      0.014589108526706696
+     ],
+     [
+      0.014308140527775433,
+      0.01419359166175127
+     ],
+     [
+      0.014168420459319339,
+      0.014420699328184128
+     ],
+     [
+      0.014171183013369691,
+      0.014209559187293053
+     ],
+     [
+      0.014154628037171003,
+      0.014477432705461979
+     ],
+     [
+      0.014134498422411025,
+      0.014272266067564487
+     ],
+     [
+      0.014306784748463258,
+      0.014300826005637646
+     ],
+     [
+      0.014280855128144506,
+      0.01433243416249752
+     ],
+     [
+      0.0141206748445972,
+      0.014292759820818901
+     ],
+     [
+      0.014118342997024774,
+      0.014284017495810986
+     ],
+     [
+      0.014049010867316249,
+      0.014277003705501556
+     ]
+    ],
+    "mejor_epoca": 39,
+    "epocas": 59,
+    "cal_entreno": 8.448818897637794,
+    "cal_no_vistos": 8.3974,
+    "n_entreno": 1143,
+    "ventaja_entreno": -0.061679790026246906,
+    "ventaja_no_vistos": -0.05339999999999989
+   },
+   {
+    "id": "164",
+    "nombre": "GRU-Clasif. k=5",
+    "campeon": false,
+    "familia": "GRU",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "ambas",
+    "oculto": 32,
+    "capas": 2,
+    "dropout": 0.4,
+    "lr": 0.001,
+    "weight_decay": 0.001,
+    "capas_red": [
+     {
+      "tipo": "entrada",
+      "nombre": "Entrada",
+      "unidades": 62,
+      "params": 0,
+      "detalle": "los últimos 5 sorteos; de cada uno, 62 valores (R1..R6 y qué bolas salieron)"
+     },
+     {
+      "tipo": "recurrente",
+      "nombre": "GRU, capa 1",
+      "unidades": 32,
+      "params": 9216,
+      "detalle": "32 neuronas con memoria; leen los 5 sorteos uno tras otro"
+     },
+     {
+      "tipo": "recurrente",
+      "nombre": "GRU, capa 2",
+      "unidades": 32,
+      "params": 6336,
+      "detalle": "32 neuronas con memoria; leen los 5 sorteos uno tras otro"
+     },
+     {
+      "tipo": "salida",
+      "nombre": "Salida",
+      "unidades": 51,
+      "params": 1683,
+      "detalle": "51 probabilidades, una por cada valor posible de R1; se predice la mediana"
+     }
+    ],
+    "parametros": 17235,
+    "curva": [
+     [
+      3.8918410918985162,
+      3.8779633045196533
+     ],
+     [
+      3.830215212982052,
+      3.809532403945923
+     ],
+     [
+      3.736685466569926,
+      3.701557159423828
+     ],
+     [
+      3.585700674233795,
+      3.540167808532715
+     ],
+     [
+      3.4139158170819894,
+      3.3679757118225098
+     ],
+     [
+      3.24694661598127,
+      3.2670528888702393
+     ],
+     [
+      3.1871152518338204,
+      3.2136690616607666
+     ],
+     [
+      3.138417718830364,
+      3.179687738418579
+     ],
+     [
+      3.1022817182491784,
+      3.1545445919036865
+     ],
+     [
+      3.121812319780108,
+      3.1378912925720215
+     ],
+     [
+      3.1019584855139564,
+      3.1293373107910156
+     ],
+     [
+      3.0879775819768622,
+      3.1238768100738525
+     ],
+     [
+      3.081370853371036,
+      3.1202964782714844
+     ],
+     [
+      3.0741055907967407,
+      3.1164472103118896
+     ],
+     [
+      3.064814617410379,
+      3.1153130531311035
+     ],
+     [
+      3.053279525342366,
+      3.113956928253174
+     ],
+     [
+      3.077816217984279,
+      3.111698627471924
+     ],
+     [
+      3.0744564140370896,
+      3.107590436935425
+     ],
+     [
+      3.0583682077429444,
+      3.1039364337921143
+     ],
+     [
+      3.0546862821254868,
+      3.104334592819214
+     ],
+     [
+      3.0443052042402274,
+      3.104538917541504
+     ],
+     [
+      3.0460966438760964,
+      3.105386734008789
+     ],
+     [
+      3.0500787880835647,
+      3.102299928665161
+     ],
+     [
+      3.056630448381638,
+      3.100675106048584
+     ],
+     [
+      3.0420996988102043,
+      3.102996826171875
+     ],
+     [
+      3.0353041515291412,
+      3.1033129692077637
+     ],
+     [
+      3.044840671252517,
+      3.1021828651428223
+     ],
+     [
+      3.0490114647131623,
+      3.1005125045776367
+     ],
+     [
+      3.0433505421195535,
+      3.099485158920288
+     ],
+     [
+      3.042428130347255,
+      3.1002180576324463
+     ],
+     [
+      3.0314413239118614,
+      3.1014528274536133
+     ],
+     [
+      3.0228152709689864,
+      3.1003518104553223
+     ],
+     [
+      3.013473998383071,
+      3.099984884262085
+     ],
+     [
+      3.01833074149339,
+      3.100733995437622
+     ],
+     [
+      3.020166413054776,
+      3.100165367126465
+     ],
+     [
+      3.01131261978778,
+      3.101290225982666
+     ],
+     [
+      3.0149918294959654,
+      3.101571798324585
+     ],
+     [
+      3.0278087678824837,
+      3.1032633781433105
+     ],
+     [
+      3.013837438410514,
+      3.104530096054077
+     ],
+     [
+      3.029222132862535,
+      3.1042795181274414
+     ],
+     [
+      3.0228731484909135,
+      3.102557420730591
+     ],
+     [
+      3.009557538371376,
+      3.101822853088379
+     ],
+     [
+      3.006656116118269,
+      3.102376937866211
+     ],
+     [
+      3.0014438206822938,
+      3.1026554107666016
+     ],
+     [
+      2.9990347065223357,
+      3.104618787765503
+     ],
+     [
+      2.9933274872639397,
+      3.1056113243103027
+     ],
+     [
+      3.0030710179086326,
+      3.105933666229248
+     ],
+     [
+      3.013400346439727,
+      3.1057589054107666
+     ],
+     [
+      2.974401687863681,
+      3.1089322566986084
+     ]
+    ],
+    "mejor_epoca": 29,
+    "epocas": 49,
+    "cal_entreno": 8.518635170603673,
+    "cal_no_vistos": 8.448400000000001,
+    "n_entreno": 1143,
+    "ventaja_entreno": 0.008136482939631762,
+    "ventaja_no_vistos": -0.0023999999999979593
+   },
+   {
+    "id": "134",
+    "nombre": "LSTM-L1 k=10",
+    "campeon": false,
+    "familia": "LSTM",
+    "perdida": "l1",
+    "ventana": 10,
+    "entrada": "multihot",
+    "oculto": 128,
+    "capas": 2,
+    "dropout": 0.0,
+    "lr": 0.003,
+    "weight_decay": 0.001,
+    "capas_red": [
+     {
+      "tipo": "entrada",
+      "nombre": "Entrada",
+      "unidades": 56,
+      "params": 0,
+      "detalle": "los últimos 10 sorteos; de cada uno, 56 valores (qué bolas salieron (56 casillas))"
+     },
+     {
+      "tipo": "recurrente",
+      "nombre": "LSTM, capa 1",
+      "unidades": 128,
+      "params": 95232,
+      "detalle": "128 neuronas con memoria; leen los 10 sorteos uno tras otro"
+     },
+     {
+      "tipo": "recurrente",
+      "nombre": "LSTM, capa 2",
+      "unidades": 128,
+      "params": 132096,
+      "detalle": "128 neuronas con memoria; leen los 10 sorteos uno tras otro"
+     },
+     {
+      "tipo": "salida",
+      "nombre": "Salida",
+      "unidades": 1,
+      "params": 129,
+      "detalle": "un solo número: el R1 estimado"
+     }
+    ],
+    "parametros": 227457,
+    "curva": [
+     [
+      0.0978096326013181,
+      0.09248967468738556
+     ],
+     [
+      0.08881720582101912,
+      0.09500408172607422
+     ],
+     [
+      0.087459965044082,
+      0.09278315305709839
+     ],
+     [
+      0.08690030227514055,
+      0.09358576685190201
+     ],
+     [
+      0.08617321840735837,
+      0.0935281366109848
+     ],
+     [
+      0.08536923924570348,
+      0.09806792438030243
+     ],
+     [
+      0.08816648816381006,
+      0.09758947044610977
+     ],
+     [
+      0.0870616816206769,
+      0.09671545773744583
+     ],
+     [
+      0.08767359468982346,
+      0.09535226225852966
+     ],
+     [
+      0.08574662561673214,
+      0.09469093382358551
+     ],
+     [
+      0.08549884746635733,
+      0.09565365314483643
+     ],
+     [
+      0.08469354428818984,
+      0.09583893418312073
+     ],
+     [
+      0.08533035493412666,
+      0.09607517719268799
+     ],
+     [
+      0.08502611313034406,
+      0.09524856507778168
+     ],
+     [
+      0.08494791627145083,
+      0.09545083343982697
+     ],
+     [
+      0.08418120388574629,
+      0.09616024792194366
+     ],
+     [
+      0.0848613227540138,
+      0.0956018716096878
+     ],
+     [
+      0.08467724536431437,
+      0.09667925536632538
+     ],
+     [
+      0.08491207665383017,
+      0.09606175124645233
+     ],
+     [
+      0.08436602132297077,
+      0.09623175114393234
+     ],
+     [
+      0.08406340571007204,
+      0.09749624133110046
+     ]
+    ],
+    "mejor_epoca": 1,
+    "epocas": 21,
+    "cal_entreno": 8.503674540682415,
+    "cal_no_vistos": 8.441799999999999,
+    "n_entreno": 1143,
+    "ventaja_entreno": -0.006824146981626811,
+    "ventaja_no_vistos": -0.009000000000000341
+   },
+   {
+    "id": "187",
+    "nombre": "MLP-Clasif. k=5",
+    "campeon": false,
+    "familia": "MLP",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "escalada",
+    "oculto": 32,
+    "capas": 2,
+    "dropout": 0.0,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "capas_red": [
+     {
+      "tipo": "entrada",
+      "nombre": "Entrada",
+      "unidades": 30,
+      "params": 0,
+      "detalle": "5 sorteos × 6 valores = 30 números en una fila (R1..R6 de cada sorteo)"
+     },
+     {
+      "tipo": "densa",
+      "nombre": "Capa densa 1",
+      "unidades": 32,
+      "params": 992,
+      "detalle": "32 neuronas conectadas con todo lo anterior"
+     },
+     {
+      "tipo": "densa",
+      "nombre": "Capa densa 2",
+      "unidades": 32,
+      "params": 1056,
+      "detalle": "32 neuronas conectadas con todo lo anterior"
+     },
+     {
+      "tipo": "salida",
+      "nombre": "Salida",
+      "unidades": 51,
+      "params": 1683,
+      "detalle": "51 probabilidades, una por cada valor posible de R1; se predice la mediana"
+     }
+    ],
+    "parametros": 3731,
+    "curva": [
+     [
+      3.925197046154191,
+      3.8935067653656006
+     ],
+     [
+      3.8745113494590186,
+      3.8344244956970215
+     ],
+     [
+      3.79336331482405,
+      3.7390217781066895
+     ],
+     [
+      3.6668328141331306,
+      3.6013519763946533
+     ],
+     [
+      3.4956985865513404,
+      3.4335927963256836
+     ],
+     [
+      3.298558810221302,
+      3.2869791984558105
+     ],
+     [
+      3.1492641782416864,
+      3.211841583251953
+     ],
+     [
+      3.077122750905957,
+      3.1917238235473633
+     ],
+     [
+      3.0508317316351907,
+      3.179060459136963
+     ],
+     [
+      3.034643322505617,
+      3.158672332763672
+     ],
+     [
+      3.0233027900652587,
+      3.1426920890808105
+     ],
+     [
+      3.016662763149682,
+      3.128511905670166
+     ],
+     [
+      3.0115945454606314,
+      3.121840476989746
+     ],
+     [
+      3.007559761082721,
+      3.1185033321380615
+     ],
+     [
+      3.005125969003821,
+      3.115251302719116
+     ],
+     [
+      3.0028932286094565,
+      3.110384464263916
+     ],
+     [
+      3.001294285580746,
+      3.108323097229004
+     ],
+     [
+      2.9997768190935883,
+      3.1060447692871094
+     ],
+     [
+      2.9986162421386595,
+      3.1038665771484375
+     ],
+     [
+      2.9982226238682883,
+      3.1054389476776123
+     ],
+     [
+      2.9967500525080704,
+      3.1092448234558105
+     ],
+     [
+      2.9965039772795845,
+      3.109503746032715
+     ],
+     [
+      2.995152435882207,
+      3.1046602725982666
+     ],
+     [
+      2.994916121819729,
+      3.1017253398895264
+     ],
+     [
+      2.994783293697542,
+      3.104684591293335
+     ],
+     [
+      2.9942320056113845,
+      3.1027300357818604
+     ],
+     [
+      2.992753483853797,
+      3.102882146835327
+     ],
+     [
+      2.9927560003852256,
+      3.102963447570801
+     ],
+     [
+      2.992042396390229,
+      3.10306715965271
+     ],
+     [
+      2.991845695906147,
+      3.102508783340454
+     ],
+     [
+      2.99146433102483,
+      3.105023145675659
+     ],
+     [
+      2.9920718041310965,
+      3.1046717166900635
+     ],
+     [
+      2.9902846187076904,
+      3.1031532287597656
+     ],
+     [
+      2.9899334573598404,
+      3.10062313079834
+     ],
+     [
+      2.9900110649399605,
+      3.096527338027954
+     ],
+     [
+      2.9899525129218056,
+      3.0994575023651123
+     ],
+     [
+      2.9899674169067008,
+      3.099215507507324
+     ],
+     [
+      2.9888308293787507,
+      3.1010653972625732
+     ],
+     [
+      2.9881604930767685,
+      3.1056809425354004
+     ],
+     [
+      2.988506968554213,
+      3.102882146835327
+     ],
+     [
+      2.9882342830131523,
+      3.1008596420288086
+     ],
+     [
+      2.9878222488104744,
+      3.1005983352661133
+     ],
+     [
+      2.9879293591551384,
+      3.0999300479888916
+     ],
+     [
+      2.9871500947816734,
+      3.0968728065490723
+     ],
+     [
+      2.9864749839696283,
+      3.0974276065826416
+     ],
+     [
+      2.9855978923526534,
+      3.098348617553711
+     ],
+     [
+      2.986022684773014,
+      3.098773956298828
+     ],
+     [
+      2.984728086866385,
+      3.09812068939209
+     ],
+     [
+      2.9845724609190354,
+      3.0989954471588135
+     ],
+     [
+      2.985383926287493,
+      3.098247528076172
+     ],
+     [
+      2.9858027719935722,
+      3.105198621749878
+     ],
+     [
+      2.983170173440731,
+      3.100215435028076
+     ],
+     [
+      2.9833142185309396,
+      3.0977566242218018
+     ],
+     [
+      2.983331332614321,
+      3.0974180698394775
+     ],
+     [
+      2.9836081586831877,
+      3.099337577819824
+     ]
+    ],
+    "mejor_epoca": 35,
+    "epocas": 55,
+    "cal_entreno": 8.504986876640421,
+    "cal_no_vistos": 8.455600000000002,
+    "n_entreno": 1143,
+    "ventaja_entreno": -0.0055118110236200835,
+    "ventaja_no_vistos": 0.004800000000003024
+   },
+   {
+    "id": "223",
+    "nombre": "Transformer-Clasif. k=5",
+    "campeon": false,
+    "familia": "Transformer",
+    "perdida": "clase",
+    "ventana": 5,
+    "entrada": "multihot",
+    "oculto": 128,
+    "capas": 2,
+    "dropout": 0.4,
+    "lr": 0.001,
+    "weight_decay": 0.0,
+    "capas_red": [
+     {
+      "tipo": "entrada",
+      "nombre": "Entrada",
+      "unidades": 56,
+      "params": 0,
+      "detalle": "los últimos 5 sorteos; de cada uno, 56 valores (qué bolas salieron (56 casillas))"
+     },
+     {
+      "tipo": "proyeccion",
+      "nombre": "Proyección",
+      "unidades": 128,
+      "params": 7936,
+      "detalle": "convierte cada sorteo en 128 números y le suma su posición"
+     },
+     {
+      "tipo": "atencion",
+      "nombre": "Atención 1",
+      "unidades": 128,
+      "params": 132480,
+      "detalle": "4 cabezas de atención (cada sorteo consulta a los demás) + 256 neuronas"
+     },
+     {
+      "tipo": "atencion",
+      "nombre": "Atención 2",
+      "unidades": 128,
+      "params": 132480,
+      "detalle": "4 cabezas de atención (cada sorteo consulta a los demás) + 256 neuronas"
+     },
+     {
+      "tipo": "salida",
+      "nombre": "Salida",
+      "unidades": 51,
+      "params": 6579,
+      "detalle": "51 probabilidades, una por cada valor posible de R1; se predice la mediana"
+     }
+    ],
+    "parametros": 279475,
+    "curva": [
+     [
+      3.5489897258986405,
+      3.2723309993743896
+     ],
+     [
+      3.137208122180738,
+      3.1750574111938477
+     ],
+     [
+      3.0512304890413606,
+      3.155458927154541
+     ],
+     [
+      3.0128310971598915,
+      3.142056941986084
+     ],
+     [
+      2.9937712323653343,
+      3.1509501934051514
+     ],
+     [
+      2.9485253492172667,
+      3.1732993125915527
+     ],
+     [
+      2.8808415903490188,
+      3.248567819595337
+     ],
+     [
+      2.795080694675937,
+      3.332817316055298
+     ],
+     [
+      2.7079796660940874,
+      3.3987746238708496
+     ],
+     [
+      2.6320275172637246,
+      3.4602394104003906
+     ],
+     [
+      2.522290851502659,
+      3.516594886779785
+     ],
+     [
+      2.4459711248179787,
+      3.559995174407959
+     ],
+     [
+      2.3536022239806846,
+      3.624109983444214
+     ],
+     [
+      2.230902034639698,
+      3.7071127891540527
+     ],
+     [
+      2.1377582331518927,
+      3.744136333465576
+     ],
+     [
+      2.061276552728718,
+      3.808154821395874
+     ],
+     [
+      1.934665724619778,
+      3.9057862758636475
+     ],
+     [
+      1.8420150674089222,
+      3.9566941261291504
+     ],
+     [
+      1.7596748291402595,
+      4.032523155212402
+     ],
+     [
+      1.6607554916495766,
+      4.113980770111084
+     ],
+     [
+      1.567621871077069,
+      4.219209671020508
+     ],
+     [
+      1.4857250590771283,
+      4.276980876922607
+     ],
+     [
+      1.350144933966726,
+      4.369842529296875
+     ],
+     [
+      1.2579251585487972,
+      4.504256248474121
+     ]
+    ],
+    "mejor_epoca": 4,
+    "epocas": 24,
+    "cal_entreno": 8.51233595800525,
+    "cal_no_vistos": 8.419,
+    "n_entreno": 1143,
+    "ventaja_entreno": 0.001837270341209063,
+    "ventaja_no_vistos": -0.03179999999999872
+   }
+  ],
+  "sobreentrenada": {
+   "capas_red": [
+    {
+     "tipo": "entrada",
+     "nombre": "Entrada",
+     "unidades": 3100,
+     "params": 0,
+     "detalle": "50 sorteos × 62 valores = 3100 números en una fila (R1..R6 y qué bolas salieron)"
+    },
+    {
+     "tipo": "densa",
+     "nombre": "Capa densa 1",
+     "unidades": 256,
+     "params": 793856,
+     "detalle": "256 neuronas conectadas con todo lo anterior"
+    },
+    {
+     "tipo": "densa",
+     "nombre": "Capa densa 2",
+     "unidades": 256,
+     "params": 65792,
+     "detalle": "256 neuronas conectadas con todo lo anterior"
+    },
+    {
+     "tipo": "salida",
+     "nombre": "Salida",
+     "unidades": 1,
+     "params": 257,
+     "detalle": "un solo número: el R1 estimado"
+    }
+   ],
+   "parametros": 859905,
+   "curva": [
+    [
+     0.18527559727338266,
+     0.10335706919431686
+    ],
+    [
+     0.09348692030604663,
+     0.09829294681549072
+    ],
+    [
+     0.0872935997485255,
+     0.09789752960205078
+    ],
+    [
+     0.0836765483083121,
+     0.09653792530298233
+    ],
+    [
+     0.07394181917029233,
+     0.09606526792049408
+    ],
+    [
+     0.06350564176694372,
+     0.09849167615175247
+    ],
+    [
+     0.05281877352344879,
+     0.10243894904851913
+    ],
+    [
+     0.04695807439951278,
+     0.10313910990953445
+    ],
+    [
+     0.041171836853794656,
+     0.10411068797111511
+    ],
+    [
+     0.03671186593438889,
+     0.10348163545131683
+    ],
+    [
+     0.03232735955376028,
+     0.10425972193479538
+    ],
+    [
+     0.02891116236920644,
+     0.10510903596878052
+    ],
+    [
+     0.02308816572288713,
+     0.10403242707252502
+    ],
+    [
+     0.02063731564905199,
+     0.10424831509590149
+    ],
+    [
+     0.018042662158900016,
+     0.10576105117797852
+    ],
+    [
+     0.017597302967101245,
+     0.10352161526679993
+    ],
+    [
+     0.016019188755802834,
+     0.1051504909992218
+    ],
+    [
+     0.014668078781378931,
+     0.10463464260101318
+    ],
+    [
+     0.014088724930717942,
+     0.10456688702106476
+    ],
+    [
+     0.01262829600843907,
+     0.10398966819047928
+    ],
+    [
+     0.012970462374304768,
+     0.10473620891571045
+    ],
+    [
+     0.012155485420030313,
+     0.10485059022903442
+    ],
+    [
+     0.01388699391302408,
+     0.10302262753248215
+    ],
+    [
+     0.014145413293751642,
+     0.10461881756782532
+    ],
+    [
+     0.013218058467901146,
+     0.10421941429376602
+    ],
+    [
+     0.010598259922366371,
+     0.10370644927024841
+    ],
+    [
+     0.009714431445911357,
+     0.10362296551465988
+    ],
+    [
+     0.010295728569702619,
+     0.1037234514951706
+    ],
+    [
+     0.010210696906119922,
+     0.1049230694770813
+    ],
+    [
+     0.010239078033136168,
+     0.1058085560798645
+    ],
+    [
+     0.01059636853857831,
+     0.10436970740556717
+    ],
+    [
+     0.010893159702297464,
+     0.10284561663866043
+    ],
+    [
+     0.010617795975804022,
+     0.10425126552581787
+    ],
+    [
+     0.010652398220603916,
+     0.10538489371538162
+    ],
+    [
+     0.010038902255084008,
+     0.10649824887514114
+    ],
+    [
+     0.009583417652318701,
+     0.10413072258234024
+    ],
+    [
+     0.00877200330997962,
+     0.102646604180336
+    ],
+    [
+     0.009313804040884504,
+     0.10356689989566803
+    ],
+    [
+     0.008665741104766896,
+     0.1041746437549591
+    ],
+    [
+     0.008169986940651795,
+     0.10355360805988312
+    ],
+    [
+     0.0082359363672148,
+     0.104813352227211
+    ],
+    [
+     0.008491697715428475,
+     0.10231858491897583
+    ],
+    [
+     0.01492018539009637,
+     0.10385490208864212
+    ],
+    [
+     0.01027584280032208,
+     0.10354150831699371
+    ],
+    [
+     0.010409913044020027,
+     0.10238432139158249
+    ],
+    [
+     0.010827644369406694,
+     0.10252469033002853
+    ],
+    [
+     0.011108392666369277,
+     0.10403874516487122
+    ],
+    [
+     0.011528114881270578,
+     0.10338243097066879
+    ],
+    [
+     0.011261912706345472,
+     0.10364264249801636
+    ],
+    [
+     0.010494968701388023,
+     0.10474732518196106
+    ],
+    [
+     0.008594191043295282,
+     0.10475912690162659
+    ],
+    [
+     0.0080732364499084,
+     0.10555782169103622
+    ],
+    [
+     0.00905202933895017,
+     0.10457178950309753
+    ],
+    [
+     0.009127984072794384,
+     0.10453571379184723
+    ],
+    [
+     0.009003003116363293,
+     0.10307557135820389
+    ],
+    [
+     0.009250502237315404,
+     0.10238880664110184
+    ],
+    [
+     0.008346260694094408,
+     0.1043873056769371
+    ],
+    [
+     0.009137278577134427,
+     0.10171118378639221
+    ],
+    [
+     0.007944713589321941,
+     0.10283829271793365
+    ],
+    [
+     0.006659282238081665,
+     0.10341408848762512
+    ],
+    [
+     0.006304522183072494,
+     0.10387447476387024
+    ],
+    [
+     0.006076433301647218,
+     0.10379720479249954
+    ],
+    [
+     0.005307137672180343,
+     0.10277441143989563
+    ],
+    [
+     0.00576436941979029,
+     0.10435036569833755
+    ],
+    [
+     0.00582950950545536,
+     0.10236413031816483
+    ],
+    [
+     0.006750466264630874,
+     0.10291017591953278
+    ],
+    [
+     0.008167435221343342,
+     0.10278595238924026
+    ],
+    [
+     0.007612623507396753,
+     0.10320306569337845
+    ],
+    [
+     0.006860872574273332,
+     0.10391206294298172
+    ],
+    [
+     0.006255595234580469,
+     0.10264310985803604
+    ],
+    [
+     0.005652210431559017,
+     0.10303143411874771
+    ],
+    [
+     0.004884028110708792,
+     0.10276153683662415
+    ],
+    [
+     0.005464719161947558,
+     0.10318038612604141
+    ],
+    [
+     0.005077188373682397,
+     0.10257832705974579
+    ],
+    [
+     0.004829023281797138,
+     0.1033259779214859
+    ],
+    [
+     0.005304550070096916,
+     0.10379133373498917
+    ],
+    [
+     0.006292519794564107,
+     0.10412425547838211
+    ],
+    [
+     0.0054466260983642234,
+     0.10396453738212585
+    ],
+    [
+     0.005907683852430813,
+     0.10278069972991943
+    ],
+    [
+     0.005252999216164668,
+     0.1015629842877388
+    ],
+    [
+     0.00539961983866982,
+     0.10300400853157043
+    ],
+    [
+     0.004792062992980103,
+     0.10233351588249207
+    ],
+    [
+     0.007699712503789689,
+     0.10077963024377823
+    ],
+    [
+     0.009007210009774513,
+     0.10303497314453125
+    ],
+    [
+     0.007690764418357156,
+     0.105021633207798
+    ],
+    [
+     0.007216966013212129,
+     0.10270348191261292
+    ],
+    [
+     0.005851646728936418,
+     0.10233350098133087
+    ],
+    [
+     0.005671669871965471,
+     0.10064374655485153
+    ],
+    [
+     0.007397928111155419,
+     0.10335756093263626
+    ],
+    [
+     0.008379520185629383,
+     0.10524404793977737
+    ],
+    [
+     0.007338928853868517,
+     0.10222041606903076
+    ],
+    [
+     0.007342918779812254,
+     0.1020795926451683
+    ],
+    [
+     0.0069779729893590286,
+     0.10392320156097412
+    ],
+    [
+     0.006856556886367799,
+     0.10255316644906998
+    ],
+    [
+     0.006375636394211426,
+     0.10177925229072571
+    ],
+    [
+     0.006234069638736892,
+     0.1021689847111702
+    ],
+    [
+     0.005685924732219332,
+     0.10193729400634766
+    ],
+    [
+     0.005444893629283449,
+     0.10205080360174179
+    ],
+    [
+     0.00594825810780624,
+     0.10205983370542526
+    ],
+    [
+     0.005962703834517056,
+     0.10242226719856262
+    ],
+    [
+     0.00570418057439563,
+     0.10217327624559402
+    ],
+    [
+     0.006461154486327964,
+     0.10254447162151337
+    ],
+    [
+     0.0062214566407155485,
+     0.10239457339048386
+    ],
+    [
+     0.0065116711875882255,
+     0.10263079404830933
+    ],
+    [
+     0.0056274116588861944,
+     0.10284162312746048
+    ],
+    [
+     0.006024729612021564,
+     0.10323088616132736
+    ],
+    [
+     0.005127249307638891,
+     0.10263745486736298
+    ],
+    [
+     0.005888430335022793,
+     0.10450496524572372
+    ],
+    [
+     0.006828149318806328,
+     0.10419291257858276
+    ],
+    [
+     0.007202491925283116,
+     0.10127215832471848
+    ],
+    [
+     0.006480799938996163,
+     0.10100209712982178
+    ],
+    [
+     0.006127150012822831,
+     0.10167417675256729
+    ],
+    [
+     0.004901792052711229,
+     0.10229430347681046
+    ],
+    [
+     0.005170359768272674,
+     0.10273383557796478
+    ],
+    [
+     0.006070966273642133,
+     0.10452386736869812
+    ],
+    [
+     0.006977329745190458,
+     0.10239516943693161
+    ],
+    [
+     0.00825972078669237,
+     0.10165052860975266
+    ],
+    [
+     0.006594861214970891,
+     0.1034327894449234
+    ],
+    [
+     0.005636335754369977,
+     0.102462038397789
+    ],
+    [
+     0.0044591485754798725,
+     0.10169942677021027
+    ],
+    [
+     0.004256270462829317,
+     0.10210259258747101
+    ],
+    [
+     0.0037557219594417774,
+     0.10201731324195862
+    ],
+    [
+     0.004254582667019291,
+     0.1026984453201294
+    ],
+    [
+     0.0038454864230716697,
+     0.1025884672999382
+    ],
+    [
+     0.004609753626631813,
+     0.10210032761096954
+    ],
+    [
+     0.004505464935677181,
+     0.10251699388027191
+    ],
+    [
+     0.004066076572556682,
+     0.10233280062675476
+    ],
+    [
+     0.004059130811237037,
+     0.10204095393419266
+    ],
+    [
+     0.00394426946346979,
+     0.10245348513126373
+    ],
+    [
+     0.0037311358050271548,
+     0.10211101919412613
+    ],
+    [
+     0.003569709872261043,
+     0.10194588452577591
+    ],
+    [
+     0.004283055853018063,
+     0.1013355553150177
+    ],
+    [
+     0.0050118133348022445,
+     0.10089610517024994
+    ],
+    [
+     0.004892855865380177,
+     0.10168849676847458
+    ],
+    [
+     0.004685238071349972,
+     0.1019873097538948
+    ],
+    [
+     0.004466016187469727,
+     0.10323828458786011
+    ],
+    [
+     0.00478825540196469,
+     0.1016746461391449
+    ],
+    [
+     0.00670001991994748,
+     0.1012352705001831
+    ],
+    [
+     0.006003088867876882,
+     0.10150362551212311
+    ],
+    [
+     0.005349672703028308,
+     0.1022571325302124
+    ],
+    [
+     0.005032652755000319,
+     0.10133414715528488
+    ],
+    [
+     0.005734516847226481,
+     0.10093968361616135
+    ],
+    [
+     0.0060493449573083774,
+     0.10251054912805557
+    ],
+    [
+     0.005732358664937939,
+     0.10278433561325073
+    ],
+    [
+     0.005904506275240412,
+     0.1024676263332367
+    ],
+    [
+     0.00537540865572885,
+     0.10311968624591827
+    ],
+    [
+     0.005375110787885258,
+     0.10275088995695114
+    ],
+    [
+     0.0045957843438327985,
+     0.10238724946975708
+    ],
+    [
+     0.004683704767184357,
+     0.10228199511766434
+    ],
+    [
+     0.004834048825975059,
+     0.10123302787542343
+    ]
+   ],
+   "mejor_epoca": 5,
+   "epocas": 150,
+   "error_entreno_inicio": 10.37543344730943,
+   "error_entreno_fin": 0.2707067342546033,
+   "error_val_mejor": 5.3796550035476685,
+   "error_val_fin": 5.669049561023712
+  },
+  "constante_entreno": 8.510498687664041,
+  "constante_no_vistos": 8.4508,
+  "max_ventaja_entreno": 0.02152230971128688
+ },
+ "tres_sorteos": {
+  "prediccion": 6,
+  "esperada": 8.503392833581513,
+  "p_9_o_mas": 0.35764253308360067,
+  "p_8_o_mas": 0.7805713317770402,
+  "p_menos_de_7": 0.057069701221661724,
+  "p10": 7.300000000000001,
+  "p50": 8.7,
+  "p90": 9.4,
+  "histograma": [
+   {
+    "hasta": 10.0,
+    "prob": 0.03685238644517991
+   },
+   {
+    "hasta": 9.5,
+    "prob": 0.25368422325287204
+   },
+   {
+    "hasta": 9.0,
+    "prob": 0.2867769337024974
+   },
+   {
+    "hasta": 8.5,
+    "prob": 0.1760462176158087
+   },
+   {
+    "hasta": 8.0,
+    "prob": 0.11355995650256981
+   },
+   {
+    "hasta": 7.5,
+    "prob": 0.06683998103313527
+   },
+   {
+    "hasta": 7.0,
+    "prob": 0.03572782068597614
+   },
+   {
+    "hasta": 6.5,
+    "prob": 0.017398115846171458
+   },
+   {
+    "hasta": 6.0,
+    "prob": 0.007797962608557054
+   },
+   {
+    "hasta": 5.5,
+    "prob": 0.0032761468356113264
+   },
+   {
+    "hasta": 5.0,
+    "prob": 0.00130437188031669
+   },
+   {
+    "hasta": 4.5,
+    "prob": 0.0004878118650710464
+   },
+   {
+    "hasta": 4.0,
+    "prob": 0.00016988312585197696
+   },
+   {
+    "hasta": 3.5,
+    "prob": 5.512215437815567e-05
+   },
+   {
+    "hasta": 3.0,
+    "prob": 1.671297470721538e-05
+   }
+  ],
+  "por_prediccion": [
+   {
+    "prediccion": 2,
+    "esperada": 8.092857142857143
+   },
+   {
+    "prediccion": 3,
+    "esperada": 8.27012987012987
+   },
+   {
+    "prediccion": 4,
+    "esperada": 8.394372294372294
+   },
+   {
+    "prediccion": 5,
+    "esperada": 8.47058727436086
+   },
+   {
+    "prediccion": 6,
+    "esperada": 8.503392833581513
+   },
+   {
+    "prediccion": 7,
+    "esperada": 8.497044797599736
+   },
+   {
+    "prediccion": 8,
+    "esperada": 8.455458525935775
+   },
+   {
+    "prediccion": 9,
+    "esperada": 8.382229756924541
+   },
+   {
+    "prediccion": 10,
+    "esperada": 8.280654584039711
+   },
+   {
+    "prediccion": 11,
+    "esperada": 8.153748582161459
+   },
+   {
+    "prediccion": 12,
+    "esperada": 8.004265102267322
+   }
+  ]
+ },
+ "prediccion": {
+  "final": 6,
+  "metodo": "Constante 6 (mediana teórica)",
+  "razon": "el campeón de Deep Learning no le ganó a la constante en la prueba final",
+  "campeon_predice": 6,
+  "por_metodo": {
+   "GRU-Clasif. k=50 (#107)": 6,
+   "GRU-Clasif. k=5 (#164)": 6,
+   "MLP-Clasif. k=5 (#187)": 6,
+   "CNN-Clasif. k=20 (#133)": 6,
+   "CNN-Clasif. k=5 (#47)": 7,
+   "LSTM-L1 k=10 (#134)": 6,
+   "Transformer-Clasif. k=5 (#223)": 5,
+   "CNN-MSE k=10 (#10)": 8,
+   "Ensamble top-5 (mediana)": 6,
+   "Constante 6 (teoría)": 6,
+   "Mediana histórica": 6
+  },
+  "coinciden": [
+   "CNN-Clasif. k=20 (#133)",
+   "Constante 6 (teoría)",
+   "Ensamble top-5 (mediana)",
+   "GRU-Clasif. k=5 (#164)",
+   "GRU-Clasif. k=50 (#107)",
+   "LSTM-L1 k=10 (#134)",
+   "MLP-Clasif. k=5 (#187)",
+   "Mediana histórica"
+  ],
+  "datos_hasta": "2026-10-21",
+  "ultimo_concurso": 4281,
+  "busqueda_hasta": "2026-10-18",
+  "calif_esperada": 8.503392833581515
+ }
+}

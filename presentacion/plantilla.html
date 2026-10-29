@@ -1,0 +1,1193 @@
+<title>¿Se puede predecir R1?</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Diapositivas de pantalla completa (scroll libre; flechas y botones saltan de una en una); la bola de sorteo es el motivo visual (R1 = la bola más chica, en color). */
+:root {
+  --bg: #eef1f5;
+  --panel: #ffffff;
+  --ink: #142033;
+  --muted: #46536a;       /* más oscuro que un gris de pantalla: en proyector el gris claro se pierde */
+  --line: #d3dae4;
+  --ball: #e0512b;        /* R1 / nuestra predicción */
+  --ball-ink: #ffffff;
+  --theory: #0f8b7d;      /* la fórmula, el azar */
+  --data: #2f5d9e;        /* lo observado */
+  --net: #8a4fd1;         /* las redes */
+  --bad: #b3261e;
+  --plain-ball: #f8fafc;
+  --plain-ball-edge: #c3ccd8;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1420; --panel: #152033; --ink: #e8edf5; --muted: #9aa8bb; --line: #2a3a52;
+    --ball: #ff6b42; --ball-ink: #1a0d08; --theory: #2ec4b0; --data: #6f9de0; --net: #b28af0; --bad: #ff7b6e;
+    --plain-ball: #1f2c42; --plain-ball-edge: #3a4d6b; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1420; --panel: #152033; --ink: #e8edf5; --muted: #9aa8bb; --line: #2a3a52;
+  --ball: #ff6b42; --ball-ink: #1a0d08; --theory: #2ec4b0; --data: #6f9de0; --net: #b28af0; --bad: #ff7b6e;
+  --plain-ball: #1f2c42; --plain-ball-edge: #3a4d6b; color-scheme: dark;
+}
+/* Sin scroll-snap: con "proximity" un giro corto de la rueda hacia arriba regresaba al inicio de la misma diapositiva */
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: clamp(15px, 0.55vw + 10px, 22px); line-height: 1.5; margin: 0; }
+/* Los títulos quedan a la misma altura en todas las diapositivas; solo la portada y la predicción van centradas */
+.slide {
+  min-height: 100vh; min-height: 100dvh; box-sizing: border-box;
+  display: grid; align-content: start; gap: 1.2rem;
+  padding-block: clamp(28px, 5vh, 56px); padding-top: clamp(32px, 7vh, 80px);
+  padding-left: max(16px, 3vw, env(safe-area-inset-left, 0px)); padding-right: max(16px, 3vw, env(safe-area-inset-right, 0px));
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 1600px) { body { font-size: 22px; } }   /* proyector 1080p: un poco más grande */
+.slide.hero, .slide.final { align-content: center; }
+.wrap { width: min(1560px, 100%); margin-inline: auto; display: grid; gap: 1.1rem; min-width: 0; }
+.eyebrow { font-family: var(--mono); font-size: 0.78em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+h1, h2 { font-family: var(--display); font-weight: 800; letter-spacing: -0.01em; text-wrap: balance; margin: 0; line-height: 1.08; }
+h1 { font-size: clamp(2.2rem, 6vw, 5rem); }
+h2 { font-size: clamp(1.4rem, 2.5vw, 2.2rem); }
+p { margin: 0; max-width: 65ch; }
+.lead { font-size: 1.15em; color: var(--muted); max-width: 60ch; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: clamp(16px, 3vw, 40px); align-items: center; }
+.cols > * { min-width: 0; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.hl { color: var(--ball); font-weight: 700; }
+.th { color: var(--theory); font-weight: 700; }
+.nt { color: var(--net); font-weight: 700; }
+.chart { width: 100%; height: auto; display: block; overflow: visible; }
+.chart text { fill: var(--muted); font-family: var(--mono); font-size: 15px; }
+.scroll-x { overflow-x: auto; }
+.scroll-x .chart { min-width: 640px; }
+.chart .t-ink { fill: var(--ink); }
+.chart .axis { stroke: var(--line); stroke-width: 1; }
+.figure { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: clamp(10px, 2vw, 22px); min-width: 0; }
+.caption { font-size: 0.9em; color: var(--muted); margin-top: 0.5rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 0.88em; color: var(--muted); margin-top: 0.4rem; }
+.legend i { display: inline-block; width: 0.8em; height: 0.8em; border-radius: 50%; margin-right: 0.35em; vertical-align: -0.05em; }
+
+/* Bolas */
+.balls { display: flex; flex-wrap: wrap; gap: clamp(8px, 1.4vw, 18px); align-items: center; }
+.ball {
+  --size: clamp(52px, 7vw, 92px);
+  width: var(--size); height: var(--size); border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--display); font-weight: 600; font-size: calc(var(--size) * 0.36); font-variant-numeric: tabular-nums;
+  background: radial-gradient(circle at 34% 30%, var(--panel) 0 18%, var(--plain-ball) 46%);
+  border: 2px solid var(--plain-ball-edge); color: var(--ink); position: relative;
+  transition: transform 0.6s cubic-bezier(.2,.9,.25,1.2), background-color 0.4s, border-color 0.4s;
+}
+.ball.r1 { background: var(--ball); border-color: var(--ball); color: var(--ball-ink); }
+.ball.r1::after { content: "R1"; position: absolute; top: calc(100% + 6px); font-family: var(--mono); font-size: 13px; color: var(--ball); font-weight: 600; }
+.ball.small { --size: clamp(30px, 3.2vw, 42px); }
+.draw-row .balls { gap: 6px; }
+.ball.small.r1::after { display: none; }
+.ball.giant { --size: clamp(150px, 22vw, 260px); }
+.ball.giant.r1::after { content: none; }
+
+/* Portada */
+.hero h1 .r1word { color: var(--ball); }
+.hero .stage { min-height: clamp(130px, 16vw, 170px); display: grid; align-items: center; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; font-family: var(--mono); font-size: 0.85em; color: var(--muted); }
+
+/* Fórmula */
+.formula { font-family: var(--mono); font-size: clamp(1.2rem, 3vw, 2.3rem); background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 0.8em 1em; overflow-x: auto; }
+.formula b { color: var(--ball); }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px; }
+.fact { border-top: 3px solid var(--line); padding-top: 0.6rem; display: grid; gap: 0.2rem; align-content: start; }
+.fact.data { border-color: var(--data); }
+.fact .big { font-family: var(--display); font-weight: 600; font-size: clamp(1.6rem, 3vw, 2.4rem); font-variant-numeric: tabular-nums; }
+.fact.accent { border-color: var(--ball); }
+.fact.theory { border-color: var(--theory); }
+.fact.net { border-color: var(--net); }
+.fact small { color: var(--muted); font-size: 0.9em; }
+#pruFacts .big { font-size: clamp(1.3rem, 2.2vw, 1.8rem); }
+.facts > * { min-width: 0; }
+/* Gráficas altas: se limitan a la pantalla (el SVG conserva su proporción y se centra) */
+#prueba .chart, #memorizar .chart { max-height: 50vh; }
+
+/* Pruebas */
+.tests { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; }
+.test { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 0.9rem 1rem; display: grid; gap: 0.25rem; }
+.test .p { font-family: var(--mono); font-size: 1.4em; font-weight: 600; color: var(--theory); }
+.test .verdict { font-size: 0.85em; color: var(--muted); }
+.chip { display: inline-block; font-family: var(--mono); font-size: 0.72em; padding: 0.15em 0.6em; border-radius: 99px; border: 1px solid currentColor; }
+
+/* Interactivo */
+.slider-row { display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; }
+input[type=range] { width: 100%; accent-color: var(--ball); height: 28px; }
+input[type=range]::-webkit-slider-thumb { width: 28px; height: 28px; }
+input[type=range]::-moz-range-thumb { width: 28px; height: 28px; }
+.readout { font-family: var(--display); font-size: clamp(1.4rem, 3vw, 2.2rem); font-variant-numeric: tabular-nums; }
+button { font: inherit; font-size: 0.9em; padding: 0.55em 1.1em; border-radius: 99px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+button.primary { background: var(--ink); border-color: var(--ink); color: var(--bg); font-weight: 700; }   /* no compite con las bolas R1 naranjas */
+button:focus-visible, input:focus-visible { outline: 3px solid var(--data); outline-offset: 3px; }
+.draws { display: grid; gap: 0.7rem; }
+.draw-row { display: grid; grid-template-columns: 7.5em max-content max-content; column-gap: 1.5rem; row-gap: 0.8rem; align-items: center; }
+#ultimos .ball.small { --size: clamp(34px, 3.2vw, 56px); }
+#simFinal small { font-family: var(--body); }
+.draw-row > * { min-width: 0; }
+.draw-row .grade { font-family: var(--mono); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* Protocolo */
+.timeline { display: grid; gap: 0.5rem; }
+.tl-bar { display: flex; height: 60px; border-radius: 10px; overflow: hidden; font-family: var(--mono); font-size: 0.85em; }
+.tl-bar div { display: grid; place-items: center; color: var(--panel); font-weight: 600; text-align: center; padding: 0 4px; min-width: 0; }
+/* las fechas se colocan en la frontera real de cada tramo (no repartidas a partes iguales) */
+.tl-dates { position: relative; height: 1.5em; font-family: var(--mono); font-size: 0.8em; color: var(--muted); }
+.tl-dates span { position: absolute; top: 0; white-space: nowrap; transform: translateX(-50%); }
+.tl-dates span:first-child { transform: none; }
+.tl-dates span:last-child { transform: translateX(-100%); }
+#protocolo .steps { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); column-gap: 28px; }
+#conclusiones .takeaways { grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 1.2rem 2rem; font-size: 1.15em; }
+.chips { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.enviada { display: inline-flex; gap: 0.6rem; align-items: center; font-weight: 700; font-size: 1.05em; padding: 0.4rem 1.1rem; border-radius: 99px; background: var(--ball); color: var(--ball-ink); }
+.agree .rotulo { flex-basis: 100%; border: 0; text-align: center; font-family: var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+.steps { display: grid; gap: 0.8rem; counter-reset: s; }
+.steps li { list-style: none; display: grid; grid-template-columns: 2.2em 1fr; gap: 0.6rem; align-items: start; }
+.steps li::before { counter-increment: s; content: counter(s); font-family: var(--display); font-weight: 600; width: 1.8em; height: 1.8em; border-radius: 50%; display: grid; place-items: center; border: 2px solid var(--ink); font-size: 0.9em; }
+.steps { padding: 0; margin: 0; }
+
+/* Modelos */
+.zoo { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 10px; }
+.zoo div { border: 1px solid var(--line); border-radius: 12px; padding: 0.8rem; background: var(--panel); display: grid; gap: 0.2rem; }
+.zoo b { font-family: var(--display); font-weight: 600; color: var(--net); }
+.zoo span { font-size: 0.82em; color: var(--muted); }
+.dims { display: grid; gap: 0.4rem; font-size: 0.9em; }
+.dims div { display: grid; grid-template-columns: 9em 1fr; gap: 0.6rem; border-bottom: 1px dashed var(--line); padding-bottom: 0.35rem; }
+.dims dt, .dims b { color: var(--muted); font-weight: 400; }
+
+/* Final */
+.final { text-align: center; justify-items: center; }
+.final .ball.giant { margin: 0.6rem 0 0.4rem; }
+.agree { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 900px; }
+.agree span { font-family: var(--mono); font-size: 0.8em; padding: 0.2em 0.7em; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); }
+.agree span.yes { border-color: var(--ball); color: var(--ink); }
+[hidden] { display: none !important; }   /* el visor de Claude ya lo trae; el archivo local no */
+.reales { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0.4rem 1.4rem; padding: 0.6rem 1.2rem; border: 2px solid var(--ball); border-radius: 12px; background: var(--panel); }
+.takeaways { display: grid; gap: 0.9rem; counter-reset: t; }
+.takeaways p { padding-left: 1rem; border-left: 3px solid var(--line); }
+.takeaways p:first-child { border-color: var(--ball); }
+
+/* Explicaciones para no especialistas */
+.plain { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--theory); border-radius: 10px; padding: 0.75rem 1rem; max-width: 80ch; font-size: 0.95em; }
+.test .q { font-weight: 700; font-size: 1.02em; }
+.test .verdict b { color: var(--ink); }
+.dims dd { margin: 0; }
+
+/* Pestañas y diagrama de arquitectura */
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabs button { font-size: 0.85em; padding: 0.35em 0.9em; border-color: var(--line); background: var(--panel); }
+.tabs button.on { background: var(--ink); border-color: var(--ink); color: var(--bg); font-weight: 700; }
+.tabs.small { margin-bottom: 0.4rem; }
+.tabs.small button { font-size: 0.7em; }
+.arq { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(12px, 2vw, 28px); align-items: start; }
+@media (max-width: 860px) { .arq { grid-template-columns: 1fr; } }
+.arq-side { display: grid; gap: 0.9rem; min-width: 0; }
+.chips { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 6px; }
+.chips span { display: grid; gap: 1px; border: 1px solid var(--line); border-radius: 8px; padding: 0.35rem 0.6rem; background: var(--panel); }
+.chips small { color: var(--muted); font-size: 0.72em; }
+.chips b { font-size: 0.9em; font-variant-numeric: tabular-nums; }
+.pick { display: flex; gap: 0.5rem; align-items: center; font-size: 0.85em; color: var(--muted); margin-bottom: 0.3rem; }
+.pick select { font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 0.25em 0.5em; max-width: 100%; }
+#memoria .chart { max-height: 30vh; }
+#memoria .test .verdict { font-size: 0.82em; }
+#modelos .dims { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); column-gap: 28px; margin-top: 0.8rem; }
+details.mas summary { cursor: pointer; color: var(--ink); font-weight: 700; font-size: 0.95em; }
+details.mas summary:focus-visible { outline: 3px solid var(--data); outline-offset: 3px; }
+.layers { margin: 0; padding-left: 1.2em; display: grid; gap: 0.35rem; font-size: 0.86em; }
+.layers small { color: var(--muted); }
+@keyframes fadein { from { opacity: 0; } }
+.play .fade { animation: fadein 1.2s ease-out backwards; animation-delay: 0.3s; }
+
+/* Glosario */
+.glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 10px 22px; margin: 0; }
+.glossary div { border-top: 2px solid var(--line); padding-top: 0.4rem; }
+.glossary dt { font-family: var(--display); font-weight: 600; font-size: 0.95em; }
+.glossary dd { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.9em; }
+
+/* Navegación */
+.nav {
+  position: fixed; right: 0; bottom: 0; z-index: 20; display: flex; gap: 8px; align-items: center;
+  padding: 10px max(14px, env(safe-area-inset-right, 0px)) max(10px, env(safe-area-inset-bottom, 0px)) 10px;
+  font-family: var(--mono); font-size: 12px; color: var(--muted);
+}
+.nav button { padding: 0.35em 0.8em; font-size: 12px; background: var(--panel); border-color: var(--line); }
+.progress { position: fixed; left: 0; right: 0; top: 0; height: calc(4px + env(safe-area-inset-top, 0px)); z-index: 21; pointer-events: none; }
+.progress div { height: 4px; margin-top: env(safe-area-inset-top, 0px); background: var(--ball); width: 0; transition: width 0.3s; }
+
+/* Movimiento: todo está dibujado en reposo; al entrar una diapositiva, se reproduce la animación. */
+@keyframes grow-y { from { transform: scaleY(0); } }
+@keyframes grow-x { from { transform: scaleX(0); } }
+@keyframes draw { from { stroke-dashoffset: var(--len, 1200); } }
+@keyframes pop { from { transform: scale(0.2); opacity: 0; } }
+@keyframes rise { from { transform: translateY(14px); opacity: 0; } }
+.play .gy { transform-box: fill-box; transform-origin: bottom; animation: grow-y 0.8s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i, 0) * 14ms); }
+.play .gx { transform-box: fill-box; transform-origin: left; animation: grow-x 0.8s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: calc(var(--i, 0) * 50ms); }
+.play .ln { stroke-dasharray: var(--len, 1200); animation: draw 1.4s ease-out backwards; animation-delay: 0.3s; }
+.play .pp { animation: pop 0.5s cubic-bezier(.2,.9,.3,1.3) backwards; animation-delay: calc(var(--i, 0) * 9ms + 0.2s); }
+.play .rise { animation: rise 0.6s ease-out backwards; animation-delay: calc(var(--i, 0) * 90ms); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .play .gy, .play .gx, .play .ln, .play .pp, .play .rise, .play .fade { animation: none; }
+  .ball { transition: none; }
+}
+</style>
+
+<div class="progress" aria-hidden="true"><div id="progress"></div></div>
+
+<!-- 1. Portada -->
+<section class="slide hero" id="inicio">
+  <div class="wrap">
+    <div class="eyebrow">Examen final · Aprendizaje Profundo · Equipo <span class="hl">R1</span></div>
+    <h1>¿Se puede predecir <span class="r1word">R1</span> del Melate?</h1>
+    <div class="stage"><div class="balls" id="heroBalls" aria-label="Último sorteo"></div></div>
+    <p class="lead" id="heroCaption"></p>
+    <div class="meta"><span id="heroMeta1"></span><span id="heroMeta2"></span><span>Presentación: 24 de octubre de 2026</span></div>
+  </div>
+</section>
+
+<!-- 2. El reto -->
+<section class="slide" id="reto">
+  <div class="wrap">
+    <div class="eyebrow">El reto</div>
+    <h2>Un solo número, tres sorteos</h2>
+    <div class="formula" role="math">calificación = 10 − 0.3 × |<b>sorteo</b> − predicción|</div>
+    <div class="facts">
+      <div class="fact accent rise" style="--i:0"><span class="big">23 · 25 · 28</span><small>de octubre: los tres sorteos que califican la misma predicción</small></div>
+      <div class="fact rise" style="--i:1"><span class="big num">−0.3</span><small>por cada número de distancia. Fallar por 10 deja 7.0</small></div>
+      <div class="fact rise" style="--i:2"><span class="big">la distancia</span><small>es lo único que castiga, así que conviene el valor de en medio (la <b>mediana</b>), no el promedio</small></div>
+    </div>
+    <p class="lead" id="spoiler"></p>
+  </div>
+</section>
+
+<!-- 3. Los datos: R1 es la bola más chica -->
+<section class="slide" id="ordenados">
+  <div class="wrap cols">
+    <div style="display:grid;gap:1rem">
+      <div class="eyebrow">Los datos</div>
+      <h2>R1 no es la primera bola. Es la más chica.</h2>
+      <p class="lead">La Lotería publica los seis números ordenados: predecir R1 es predecir el <b>menor de seis números al azar entre 1 y 56</b>.</p>
+      <div class="facts" id="datosFacts"></div>
+    </div>
+    <div class="figure">
+      <div class="draws" id="ultimos"></div>
+      <div class="caption">Los cinco sorteos más recientes, como los publica la Lotería Nacional.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Qué número conviene: la mediana (curva + control deslizante) -->
+<section class="slide" id="mediana">
+  <div class="wrap">
+    <div class="eyebrow">Estadística · qué número conviene</div>
+    <h2 id="medTitulo"></h2>
+    <div class="cols">
+      <div class="figure"><svg class="chart" id="chCurva" viewBox="0 0 640 300" role="img" aria-label="Calificación esperada según la predicción"></svg>
+        <div class="caption" id="curvaCaption"></div></div>
+      <div style="display:grid;gap:1rem">
+        <label for="pred" class="eyebrow">Mueve tu predicción</label>
+        <div class="slider-row"><span class="num">1</span><input type="range" id="pred" min="1" max="25" step="1"><span class="num">25</span></div>
+        <div class="facts">
+          <div class="fact accent"><span class="readout" id="predOut"></span><small>predicción</small></div>
+          <div class="fact theory"><span class="readout" id="predCal"></span><small>calificación esperada por sorteo</small></div>
+        </div>
+        <p id="predTxt" class="lead"></p>
+        <p class="plain" id="defSiempre"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Memoria -->
+<section class="slide" id="memoria">
+  <div class="wrap">
+    <div class="eyebrow">Estadística · ¿el pasado ayuda a adivinar?</div>
+    <h2 id="memTitulo"></h2>
+    <div class="tests" id="tests"></div>
+    <div class="cols" style="align-items:start">
+      <div class="plain"><b>Cómo leerlas:</b> <b>p</b> dice qué tan raro sería el resultado si el sorteo fuera puro azar. Si p es mayor que 0.05, no encontramos nada raro ni una pista que una red pudiera aprovechar.</div>
+      <div class="figure"><svg class="chart" id="chAcf" viewBox="0 0 640 240" role="img" aria-label="Autocorrelación de R1"></svg>
+        <div class="caption" id="acfCap"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Modelos -->
+<section class="slide" id="modelos">
+  <div class="wrap">
+    <div class="eyebrow">Deep Learning · lo que probamos</div>
+    <h2 id="zooTitulo"></h2>
+    <div class="plain">Una <b>red neuronal</b> es una fórmula con miles de parámetros que se ajustan con ejemplos. Cada pasada completa por los sorteos del pasado es una <b>época</b>.</div>
+    <div class="zoo">
+      <div class="rise" style="--i:0"><b>MLP</b><span>Capas de neuronas sobre los últimos sorteos puestos en fila.</span></div>
+      <div class="rise" style="--i:1"><b>LSTM</b><span>Lee los sorteos en orden y guarda memoria de lo que vio.</span></div>
+      <div class="rise" style="--i:2"><b>GRU</b><span>Como la LSTM, con una memoria más simple.</span></div>
+      <div class="rise" style="--i:3"><b>CNN 1D</b><span>Filtros que buscan patrones en sorteos seguidos.</span></div>
+      <div class="rise" style="--i:4"><b>Transformer</b><span>Atención: cada sorteo "consulta" a los demás.</span></div>
+    </div>
+    <p class="lead" style="max-width:none">Tres formas de medir el error al entrenar. Con <b>L1</b> (la distancia, como la calificación) la red apunta a la mediana. Con <b>MSE</b> (la distancia al cuadrado) apunta al promedio, 8, y pierde puntos. Con <b>probabilidades</b> reparte la chance entre los 51 valores posibles de R1 y enviamos su mediana (ese error se llama entropía cruzada).</p>
+    <details class="mas" open>
+      <summary>Todo lo que variamos entre configuraciones</summary>
+      <dl class="dims">
+        <div><dt>Qué responde</dt><dd>un número (el R1 estimado), o la probabilidad de cada valor de 1 a 51 (R1 nunca pasa de 51: no cabrían cinco números mayores); en ese caso se toma la mediana</dd></div>
+        <div><dt>Cuánta historia ve</dt><dd>los últimos 5, 10, 20 o 50 sorteos</dd></div>
+        <div><dt>Cómo ve cada sorteo</dt><dd>los seis números · una lista de 56 casillas que marca qué bolas salieron · ambas cosas</dd></div>
+        <div><dt>Ajustes finos</dt><dd>16 a 128 neuronas por capa, 1 o 2 capas, <i>dropout</i> (apagar neuronas al azar para que no memoricen), velocidad de aprendizaje y penalización de pesos (<i>weight decay</i>: castigo a los parámetros muy grandes)</dd></div>
+        <div><dt>Para comparar</dt><dd>métodos sin redes: gradient boosting, cadena de Markov, "números calientes", medianas recientes</dd></div>
+      </dl>
+    </details>
+  </div>
+</section>
+
+<!-- 7. Arquitecturas -->
+<section class="slide" id="arquitectura">
+  <div class="wrap">
+    <div class="eyebrow">Deep Learning · una red por dentro</div>
+    <h2 id="arqTitulo"></h2>
+    <div class="tabs" id="tabsArq" role="tablist" aria-label="Red finalista"></div>
+    <div class="arq">
+      <div class="figure"><svg class="chart" id="chArq" viewBox="0 0 760 360" role="img" aria-label="Diagrama de capas de la red"></svg>
+        <div class="caption">Cada círculo es una neurona (se dibujan hasta 10 por capa); cada línea, un parámetro que se ajusta al entrenar.</div></div>
+      <div class="arq-side">
+        <div class="chips" id="arqChips"></div>
+        <ol class="layers" id="arqCapas"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Protocolo -->
+<section class="slide" id="protocolo">
+  <div class="wrap">
+    <div class="eyebrow">Cómo evitamos engañarnos</div>
+    <h2 id="protoTitulo"></h2>
+    <div class="plain" id="protoPlain"></div>
+    <div class="timeline">
+      <div class="tl-bar" id="tlBar"></div>
+      <div class="tl-dates" id="tlDates"></div>
+    </div>
+    <ol class="steps">
+      <li class="rise" style="--i:0"><p><b>Sin ver el futuro:</b> cada predicción usa solo sorteos anteriores.</p></li>
+      <li class="rise" style="--i:1"><p><b>Elegir al campeón</b> con los exámenes de práctica.</p></li>
+      <li class="rise" style="--i:2"><p id="paso3"></p></li>
+      <li class="rise" style="--i:3"><p id="paso4"></p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 9. Búsqueda -->
+<section class="slide" id="busqueda">
+  <div class="wrap">
+    <div class="eyebrow">Deep Learning · la búsqueda</div>
+    <h2 id="busqTitulo"></h2>
+    <div class="figure scroll-x"><svg class="chart" id="chBusq" viewBox="0 0 960 300" role="img" aria-label="Calificación de cada configuración en validación"></svg>
+      <div class="caption" id="busqCap"></div></div>
+  </div>
+</section>
+
+<!-- 10. Qué aprendieron: lo real contra lo que predijeron -->
+<section class="slide" id="serie">
+  <div class="wrap">
+    <div class="eyebrow">Deep Learning · qué aprendieron</div>
+    <h2 id="serieTitulo"></h2>
+    <div class="facts" id="aprFacts"></div>
+    <div class="figure scroll-x"><svg class="chart" id="chSerie" viewBox="0 0 960 280" role="img" aria-label="R1 real contra predicciones"></svg>
+      <div class="legend"><span><i style="background:var(--data)"></i>R1 real</span><span><i style="background:var(--ball)"></i>lo que predijo el campeón</span><span><i style="background:var(--net)"></i>la mejor red entrenada con MSE</span></div>
+      <div class="caption" id="serieCap"></div></div>
+  </div>
+</section>
+
+<!-- 11. Curvas de entrenamiento -->
+<section class="slide" id="curvas">
+  <div class="wrap">
+    <div class="eyebrow">Deep Learning · ¿memorizaron en vez de aprender?</div>
+    <h2>Así se ve el sobreentrenamiento, y por qué a nosotros casi no nos pasó</h2>
+    <div class="plain">Una red que <b>memoriza</b> sigue bajando su error con lo que ya vio mientras sube su error con sorteos nuevos. El <b>early stopping</b> la detiene en el mejor punto.</div>
+    <div class="cols" style="align-items:start">
+      <div class="figure">
+        <label class="pick" for="selCurva">Red: <select id="selCurva"></select></label>
+        <svg class="chart" id="chCurva2" viewBox="0 0 640 300" role="img" aria-label="Curva de entrenamiento de la red elegida"></svg>
+        <div class="legend"><span><i style="background:var(--muted)"></i>error en sorteos que ya vio</span><span><i style="background:var(--net)"></i>error en sorteos nuevos</span></div>
+        <div class="caption" id="curvaCap"></div></div>
+      <div class="figure"><svg class="chart" id="chSobre" viewBox="0 0 640 300" role="img" aria-label="Curva de una red sobreentrenada a propósito"></svg>
+        <div class="legend"><span><i style="background:var(--muted)"></i>error en sorteos que ya vio</span><span><i style="background:var(--net)"></i>error en sorteos nuevos</span></div>
+        <div class="caption" id="sobreCap"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Prueba final -->
+<section class="slide" id="prueba">
+  <div class="wrap">
+    <div class="eyebrow">El examen final</div>
+    <h2 id="pruTitulo"></h2>
+    <div class="facts" id="pruFacts"></div>
+    <div class="figure" style="overflow-x:auto"><svg class="chart" id="chPrueba" viewBox="0 0 960 520" role="img" aria-label="Diferencia contra siempre 6 en la prueba final" style="min-width:640px"></svg>
+      <p class="caption" id="pruCap"></p></div>
+  </div>
+</section>
+
+<!-- 13. Tres sorteos: simulador -->
+<section class="slide" id="suerte">
+  <div class="wrap">
+    <div class="eyebrow">Tres sorteos · cuánto pesa la suerte</div>
+    <h2 id="suerteTitulo"></h2>
+    <div class="cols" style="align-items:start">
+      <div class="figure"><svg class="chart" id="chTres" viewBox="0 0 640 280" role="img" aria-label="Distribución de la calificación final"></svg>
+        <div class="caption" id="tresCap"></div></div>
+      <div style="display:grid;gap:1rem">
+        <p id="suerteTxt"></p>
+        <div><button class="primary" id="btnSortear" type="button">Sortear 3 Melates</button></div>
+        <div class="draws" id="simDraws" aria-live="polite"></div>
+        <div class="readout" id="simFinal"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14. Predicción -->
+<section class="slide final" id="prediccion">
+  <div class="wrap final">
+    <div class="enviada">✓ Predicción enviada · sorteos del 23, 25 y 28 de octubre</div>
+    <div class="ball giant r1 pp" id="finalBall" aria-label="R1 = 6"></div>
+    <p class="lead" id="finalTxt" style="text-wrap: pretty"></p>
+    <div class="reales" id="reales" hidden></div>
+    <div class="agree" id="agree"></div>
+  </div>
+</section>
+
+<!-- 15. Conclusiones -->
+<section class="slide" id="conclusiones">
+  <div class="wrap">
+    <div class="eyebrow">Lo que aprendimos</div>
+    <h2>El mejor modelo fue entender el problema</h2>
+    <div class="takeaways" id="takeaways"></div>
+  </div>
+</section>
+
+<!-- A1. Apéndice: ventaja en sorteos vistos contra no vistos -->
+<section class="slide" id="memorizar">
+  <div class="wrap">
+    <div class="eyebrow">Apéndice · la prueba de que no memorizaron</div>
+    <h2 id="memoTitulo"></h2>
+    <div class="plain" id="memoPlain"></div>
+    <div class="figure scroll-x"><svg class="chart" id="chMemo" viewBox="0 0 960 330" role="img" aria-label="Ventaja sobre siempre 6 en sorteos vistos y no vistos"></svg>
+      <div class="legend"><span><i style="background:var(--muted)"></i>en los sorteos con los que entrenó</span><span><i style="background:var(--net)"></i>en sorteos nuevos</span></div>
+      <div class="caption" id="memoCap"></div></div>
+  </div>
+</section>
+
+<!-- A2. Apéndice: glosario -->
+<section class="slide" id="glosario">
+  <div class="wrap">
+    <div class="eyebrow">Apéndice · glosario rápido</div>
+    <h2>Las palabras de esta presentación</h2>
+    <dl class="glossary" id="glosarioLista"></dl>
+    <p class="caption" id="fuente"></p>
+  </div>
+</section>
+
+<nav class="nav" aria-label="Navegación">
+  <span id="counter" class="num"></span>
+  <button type="button" id="btnPrev" aria-label="Diapositiva anterior">↑</button>
+  <button type="button" id="btnNext" aria-label="Diapositiva siguiente">↓</button>
+  <button type="button" id="btnTheme" aria-label="Cambiar tema">◐</button>
+  <button type="button" id="btnFull" aria-label="Pantalla completa">⛶</button>
+</nav>
+
+<script id="carga-datos" type="application/json">/*__DATOS__*/</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById("carga-datos").textContent);
+  const $ = (id) => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+  const fmt = (x, d = 0) => Number(x).toLocaleString("es-MX", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const pct = (x, d = 0) => fmt(100 * x, d) + " %";
+  const pfmt = (p) => (p < 0.001 ? "< 0.001" : fmt(p, 3));
+  const fecha = (s) => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("es-MX", { day: "numeric", month: "short", year: "numeric" }); };
+  const anio = (s) => s.slice(0, 4);
+  const css = (v) => `var(--${v})`;
+  const PRED = D.prediccion.final;
+  const MED = D.distribucion.mediana_teorica;
+
+  // ---------- utilidades SVG ----------
+  function el(tag, attrs = {}, parent) {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function txt(parent, x, y, s, attrs = {}) { const t = el("text", { x, y, ...attrs }, parent); t.textContent = s; return t; }
+  const lin = (d0, d1, r0, r1) => (v) => r0 + ((v - d0) / (d1 - d0)) * (r1 - r0);
+  function frame(svg, { l = 46, r = 16, t = 14, b = 34 } = {}) {
+    const [, , W, H] = svg.getAttribute("viewBox").split(" ").map(Number);
+    svg.innerHTML = "";
+    return { W, H, l, r, t, b, x0: l, x1: W - r, y0: H - b, y1: t };
+  }
+  function yAxis(svg, f, y, ticks, fmtT = (v) => v) {
+    for (const v of ticks) {
+      el("line", { x1: f.x0, x2: f.x1, y1: y(v), y2: y(v), class: "axis", "stroke-dasharray": "2 4" }, svg);
+      txt(svg, f.x0 - 6, y(v) + 4, fmtT(v), { "text-anchor": "end" });
+    }
+  }
+  function xTicks(svg, f, x, ticks, fmtT = (v) => v) {
+    el("line", { x1: f.x0, x2: f.x1, y1: f.y0, y2: f.y0, class: "axis" }, svg);
+    for (const v of ticks) txt(svg, x(v), f.y0 + 18, fmtT(v), { "text-anchor": "middle" });
+  }
+  function pathLen(p) { try { return Math.ceil(p.getTotalLength()); } catch { return 1200; } }
+  function line(svg, pts, attrs) {
+    const p = el("path", { d: "M" + pts.map((q) => q.join(",")).join("L"), fill: "none", class: "ln", ...attrs }, svg);
+    p.style.setProperty("--len", pathLen(p));
+    return p;
+  }
+  const niceTicks = (a, b, n) => { const step = Math.pow(10, Math.floor(Math.log10((b - a) / n))); const m = [1, 2, 5, 10].find((k) => (b - a) / (k * step) <= n) * step; const out = []; for (let v = Math.ceil(a / m) * m; v <= b + 1e-9; v += m) out.push(+v.toFixed(6)); return out; };
+
+  // ---------- bolas ----------
+  function ball(n, { r1 = false, cls = "" } = {}) {
+    const b = document.createElement("div");
+    b.className = `ball ${cls} ${r1 ? "r1" : ""}`;
+    b.textContent = n;
+    return b;
+  }
+  function drawBalls(nums, cls = "small") {
+    const box = document.createElement("div");
+    box.className = "balls";
+    const min = Math.min(...nums);
+    for (const n of [...nums].sort((a, b) => a - b)) box.appendChild(ball(n, { r1: n === min, cls }));
+    return box;
+  }
+
+  // ---------- 1. Portada: seis bolas salen en desorden, se ordenan y la menor se vuelve R1 ----------
+  const ult = D.datos.ultimos[D.datos.ultimos.length - 1];
+  const ultFecha = D.datos.ultimas_fechas[D.datos.ultimas_fechas.length - 1];
+  const nat = ["R1", "R2", "R3", "R4", "R5", "R6"].map((k) => ult[k]);
+  const hero = $("heroBalls");
+  const ordenSalida = [3, 0, 5, 1, 4, 2].map((i) => nat[i]);   // un orden de salida ilustrativo
+  const heroBallEls = ordenSalida.map((n) => hero.appendChild(ball(n)));
+  $("heroCaption").textContent = `Sorteo ${fmt(ult.CONCURSO)} (${fecha(ultFecha)}). R1 es la más chica de las seis.`;
+  $("heroMeta1").textContent = `${fmt(D.datos.era_n)} sorteos con las reglas actuales`;
+  $("spoiler").innerHTML = D.prueba.gana
+    ? `<b>Spoiler:</b> una red sí logró ganarle a enviar siempre ${MED}. Les mostramos cómo y por cuánto.`
+    : `<b>Spoiler:</b> ninguna red le gana a enviar siempre ${MED} más allá de la suerte. Les mostramos por qué.`;
+  $("heroMeta2").textContent = `${D.busqueda.n_configs} configuraciones de redes neuronales`;
+  function heroSequence() {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const sorted = [...heroBallEls].sort((a, b) => +a.textContent - +b.textContent);
+    if (reduce) { sorted.forEach((b) => hero.appendChild(b)); sorted[0].classList.add("r1"); return; }
+    heroBallEls.forEach((b) => { b.classList.remove("r1"); b.style.transform = ""; hero.appendChild(b); });   // vuelven al orden de salida
+    heroBallEls.forEach((b, i) => b.animate([{ transform: "translateY(-60px) scale(.3)", opacity: 0 }, { transform: "none", opacity: 1 }],
+      { duration: 520, delay: 180 * i, easing: "cubic-bezier(.2,.9,.3,1.25)", fill: "backwards" }));
+    setTimeout(() => {   // FLIP: medir, reordenar, animar hacia la nueva posición
+      const z = parseFloat(hero.closest(".wrap").style.zoom) || 1;   // con zoom, getBoundingClientRect mide en pixeles ya reducidos
+      const before = new Map(heroBallEls.map((b) => [b, b.getBoundingClientRect().left]));
+      sorted.forEach((b) => hero.appendChild(b));
+      sorted.forEach((b) => { const dx = (before.get(b) - b.getBoundingClientRect().left) / z; b.animate([{ transform: `translateX(${dx}px)` }, { transform: "none" }], { duration: 700, easing: "cubic-bezier(.3,.8,.3,1)" }); });
+      setTimeout(() => sorted[0].classList.add("r1"), 650);
+    }, 180 * 6 + 600);
+  }
+  // Estado en reposo: ya ordenadas, con R1 marcada (lo que ve una miniatura o un lector rápido)
+  [...heroBallEls].sort((a, b) => +a.textContent - +b.textContent).forEach((b) => hero.appendChild(b));
+  hero.firstChild.classList.add("r1");
+
+  // ---------- 3. Los datos: últimos sorteos y cuántos usamos ----------
+  const ultBox = $("ultimos");
+  D.datos.ultimos.slice(-5).reverse().forEach((r, i) => {
+    const row = document.createElement("div");
+    row.className = "draw-row rise";
+    row.style.setProperty("--i", i);
+    row.innerHTML = `<span class="num">${fecha(D.datos.ultimas_fechas[D.datos.ultimas_fechas.length - 1 - i])}</span>`;
+    row.appendChild(drawBalls(["R1", "R2", "R3", "R4", "R5", "R6"].map((k) => r[k])));
+    const g = document.createElement("span"); g.className = "grade hl"; g.textContent = `R1 = ${r.R1}`; row.appendChild(g);
+    ultBox.appendChild(row);
+  });
+  // "Mesetas": máximos que se sostuvieron 100 sorteos o más. Los saltos 36 → 38 → 39 de los primeros sorteos de 1984
+  // son azar (todavía no había salido el número más alto), no cambios de reglas.
+  const cf = D.datos.cambios_formato;
+  const mesetas = cf.filter((c, i) => (cf[i + 1] ? cf[i + 1].concurso : D.datos.ultimo_concurso + 1) - c.concurso >= 100);
+  $("datosFacts").innerHTML = `
+    <div class="fact accent"><span class="big num">${fmt(D.datos.era_n)}</span><small>sorteos con las reglas actuales (6 de 56, desde ${fecha(D.datos.era_inicio_fecha)}). Son los que usamos.</small></div>
+    <div class="fact"><span class="big num">${fmt(D.datos.n_sorteos)}</span><small>en el histórico desde ${anio(D.datos.primera_fecha)}; antes se jugaba con menos números (el universo creció de ${mesetas[0].maximo} a ${mesetas[mesetas.length - 1].maximo})</small></div>`;
+
+  // ---------- 4. Qué número conviene: curva de calificación + control deslizante ----------
+  const dist = D.distribucion;
+  const curva = dist.curva_calificacion;
+  const ccMax = Math.max(...curva.map((c) => c.teorica));
+  const pico = curva.reduce((a, c) => (c.teorica > a.teorica ? c : a));
+  $("medTitulo").textContent = `Enviar ${pico.prediccion} da la calificación esperada más alta: es la mediana de R1`;
+  $("curvaCaption").textContent = `Línea: calificación esperada con la fórmula exacta, P(R1 = k) = C(56−k, 5) / C(56, 6). Puntos: lo que habría sacado cada número en los ${fmt(D.datos.era_n)} sorteos reales; ${dist.chi2_r1.p > 0.05 ? "coinciden" : "difieren"}. La mitad de las veces (${pct(dist.p_r1_hasta_mediana)}) R1 vale ${MED} o menos.`;
+  const svgC = $("chCurva");
+  let marker;
+  (function () {
+    const f = frame(svgC, { b: 52 });
+    const lo = Math.min(...curva.map((c) => c.teorica)) - 0.05;
+    const x = lin(1, 25, f.x0, f.x1), y = lin(lo, ccMax + 0.08, f.y0, f.y1);
+    svgC._x = x; svgC._y = y;
+    yAxis(svgC, f, y, niceTicks(lo, ccMax + 0.08, 5), (v) => fmt(v, 1));
+    xTicks(svgC, f, x, [1, 5, 10, 15, 20, 25]);
+    line(svgC, curva.map((c) => [x(c.prediccion), y(c.teorica)]), { stroke: css("theory"), "stroke-width": 3 });
+    curva.forEach((c, i) => el("circle", { cx: x(c.prediccion), cy: y(c.empirica), r: 3.2, fill: css("data"), class: "pp", style: `--i:${i * 3}` }, svgC));
+    txt(svgC, f.x1, f.y0 + 44, "predicción", { "text-anchor": "end" });
+    const mean = curva.reduce((a, c) => (Math.abs(c.prediccion - Math.round(dist.media_teorica)) < Math.abs(a.prediccion - Math.round(dist.media_teorica)) ? c : a));
+    // el promedio se anota debajo de la curva para no chocar con la etiqueta del máximo
+    el("line", { x1: x(mean.prediccion), x2: x(mean.prediccion), y1: y(mean.teorica) + 8, y2: y(mean.teorica) + 34, stroke: css("muted") }, svgC);
+    txt(svgC, x(mean.prediccion) + 6, y(mean.teorica) + 50, `promedio ≈ ${fmt(dist.media_teorica, 1)}`, { "text-anchor": "start" });   // a la derecha: no lo tapa la línea del control en 6
+    txt(svgC, x(pico.prediccion), y(pico.teorica) - 16, `máximo: ${pico.prediccion} → ${fmt(pico.teorica, 2)}`, { "text-anchor": "middle", class: "t-ink" });
+    txt(svgC, f.x1, f.y1 + 14, "calificación esperada por sorteo", { "text-anchor": "end" });
+    marker = el("g", {}, svgC);
+    el("line", { y1: f.y1, y2: f.y0, stroke: css("ball"), "stroke-width": 1.5, "stroke-dasharray": "4 4" }, marker);
+    el("circle", { r: 7, fill: css("ball"), stroke: css("panel"), "stroke-width": 2 }, marker);
+  })();
+  function setPred(v) {
+    const c = curva.find((q) => q.prediccion === v);
+    $("predOut").textContent = v;
+    $("predCal").textContent = fmt(c.teorica, 2);
+    const g = marker; const x = svgC._x(v), y = svgC._y(c.teorica);
+    g.children[0].setAttribute("x1", x); g.children[0].setAttribute("x2", x);
+    g.children[1].setAttribute("cx", x); g.children[1].setAttribute("cy", y);
+    $("predTxt").textContent = v === pico.prediccion
+      ? `${v} es el máximo: ningún otro número espera más de ${fmt(pico.teorica, 2)} por sorteo.`
+      : `Enviar ${v} cuesta ${fmt(pico.teorica - c.teorica, 2)} puntos por sorteo frente a ${pico.prediccion}.`;
+  }
+  $("defSiempre").innerHTML = `De aquí en adelante llamamos <b>"siempre ${MED}"</b> a enviar ${MED} sin ningún modelo: es la vara contra la que medimos cada red.`;
+  const predInicial = pico.prediccion;   // en reposo muestra la respuesta; quien presenta lo mueve para comparar
+  $("pred").value = predInicial; setPred(predInicial);
+  $("pred").addEventListener("input", (e) => setPred(+e.target.value));
+
+  const N_BOLAS = 56;
+  // ---------- 7. Memoria ----------
+  const pr = D.pruebas;
+  const tests = [
+    ["¿Algún número sale más que otros?", pr.chi2_bolas.p, "chi-cuadrada sobre las 56 bolas", "No: ninguna sale más de lo que explica el azar."],
+    ["¿R1 se parece a los anteriores?", pr.ljung_box_p["20"], "Ljung-Box, 20 sorteos atrás", "No: conocer los anteriores no ayuda."],
+    ["¿Hay rachas de R1 altos o bajos?", pr.rachas.p, "prueba de rachas", "No: cambia como lo haría el azar."],
+    ["¿Un R1 bajo atrae otro bajo?", pr.independencia.p, "tabla de contingencia", "No: el siguiente no depende del anterior."],
+  ];
+  const sinMemoria = tests.every((t) => t[1] > 0.05);
+  $("memTitulo").textContent = sinMemoria ? "Cuatro pruebas, ninguna encuentra memoria" : "Cuatro pruebas de memoria";
+  tests.forEach(([pregunta, p, como, si], i) => {
+    const d = document.createElement("div"); d.className = "test rise"; d.style.setProperty("--i", i);
+    d.innerHTML = `<span class="q">${pregunta}</span><span class="p">p = ${pfmt(p)}</span>` +
+      `<span class="verdict"><b>${p > 0.05 ? si : "Sí: el resultado es raro para puro azar."}</b> <small>(${como})</small></span>`;
+    $("tests").appendChild(d);
+  });
+  (function () {
+    const svg = $("chAcf"); const f = frame(svg, { l: 58, b: 44, t: 26 });
+    const m = Math.max(0.08, ...pr.acf.map(Math.abs)) * 1.15;
+    const x = lin(0.5, 20.5, f.x0, f.x1), y = lin(-m, m, f.y0, f.y1);
+    el("rect", { x: f.x0, y: y(pr.banda), width: f.x1 - f.x0, height: y(-pr.banda) - y(pr.banda), fill: css("theory"), opacity: 0.2 }, svg);
+    yAxis(svg, f, y, [-0.06, -0.03, 0, 0.03, 0.06].filter((v) => Math.abs(v) < m), (v) => fmt(v, 2));
+    xTicks(svg, f, x, [1, 5, 10, 15, 20]);
+    txt(svg, f.x0 - 50, f.y1 - 10, "parecido con sorteos anteriores", {});
+    txt(svg, f.x1, f.y0 + 36, "sorteos atrás", { "text-anchor": "end" });
+    txt(svg, f.x1 - 4, y(pr.banda) - 6, "zona del puro azar", { "text-anchor": "end", class: "t-ink" });
+    const bw = (f.x1 - f.x0) / 20 * 0.55;
+    pr.acf.forEach((a, i) => el("rect", { x: x(i + 1) - bw / 2, y: Math.min(y(a), y(0)), width: bw, height: Math.abs(y(a) - y(0)), fill: Math.abs(a) > pr.banda ? css("bad") : css("data"), rx: 2, class: "gy", style: `--i:${i * 3}` }, svg));
+    $("acfCap").textContent = `Cada barra: qué tanto se parece R1 al de 1 a 20 sorteos atrás. La franja verde es lo que produce el puro azar. ` +
+      (pr.acf_fuera === 0 ? "Ninguna barra sale de ella." : `Salen ${pr.acf_fuera} de 20; por azar se espera alrededor de 1.`);
+  })();
+
+  // Nombre legible de un método de la tabla, p. ej. "CNN-Clasif. k=20 (#133)" -> "CNN · probabilidades · 20 sorteos (#133)"
+  function etiqueta(metodo) {
+    const s = metodo.replace("Campeón: ", "");
+    const m = s.match(/^(\w+)-(Clasif\.|L1|MSE) k=(\d+)( \(#\d+\))?$/);
+    if (m) return `${m[1]} · ${m[2] === "Clasif." ? "probabilidades" : m[2]} · ${m[3]} sorteos${m[4] || ""}`;
+    if (s.startsWith("Ensamble")) return "Combinación de las 5 mejores redes";
+    if (s.startsWith("Constante")) return `Siempre ${MED} (sin modelo)`;
+    return s;
+  }
+  const nombreRed = (r) => `${r.familia} · ${r.perdida === "clase" ? "probabilidades" : r.perdida.toUpperCase()} · ${r.ventana} sorteos`;
+
+  // ---------- 8. Modelos ----------
+  $("zooTitulo").textContent = `Probamos 5 familias de redes y ${D.busqueda.n_configs} configuraciones`;
+
+  // ---------- 9 y 13. Arquitectura y curvas: una pestaña por red finalista ----------
+  const redes = D.redes.finalistas;
+  let redActual = 0;
+  function pestañas(caja, alElegir) {
+    redes.forEach((r, i) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.setAttribute("role", "tab");
+      b.textContent = `${r.campeon ? "★ " : ""}${nombreRed(r)}`;
+      b.addEventListener("click", () => alElegir(i));
+      caja.appendChild(b);
+    });
+  }
+  function elegirRed(i) {
+    redActual = i;
+    [...$("tabsArq").children].forEach((b, j) => { b.setAttribute("aria-selected", j === i); b.classList.toggle("on", j === i); });
+    $("selCurva").value = i;
+    dibujarArquitectura(redes[i]);
+    dibujarCurva(redes[i]);
+  }
+  function dibujarArquitectura(r) {
+    const svg = $("chArq"); const f = frame(svg, { l: 30, r: 30, t: 30, b: 78 });
+    const capas = r.capas_red, n = capas.length, MAXV = 10;
+    const xc = (i) => f.x0 + (i + 0.5) * (f.x1 - f.x0) / n;
+    const pos = capas.map((c, i) => {
+      const v = Math.min(c.unidades, MAXV), gap = Math.min(24, (f.y0 - f.y1) / (v + 1)), y0 = (f.y0 + f.y1) / 2 - gap * (v - 1) / 2;
+      return Array.from({ length: v }, (_, j) => [xc(i), y0 + j * gap]);
+    });
+    const conexiones = el("g", { class: "fade" }, svg);
+    for (let i = 0; i < n - 1; i++)
+      for (const [x1, y1] of pos[i]) for (const [x2, y2] of pos[i + 1])
+        el("line", { x1, y1, x2, y2, stroke: css("muted"), "stroke-width": 1, opacity: 0.45 }, conexiones);
+    capas.forEach((c, i) => {
+      const color = { entrada: "data", salida: "ball", resumen: "muted" }[c.tipo] || "net";
+      pos[i].forEach(([x, y], j) => {
+        const attrs = { fill: css(color), class: "pp", style: `--i:${i * 10 + j}` };
+        if (c.tipo === "entrada") el("rect", { x: x - 6, y: y - 6, width: 12, height: 12, rx: 2, ...attrs }, svg);
+        else if (c.tipo === "conv") el("rect", { x: x - 7, y: y - 7, width: 14, height: 14, rx: 3, ...attrs }, svg);
+        else if (c.tipo === "atencion") el("path", { d: `M${x},${y - 8} l8,8 l-8,8 l-8,-8 z`, ...attrs }, svg);
+        else el("circle", { cx: x, cy: y, r: 7, ...attrs }, svg);
+      });
+      if (c.tipo === "recurrente") {   // la flecha circular marca la memoria: la capa se vuelve a leer a sí misma
+        const [x, y] = pos[i][0];
+        el("path", { d: `M${x - 9},${y - 12} a 11 11 0 1 1 18 0`, fill: "none", stroke: css("net"), "stroke-width": 2 }, svg);
+        el("path", { d: `M${x + 9},${y - 12} l-1,-7 l6,4 z`, fill: css("net") }, svg);
+      }
+      const yb = f.y0 + 22;
+      txt(svg, xc(i), yb, c.nombre, { "text-anchor": "middle", class: "t-ink" });
+      txt(svg, xc(i), yb + 17, c.tipo === "entrada" ? `${fmt(c.unidades)} valores` : `${fmt(c.unidades)} ${c.tipo === "conv" ? "filtros" : "neuronas"}`, { "text-anchor": "middle" });
+      if (c.unidades > MAXV) txt(svg, xc(i), pos[i][pos[i].length - 1][1] + 22, "⋮", { "text-anchor": "middle" });
+      if (c.params) txt(svg, xc(i), yb + 34, `${fmt(c.params)} parámetros`, { "text-anchor": "middle" });
+    });
+    const chips = [["Parámetros", fmt(r.parametros)], ["Ve", `${r.ventana} sorteos`], ["Responde", r.perdida === "clase" ? "probabilidades" : "un número"],
+      ["Error al entrenar", r.perdida === "clase" ? "entropía cruzada" : r.perdida.toUpperCase()], ["Dropout", pct(r.dropout)],
+      ["Velocidad de aprendizaje", r.lr], ["Penalización de pesos", r.weight_decay], ["Se quedó con la época", `${r.mejor_epoca} (entrenó ${r.epocas})`]];
+    $("arqChips").innerHTML = chips.map(([k, v]) => `<span><small>${k}</small><b>${v}</b></span>`).join("");
+    // los parámetros por capa ya están en el diagrama; aquí solo qué hace cada capa
+    $("arqCapas").innerHTML = r.capas_red.map((c) => `<li><b>${c.nombre}:</b> ${c.detalle.replace("R1..R6", "R1 a R6")}</li>`).join("");
+    svgPlay(svg);
+  }
+  function curvaEn(svg, curva, { escala = 1, unidad, paro, titulo }) {
+    const f = frame(svg, { l: 54, b: 54, t: 34 });
+    const ent = curva.map((h) => h[0] * escala), val = curva.map((h) => h[1] * escala);
+    const lo = Math.min(...ent, ...val), hi = Math.max(...ent, ...val), pad = (hi - lo) * 0.08;
+    const x = lin(1, curva.length, f.x0, f.x1), y = lin(Math.max(0, lo - pad), hi + pad, f.y0, f.y1);
+    yAxis(svg, f, y, niceTicks(Math.max(0, lo - pad), hi + pad, 5), (v) => fmt(v, hi < 1 ? 3 : hi < 10 ? 2 : 1));
+    xTicks(svg, f, x, niceTicks(1, curva.length, 6).filter((v) => v >= 1));
+    el("rect", { x: x(paro), y: f.y1, width: Math.max(0, f.x1 - x(paro)), height: f.y0 - f.y1, fill: css("muted"), opacity: 0.08 }, svg);
+    el("line", { x1: x(paro), x2: x(paro), y1: f.y1, y2: f.y0, stroke: css("theory"), "stroke-width": 2, "stroke-dasharray": "5 4" }, svg);
+    const cercaDerecha = x(paro) > f.x1 - 260;   // la etiqueta no debe salirse por la derecha
+    txt(svg, cercaDerecha ? x(paro) - 6 : x(paro) + 6, f.y1 + 28, titulo, { class: "t-ink", "text-anchor": cercaDerecha ? "end" : "start" });
+    line(svg, ent.map((v, i) => [x(i + 1), y(v)]), { stroke: css("muted"), "stroke-width": 2.5 });
+    line(svg, val.map((v, i) => [x(i + 1), y(v)]), { stroke: css("net"), "stroke-width": 3 });
+    txt(svg, f.x0 - 44, f.y1 - 14, unidad, {});
+    txt(svg, f.x1, f.y0 + 46, "época (pasada completa por los sorteos de entrenamiento)", { "text-anchor": "end" });
+  }
+  function dibujarCurva(r) {
+    curvaEn($("chCurva2"), r.curva, {
+      escala: r.perdida === "clase" ? 1 : N_BOLAS,
+      unidad: r.perdida === "clase" ? "error (entropía cruzada)" : "error promedio (números)",
+      paro: r.mejor_epoca, titulo: `se queda con la época ${r.mejor_epoca}`,
+    });
+    const pac = r.epocas - r.mejor_epoca;
+    $("curvaCap").textContent = `${r.campeon ? "El campeón" : "Esta red"} dejó de mejorar en la época ${r.mejor_epoca}, esperó ${pac} más y se detuvo con lo aprendido en la ${r.mejor_epoca}. ` +
+      cierreCurva(r);
+    svgPlay($("chCurva2"));
+  }
+  // La frase final depende de la red: no todas terminan con las dos curvas pegadas
+  function cierreCurva(r) {
+    const [e, v] = r.curva[r.mejor_epoca - 1];
+    const brecha = (v - e) / v;
+    return brecha < 0.05
+      ? "Ahí las dos curvas siguen casi pegadas: memorizó muy poco."
+      : `Ahí su error con sorteos nuevos ya era ${pct(brecha)} mayor que con los que vio: empezaba a memorizar.`;
+  }
+  // Repite la animación de una diapositiva al cambiar de red, pero solo si ya se vio: no anima nada fuera de pantalla.
+  function svgPlay(svg) {
+    const s = svg.closest(".slide");
+    if (!s.dataset.visto) return;
+    s.classList.remove("play"); void svg.getBoundingClientRect(); s.classList.add("play");
+  }
+  const redCampeona = redes.find((r) => r.campeon) || redes[0];
+  $("arqTitulo").textContent = `Por dentro: el campeón es una ${redCampeona.familia} de ${fmt(redCampeona.parametros)} parámetros`;
+  pestañas($("tabsArq"), elegirRed);
+  $("selCurva").innerHTML = redes.map((r, i) => `<option value="${i}">${r.campeon ? "★ " : ""}${nombreRed(r)}</option>`).join("");
+  $("selCurva").addEventListener("change", (e) => elegirRed(+e.target.value));
+  elegirRed(0);
+  (function () {
+    const s = D.redes.sobreentrenada;
+    curvaEn($("chSobre"), s.curva, { escala: N_BOLAS, unidad: "error promedio (números)", paro: s.mejor_epoca,
+      titulo: `aquí la habría detenido el early stopping (época ${s.mejor_epoca})` });
+    $("sobreCap").textContent = `Contraejemplo a propósito: ${fmt(s.parametros)} parámetros, sin dropout ni early stopping, ${s.epocas} épocas. ` +
+      `Con lo que ya vio, su error baja de ${fmt(s.error_entreno_inicio, 1)} a ${fmt(s.error_entreno_fin, 2)} números (memorizó); con sorteos nuevos empeora de ${fmt(s.error_val_mejor, 2)} (época ${s.mejor_epoca}) a ${fmt(s.error_val_fin, 2)}.`;
+  })();
+
+  // ---------- 10. Protocolo ----------
+  $("protoTitulo").textContent = `Con ${D.busqueda.n_configs} intentos, alguno le gana a "siempre ${MED}" por pura suerte`;
+  const anterior = D.prueba.corrida_anterior;
+  const conSigno = (v) => (v >= 0 ? "+" : "−") + fmt(Math.abs(v), 3);
+  $("paso3").innerHTML = `<b>Confirmar en un examen final</b> de ${fmt(D.prueba.n)} sorteos que no se usó para elegir` +
+    (anterior ? ` (lo abrimos dos veces: al terminar la búsqueda de ${anterior.n_configs} configuraciones y la de ${D.busqueda.n_configs}; el campeón quedó en ${conSigno(anterior.dif_vs_ref)} y ${conSigno(D.prueba.campeon.dif_vs_ref)})` : "") + ".";
+  $("paso4").innerHTML = `<b>Regla fijada antes:</b> enviar el número del campeón solo si le gana a "siempre ${MED}" más allá de la suerte; si no, enviar ${MED}.`;
+  $("protoPlain").innerHTML = `Como ${D.busqueda.n_configs} alumnos que presentan el mismo examen de práctica: alguno saca la mejor nota por suerte. Por eso el examen que cuenta debe ser uno que <b>nadie vio</b>.`;
+  (function () {
+    const bq = D.busqueda, pu = D.prueba;
+    const t = (s) => new Date(s).getTime();
+    const a = t(D.datos.era_inicio_fecha), b = t(bq.validacion_desde), c = t(pu.desde), d = t(pu.hasta);
+    const seg = [["Estudio · entrenamiento", b - a, "data"], ["Exámenes de práctica · validación", c - b, "muted"], ["Examen final · prueba", d - c, "ink"]];
+    $("tlBar").innerHTML = seg.map(([n, w, col], i) => `<div class="gx" style="flex:${w};background:var(--${col});--i:${i}">${n}</div>`).join("");
+    // cada fecha va en la frontera real de su tramo (porcentaje del tiempo total)
+    $("tlDates").innerHTML = [[D.datos.era_inicio_fecha, a], [bq.validacion_desde, b], [pu.desde, c], [pu.hasta, d]]
+      .map(([s, v]) => `<span style="left:${(100 * (v - a) / (d - a)).toFixed(2)}%">${fecha(s)}</span>`).join("");
+  })();
+
+  // ---------- 11. Búsqueda ----------
+  (function () {
+    const bq = D.busqueda, pts = bq.puntos;
+    $("busqTitulo").textContent = `${bq.le_ganan_en_validacion} de ${bq.n_configs} configuraciones le ganan a "siempre ${bq.constante}" en los exámenes de práctica`;
+    const svg = $("chBusq"); const f = frame(svg, { l: 150, b: 52 });
+    const vals = pts.map((p) => p.calificacion).concat([bq.ref_validacion]);
+    const lo = Math.min(...vals) - 0.01, hi = Math.max(...vals) + 0.01;
+    const x = lin(lo, hi, f.x0, f.x1);
+    const filas = [["l1", "L1 (distancia)", "net"], ["clase", "Probabilidades", "net"], ["mse", "MSE (cuadrado)", "bad"]];
+    const y = (i) => f.y1 + (i + 0.5) * (f.y0 - f.y1) / 3;
+    xTicks(svg, f, x, niceTicks(lo, hi, 6), (v) => fmt(v, 2));
+    const puntos = el("g", { class: "fade" }, svg);   // cientos de puntos: una sola animación para el grupo
+    filas.forEach(([key, lab, col], i) => {
+      txt(svg, f.x0 - 12, y(i) + 4, lab, { "text-anchor": "end", class: "t-ink" });
+      el("line", { x1: f.x0, x2: f.x1, y1: y(i), y2: y(i), class: "axis", "stroke-dasharray": "2 5" }, svg);
+      pts.filter((p) => p.perdida === key).forEach((p, j) => {
+        const jit = (((j * 7919) % 97) / 97 - 0.5) * (f.y0 - f.y1) / 4.2;
+        // las de MSE van huecas: el rojo se confundía con el naranja del campeón en el proyector
+        el("circle", key === "mse"
+          ? { cx: x(p.calificacion), cy: y(i) + jit, r: 5, fill: "none", stroke: css("net"), "stroke-width": 2 }
+          : { cx: x(p.calificacion), cy: y(i) + jit, r: 5, fill: css(col), opacity: 0.75 }, puntos);
+      });
+    });
+    el("line", { x1: x(bq.ref_validacion), x2: x(bq.ref_validacion), y1: f.y1 - 4, y2: f.y0, stroke: css("theory"), "stroke-width": 2.5 }, svg);
+    txt(svg, x(bq.ref_validacion) - 8, f.y1 + 8, `siempre ${bq.constante}: ${fmt(bq.ref_validacion, 3)}`, { class: "t-ink", "text-anchor": "end" });
+    txt(svg, f.x1, f.y0 + 46, "calificación promedio en los exámenes de práctica →  mejor", { "text-anchor": "end" });
+    const best = Math.max(...pts.map((p) => p.calificacion));
+    $("busqCap").textContent = `Cada punto es una configuración calificada en ${fmt(bq.n_validacion)} sorteos de práctica; más a la derecha, mejor. ` +
+      `Las de probabilidades se amontonan sobre "siempre ${bq.constante}"; las de L1 quedan un poco atrás y las de MSE, más atrás. La mejor le gana por ${fmt(best - bq.ref_validacion, 3)}: ¿talento o suerte? Lo decide el examen final.`;
+  })();
+
+  // ---------- 10. Qué aprendieron: datos clave arriba de la gráfica de lo real contra lo predicho ----------
+  (function () {
+    const dl = D.prueba.tabla.filter((r) => r.tipo === "Deep Learning");
+    const enMediana = dl.filter((r) => r.moda === MED).length;
+    const camp = D.prueba.campeon, real = D.prueba.serie.real;
+    $("aprFacts").innerHTML = `
+      <div class="fact accent"><span class="big num">${pct(camp.pct_moda)}</span><small>de los ${fmt(D.prueba.n)} sorteos del examen final el campeón respondió ${camp.moda}</small></div>
+      <div class="fact net"><span class="big num">${enMediana} de ${dl.length}</span><small>finalistas de Deep Learning (incluida la combinación) respondieron ${MED} más que cualquier otro número</small></div>
+      <div class="fact data"><span class="big num">${Math.min(...real)}–${Math.max(...real)}</span><small>rango del R1 real en los ${real.length} sorteos de la gráfica</small></div>`;
+  })();
+
+  // ---------- 14. Ventaja en sorteos vistos contra no vistos ----------
+  (function () {
+    const R = D.redes, rows = R.finalistas;
+    const maxEnt = R.max_ventaja_entreno;
+    $("memoTitulo").textContent = maxEnt < 0.05 ? "Las redes casi no memorizaron" : "Algunas redes memorizaron";
+    $("memoPlain").innerHTML = `Una red que memoriza le gana mucho más a "siempre ${D.busqueda.constante}" con los sorteos que ya vio que con los nuevos. Comparamos <b>dentro de cada periodo</b>, porque hasta "siempre ${D.busqueda.constante}" califica distinto en los dos (${fmt(R.constante_entreno, 3)} contra ${fmt(R.constante_no_vistos, 3)}).`;
+    const svg = $("chMemo");
+    svg.setAttribute("viewBox", `0 0 960 ${rows.length * 32 + 70}`);
+    const f = frame(svg, { l: 420, r: 30, t: 14, b: 44 });
+    const vals = rows.flatMap((r) => [r.ventaja_entreno, r.ventaja_no_vistos]);
+    const lo = Math.min(-0.03, ...vals) - 0.01, hi = Math.max(0.03, ...vals) + 0.01;
+    const x = lin(lo, hi, f.x0, f.x1), y = (i) => f.y1 + (i + 0.5) * (f.y0 - f.y1) / rows.length;
+    xTicks(svg, f, x, niceTicks(lo, hi, 6), (v) => (Math.abs(v) < 1e-9 ? "0" : (v > 0 ? "+" : "−") + fmt(Math.abs(v), 2)));
+    el("line", { x1: x(0), x2: x(0), y1: f.y1, y2: f.y0, stroke: css("theory"), "stroke-width": 2 }, svg);
+    rows.forEach((r, i) => {
+      if (r.campeon) el("rect", { x: 0, y: y(i) - 14, width: f.W, height: 28, fill: css("ball"), opacity: 0.1 }, svg);   // la misma banda que en el examen final
+      txt(svg, f.x0 - 12, y(i) + 4, `${r.campeon ? "★ " : ""}${nombreRed(r)}`, { "text-anchor": "end", class: r.campeon ? "t-ink" : "" });
+      el("line", { x1: x(r.ventaja_entreno), x2: x(r.ventaja_no_vistos), y1: y(i), y2: y(i), stroke: css("line"), "stroke-width": 4 }, svg);
+      el("circle", { cx: x(r.ventaja_entreno), cy: y(i), r: 6.5, fill: css("muted"), class: "pp", style: `--i:${i * 5}` }, svg);
+      el("circle", { cx: x(r.ventaja_no_vistos), cy: y(i), r: 6.5, fill: css("net"), class: "pp", style: `--i:${i * 5 + 2}` }, svg);
+    });
+    txt(svg, f.x1, f.y0 + 34, `puntos por sorteo arriba (+) o abajo (−) de "siempre ${D.busqueda.constante}", mismo periodo`, { "text-anchor": "end" });
+    const sinMse = rows.filter((r) => r.perdida !== "mse");
+    const maxNo = Math.max(...sinMse.map((r) => r.ventaja_no_vistos));
+    $("memoCap").textContent = `Con lo que ya vieron, la ventaja máxima fue ${fmt(maxEnt, 3)} puntos por sorteo: casi no memorizaron. Con sorteos nuevos quedan pegadas al cero (la mejor, ${maxNo >= 0 ? "+" : "−"}${fmt(Math.abs(maxNo), 3)}). La red de MSE queda abajo en ambos porque apunta al promedio.`;
+  })();
+
+  // ---------- 15. Prueba final: diferencia contra "siempre 6" con IC ----------
+  (function () {
+    const pu = D.prueba;
+    const camp = pu.campeon;
+    // Menos renglones que la tabla completa: el campeón, la mejor otra red, la combinación y la red de MSE, más los
+    // métodos sin redes. "Mediana histórica" se omite porque predice lo mismo que "siempre 6" (sale idéntica).
+    const esDL = (r) => r.tipo === "Deep Learning";
+    const otraRed = pu.tabla.find((r) => esDL(r) && r.metodo !== camp.metodo && !r.metodo.startsWith("Ensamble") && !/-MSE /.test(r.metodo));
+    const rows = pu.tabla.filter((r) => r.metodo === camp.metodo || r === otraRed
+      || (esDL(r) && (r.metodo.startsWith("Ensamble") || /-MSE /.test(r.metodo)))
+      || (!esDL(r) && !["Mediana histórica", "Mediana últimos 50"].includes(r.metodo)));
+    const signo = (v) => (v >= 0 ? "+" : "−") + fmt(Math.abs(v), 3);
+    const siempre = `"siempre ${D.busqueda.constante}"`;
+    $("pruTitulo").textContent = pu.gana
+      ? `En el examen final, el campeón le gana a ${siempre}`
+      : `En el examen final, el campeón no se distingue de ${siempre}`;
+    const svg = $("chPrueba");
+    svg.setAttribute("viewBox", `0 0 960 ${rows.length * 24 + 80}`);
+    const f = frame(svg, { l: 430, r: 110, t: 34, b: 40 });
+    // El eje se corta en CORTE: un método mucho peor (p. ej. "Último R1") aplastaría a todos los demás.
+    const CORTE = -0.16;
+    const lo = Math.max(CORTE, Math.min(...rows.map((r) => r.ic_bajo)) - 0.01), hi = Math.max(...rows.map((r) => r.ic_alto)) + 0.01;
+    const x = (v) => lin(lo, hi, f.x0, f.x1)(Math.max(lo, v));
+    const y = (i) => f.y1 + (i + 0.5) * (f.y0 - f.y1) / rows.length;
+    xTicks(svg, f, x, niceTicks(lo, hi, 6), (v) => (Math.abs(v) < 1e-9 ? "0" : (v > 0 ? "+" : "−") + fmt(Math.abs(v), 2)));
+    el("line", { x1: x(0), x2: x(0), y1: f.y1, y2: f.y0, stroke: css("theory"), "stroke-width": 2 }, svg);
+    txt(svg, f.x1 + 100, f.y1 - 14, "calificación", { "text-anchor": "end" });
+    rows.forEach((r, i) => {
+      const isC = r === camp || r.metodo === camp.metodo;
+      const col = isC ? "ball" : r.tipo === "Deep Learning" ? "net" : r.metodo.startsWith("Constante") ? "theory" : "muted";
+      if (isC) el("rect", { x: 0, y: y(i) - 12, width: f.W, height: 24, fill: css("ball"), opacity: 0.1 }, svg);
+      txt(svg, f.x0 - 12, y(i) + 5, (isC ? "★ campeón: " : "") + etiqueta(r.metodo).replace(/ \(#\d+\)/, ""), { "text-anchor": "end", class: isC ? "t-ink" : "" });
+      el("line", { x1: x(r.ic_bajo), x2: x(r.ic_alto), y1: y(i), y2: y(i), stroke: css(col), "stroke-width": 2.5, class: "gx", style: `--i:${i}` }, svg);
+      if (r.dif_vs_ref < lo) {
+        el("path", { d: `M${f.x0 + 2},${y(i)} l10,-6 v12 z`, fill: css(col) }, svg);
+        txt(svg, f.x0 + 18, y(i) + 4, `fuera de la gráfica: ${fmt(r.dif_vs_ref, 2)}`, {});
+      } else {
+        el("circle", { cx: x(r.dif_vs_ref), cy: y(i), r: 5.5, fill: css(col), class: "pp", style: `--i:${i * 6}` }, svg);
+      }
+      txt(svg, f.x1 + 100, y(i) + 4, fmt(r.calificacion, 3), { "text-anchor": "end", class: isC ? "t-ink" : "" });
+    });
+    txt(svg, f.x1, f.y0 + 34, `puntos por sorteo arriba (+) o abajo (−) de "siempre ${D.busqueda.constante}"`, { "text-anchor": "end" });
+    const enVal = camp.validacion - D.busqueda.ref_validacion;
+    $("pruFacts").innerHTML = `
+      <div class="fact accent rise" style="--i:0"><span class="big num">${signo(enVal)}</span><small>ventaja del campeón en los exámenes de práctica, donde se eligió entre ${D.busqueda.n_configs}</small></div>
+      <div class="fact accent rise" style="--i:1"><span class="big num">${signo(camp.dif_vs_ref)}</span><small>en el examen final: ${pu.gana ? "la ventaja se sostiene" : `la ventaja desapareció; se explica por haber elegido al mejor de ${D.busqueda.n_configs}`}</small></div>`;
+    const ant = pu.corrida_anterior;
+    const notaAnterior = ant ? ` En la búsqueda anterior (${ant.n_configs} configuraciones), su campeón, ${ant.campeon.includes("Ensamble") ? "la combinación de las 5 mejores redes" : etiqueta(ant.campeon).replace(/ \(#\d+\)/, "")}, quedó en ${signo(ant.dif_vs_ref)}.` : "";
+    $("pruCap").textContent = `${fmt(pu.n)} sorteos nuevos (${fecha(pu.desde)} a ${fecha(pu.hasta)}). Punto: ventaja por sorteo frente a "siempre ${D.busqueda.constante}". ` +
+      `Línea: su rango probable (intervalo de confianza de 95 %); si toca la vertical verde, no se distingue de "siempre ${D.busqueda.constante}".${notaAnterior}`;
+  })();
+
+  // ---------- 16. Serie ----------
+  (function () {
+    const s = D.prueba.serie, n = s.real.length;
+    const [cmin, cmax] = D.prueba.campeon.rango;
+    $("serieTitulo").textContent = D.prueba.campeon.moda === MED
+      ? `Las redes aprendieron a decir ${MED} la mayoría de las veces`
+      : `R1 salta entre ${Math.min(...s.real)} y ${Math.max(...s.real)}; el campeón se mueve entre ${cmin} y ${cmax}`;
+    const svg = $("chSerie"); const f = frame(svg, { b: 52 });
+    const ymax = Math.max(...s.real) + 2;
+    const x = lin(0, n - 1, f.x0, f.x1), y = lin(0, ymax, f.y0, f.y1);
+    yAxis(svg, f, y, niceTicks(0, ymax, 5));
+    xTicks(svg, f, x, [0, Math.round(n / 4), Math.round(n / 2), Math.round(3 * n / 4), n - 1], (v) => v + 1);
+    const reales = el("g", { class: "fade" }, svg);
+    s.real.forEach((v, i) => el("circle", { cx: x(i), cy: y(v), r: 3.6, fill: css("data"), opacity: 0.75 }, reales));
+    const step = (arr) => arr.flatMap((v, i) => [[x(Math.max(0, i - 0.5)), y(v)], [x(Math.min(n - 1, i + 0.5)), y(v)]]);
+    if (s["Mejor MSE"]) line(svg, step(s["Mejor MSE"]), { stroke: css("net"), "stroke-width": 2.5 });
+    line(svg, step(s["Campeón"]), { stroke: css("ball"), "stroke-width": 3 });
+    txt(svg, f.x1, f.y0 + 46, `últimos ${n} sorteos del examen final`, { "text-anchor": "end" });
+    $("serieCap").textContent = `Si hubiera un patrón, las líneas seguirían a los puntos. No lo hacen: no hay nada que perseguir, y quedarse cerca de ${MED} es lo que menos error deja. La red de MSE va más arriba porque apunta al promedio.`;
+  })();
+
+  // ---------- 17. Tres sorteos ----------
+  (function () {
+    const tr = D.tres_sorteos;
+    $("suerteTitulo").textContent = `Enviando ${tr.prediccion}, 8 de cada 10 veces la calificación final queda entre ${fmt(tr.p10, 1)} y ${fmt(tr.p90, 1)}`;
+    const h = [...tr.histograma].reverse();
+    const svg = $("chTres"); const f = frame(svg, { b: 40 });
+    const pmax = Math.max(...h.map((q) => q.prob)) * 1.12;
+    const x = lin(0, h.length, f.x0, f.x1), y = lin(0, pmax, f.y0, f.y1);
+    yAxis(svg, f, y, niceTicks(0, pmax, 4), (v) => fmt(v * 100) + " %");
+    el("line", { x1: f.x0, x2: f.x1, y1: f.y0, y2: f.y0, class: "axis" }, svg);
+    const bw = (f.x1 - f.x0) / h.length * 0.78;
+    h.forEach((q, i) => {
+      el("rect", { x: x(i + 0.5) - bw / 2, y: y(q.prob), width: bw, height: f.y0 - y(q.prob), fill: css("theory"), opacity: 0.85, rx: 2, class: "gy", style: `--i:${i * 4}` }, svg);
+      if (i % 2 === 1) txt(svg, x(i + 0.5), f.y0 + 16, fmt(q.hasta, 1), { "text-anchor": "middle" });
+    });
+    txt(svg, f.x1, f.y0 + 34, "calificación final (promedio de los 3 sorteos)", { "text-anchor": "end" });
+    $("tresCap").textContent = `Probabilidad exacta de cada calificación final enviando ${tr.prediccion}. Esperada: ${fmt(tr.esperada, 2)}; ${pct(tr.p_9_o_mas)} de las veces 9 o más y solo ${pct(tr.p_menos_de_7)} menos de 7. Esta variación no depende del método, sino de las bolas.`;
+    $("suerteTxt").textContent = `Sorteamos aquí tres Melates y calificamos el ${PRED}. Cada vez sale distinto: eso es la suerte.`;
+  })();
+  // Sorteos simulados: se etiquetan "Simulación", no con las fechas reales, para que no se confundan con el resultado.
+  function sortear(animar = true) {
+    const box = $("simDraws"); box.innerHTML = "";
+    const fechas = ["Simulación 1", "Simulación 2", "Simulación 3"], notas = [];
+    fechas.forEach((fch, i) => {
+      const bolas = []; while (bolas.length < 6) { const b = 1 + Math.floor(Math.random() * 56); if (!bolas.includes(b)) bolas.push(b); }
+      const r1 = Math.min(...bolas), nota = 10 - 0.3 * Math.abs(r1 - PRED); notas.push(nota);
+      const row = document.createElement("div"); row.className = "draw-row rise"; row.style.setProperty("--i", i);
+      row.innerHTML = `<span class="num">${fch}</span>`;
+      row.appendChild(drawBalls(bolas));
+      const g = document.createElement("span"); g.className = "grade"; g.textContent = fmt(nota, 1); row.appendChild(g);
+      box.appendChild(row);
+    });
+    if (animar) { box.parentElement.classList.remove("play"); void box.offsetWidth; box.parentElement.classList.add("play"); }
+    $("simFinal").innerHTML = `${fmt(notas.reduce((a, b) => a + b) / 3, 1)} <small style="font-size:.45em;color:var(--muted)">calificación de esta simulación, enviando ${PRED}</small>`;
+  }
+  $("btnSortear").addEventListener("click", () => sortear(true));
+  sortear(false);
+
+  // ---------- 18. Predicción ----------
+  (function () {
+    const p = D.prediccion;
+    $("finalBall").textContent = p.final;
+    const campeon = etiqueta(D.prueba.campeon.metodo).replace(/ \(#\d+\)/, "");
+    const porque = D.prueba.gana
+      ? `El campeón (${campeon}) le ganó a "siempre ${MED}" en el examen final, así que enviamos su número.`
+      : `Ninguna red le ganó a "siempre ${MED}" más allá de la suerte, así que enviamos ${p.final}, la mediana. ${p.campeon_predice === p.final ? `El campeón (${campeon}) también dice ${p.final}.` : `El campeón (${campeon}) habría dicho ${p.campeon_predice}.`}`;
+    $("finalTxt").textContent = `${porque} Calificación esperada: ${fmt(p.calif_esperada, 2)} por sorteo (datos hasta el ${fecha(p.datos_hasta)}).`;
+    // Etiquetas cortas: familia y cuántos sorteos ve ("GRU 50"), o el nombre corto del método sin redes
+    const corta = (k) => {
+      const m = k.match(/^(\w+)-(Clasif\.|L1|MSE) k=(\d+)/);
+      if (m) return `${m[1]}${m[2] === "MSE" ? " MSE" : ""} ${m[3]}`;
+      if (k.startsWith("Ensamble")) return "combinación";
+      if (k.startsWith("Constante")) return `siempre ${MED}`;
+      return k.toLowerCase();
+    };
+    // se cuentan solo las redes: "siempre 6" y la mediana histórica dicen 6 por definición
+    const deRedes = Object.entries(p.por_metodo).filter(([k]) => /^\w+-(Clasif\.|L1|MSE) k=/.test(k) || k.startsWith("Ensamble")).map(([, v]) => v);
+    $("agree").innerHTML = `<span class="rotulo">${deRedes.filter((v) => v === p.final).length} de ${deRedes.length} redes (incluida la combinación) dicen ${p.final}</span>` +
+      Object.entries(p.por_metodo).map(([k, v]) => `<span class="${v === p.final ? "yes" : ""}">${corta(k)}: <b>${v}</b></span>`).join("");
+    // Si el histórico ya trae los sorteos calificados (al regenerar después del 23 de octubre), se muestra el resultado real
+    const reales = ["2026-10-23", "2026-10-25", "2026-10-28"].map((f) => {
+      const i = D.datos.ultimas_fechas.indexOf(f);
+      return i < 0 ? null : { f, r1: D.datos.ultimos[i].R1, nota: 10 - 0.3 * Math.abs(D.datos.ultimos[i].R1 - p.final) };
+    }).filter(Boolean);
+    if (reales.length) {
+      $("reales").hidden = false;
+      $("reales").innerHTML = `<span class="eyebrow">Resultado real</span>` + reales.map((x) =>
+        `<span>${fecha(x.f)}: R1 = <b>${x.r1}</b> → ${fmt(x.nota, 1)}</span>`).join("") +
+        (reales.length === 3 ? `<span>Calificación final: <b>${fmt(reales.reduce((a, x) => a + x.nota, 0) / 3, 2)}</b></span>` : "");
+    }
+  })();
+
+  // ---------- 19. Conclusiones ----------
+  (function () {
+    const camp = D.prueba.campeon;
+    const items = [
+      D.prueba.gana
+        ? `<b>Enviamos ${PRED}</b>, lo que dice el campeón, porque le ganó a "siempre ${MED}" en el examen final.`
+        : `<b>Enviamos ${PRED}</b>: es la mediana de R1, el número que en promedio queda más cerca, y el examen castiga la distancia.`,
+      `${sinMemoria ? "El sorteo no tiene memoria" : "Las pruebas encontraron poca estructura"}, y ${D.prueba.gana ? "una red sí logró aprovecharla" : `${D.busqueda.n_configs} configuraciones de redes no encontraron patrón`} (campeón: ${camp.dif_vs_ref >= 0 ? "+" : "−"}${fmt(Math.abs(camp.dif_vs_ref), 3)} por sorteo). No fue por memorizar: el early stopping las frenó a tiempo.`,
+      `Cómo se mide el error define lo que aprende la red: L1 aprende la mediana; MSE, el promedio.`,
+      `Elegir entre muchos modelos siempre produce un "ganador": solo datos nuevos dicen si fue talento o suerte.`,
+    ];
+    $("takeaways").innerHTML = items.map((s, i) => `<p class="rise" style="--i:${i}">${s}</p>`).join("");
+  })();
+
+  // ---------- 20. Glosario ----------
+  (function () {
+    const g = [
+      ["Mediana", `el valor de en medio: la mitad de las veces R1 sale igual o menor (${MED}) y la otra mitad mayor.`],
+      ["Valor p", "qué tan raro sería un resultado si todo fuera puro azar. Mayor que 0.05: nada raro."],
+      ["Red neuronal", "una fórmula con miles de parámetros (perillas) que se ajustan con ejemplos."],
+      ["Neurona y capa", "una neurona combina números y pasa el resultado; una capa es un grupo de neuronas que trabajan a la vez."],
+      ["Parámetro", "cada número que la red ajusta al entrenar; cada línea del diagrama es uno."],
+      ["Época", "una pasada completa por todos los sorteos de entrenamiento."],
+      ["Error o pérdida", "qué tan lejos quedó la red; entrenar es hacerlo más chico."],
+      ["L1, MSE y probabilidades", "tres formas de medir el error: la distancia, la distancia al cuadrado, o qué tan probable le parecía a la red el valor real (entropía cruzada)."],
+      ["Sobreentrenar", "memorizar los ejemplos en vez de aprender; le va bien con lo visto y mal con lo nuevo."],
+      ["Early stopping", "detener el entrenamiento cuando el error con datos nuevos deja de bajar."],
+      ["Dropout", "apagar neuronas al azar mientras entrena, para que no dependa de memorizar."],
+      ["Validación y prueba", "los exámenes de práctica (para elegir) y el examen final (para confirmar)."],
+      ["Intervalo de confianza", "el rango donde probablemente está el valor real, considerando la suerte."],
+    ];
+    $("glosarioLista").innerHTML = g.map(([t, d]) => `<div><dt>${t}</dt><dd>${d}</dd></div>`).join("");
+    $("fuente").textContent = `Fuente: histórico oficial de resultados del Melate, Lotería Nacional (loterianacional.gob.mx), datos hasta el ${fecha(D.prediccion.datos_hasta)}. Código: melate_r1.ipynb, experimentos.py, melate_nucleo.py.`;
+  })();
+
+  // ---------- navegación, animaciones al entrar, tema ----------
+  const slides = [...document.querySelectorAll(".slide")];
+  let current = 0;
+  // La diapositiva "actual" es la que cruza la línea media de la pantalla. Se calcula en cada scroll y no con
+  // IntersectionObserver + rootMargin: dentro del visor de Claude (un iframe de otro origen) el navegador ignora
+  // rootMargin, el contador apuntaba a la diapositiva equivocada y "anterior" no hacía nada.
+  function actualizar() {
+    const medio = innerHeight / 2;
+    let i = slides.findIndex((s) => { const r = s.getBoundingClientRect(); return r.top <= medio && r.bottom > medio; });
+    if (i < 0) i = scrollY < 10 ? 0 : slides.length - 1;
+    current = i;
+    $("counter").textContent = `${i + 1} / ${slides.length}`;
+    $("progress").style.width = `${((i + 1) / slides.length) * 100}%`;
+    const s = slides[i];
+    if (!s.dataset.visto) {   // cada diapositiva se anima una sola vez: reiniciar cientos de animaciones en cada visita causaba lag
+      s.dataset.visto = "1";
+      s.classList.add("play");
+      if (s.id === "inicio") heroSequence();
+    }
+  }
+  let cuadroPendiente = false;
+  addEventListener("scroll", () => {
+    if (cuadroPendiente) return;
+    cuadroPendiente = true;
+    requestAnimationFrame(() => { cuadroPendiente = false; actualizar(); });
+  }, { passive: true });
+
+  // En pantallas de computadora, una diapositiva más alta que la pantalla se reduce (hasta 70 %) para que quepa
+  // completa. En teléfono no: ahí se desplaza normalmente. Primero se limpian todas, luego se mide todo y al final
+  // se escribe todo, para no forzar un recálculo de página por diapositiva.
+  function ajustar() {
+    const wraps = slides.map((s) => s.querySelector(".wrap"));
+    wraps.forEach((w) => { w.style.zoom = ""; });
+    if (innerWidth >= 900) {
+      const medidas = slides.map((s, i) => {
+        const cs = getComputedStyle(s);
+        return [innerHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - 6, wraps[i].scrollHeight];   // 6 px de margen por redondeos
+      });
+      medidas.forEach(([disponible, alto], i) => { if (alto > disponible) wraps[i].style.zoom = Math.max(0.7, disponible / alto).toFixed(3); });
+      // Con zoom, las gráficas de ancho 100 % no se encogen en la misma proporción: se mide lo que de verdad se ve
+      // y se corrige, hasta tres veces.
+      for (let vuelta = 0; vuelta < 3; vuelta++) {
+        const vistas = wraps.map((w) => w.getBoundingClientRect().height);
+        let cambio = false;
+        vistas.forEach((alto, i) => {
+          const disponible = medidas[i][0], z = parseFloat(wraps[i].style.zoom) || 1;
+          const nuevo = Math.max(0.7, z * disponible / alto);
+          if (alto > disponible + 1 && nuevo < z - 0.001) { wraps[i].style.zoom = nuevo.toFixed(3); cambio = true; }
+        });
+        if (!cambio) break;
+      }
+    }
+    actualizar();
+  }
+  ajustar();
+  document.fonts?.ready.then(ajustar);
+  document.querySelectorAll("details").forEach((d) => d.addEventListener("toggle", ajustar));   // abrir "Todo lo que variamos" cambia la altura
+  let espera;
+  addEventListener("resize", () => { clearTimeout(espera); espera = setTimeout(ajustar, 150); });
+
+  const suave = () => (matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
+  const go = (i) => slides[Math.max(0, Math.min(slides.length - 1, i))].scrollIntoView({ behavior: suave() });
+  // Avanzar o retroceder: si a la diapositiva actual le queda contenido abajo (o arriba), primero se recorre ese
+  // contenido; en la primera y en la última no se hace nada más (antes, ↓ en la última regresaba a su inicio).
+  function paso(dir) {
+    const r = slides[current].getBoundingClientRect();
+    if (dir > 0 && r.bottom > innerHeight + 8) return scrollBy({ top: Math.min(innerHeight * 0.85, r.bottom - innerHeight), behavior: suave() });
+    if (dir < 0 && r.top < -8) return scrollBy({ top: Math.max(-innerHeight * 0.85, r.top), behavior: suave() });
+    if (current + dir < 0 || current + dir >= slides.length) return;
+    go(current + dir);
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;                        // Alt+← / Alt+→ siguen siendo del navegador
+    const tag = e.target.tagName;
+    if (["INPUT", "SELECT", "TEXTAREA"].includes(tag)) return;             // la barra y el menú usan sus flechas
+    if (tag === "BUTTON" && (e.key === " " || e.key === "Enter")) return;  // Espacio sobre un botón lo presiona
+    const adelante = ["ArrowDown", "ArrowRight", "PageDown"].includes(e.key) || (e.key === " " && !e.shiftKey);
+    const atras = ["ArrowUp", "ArrowLeft", "PageUp"].includes(e.key) || (e.key === " " && e.shiftKey);
+    if (adelante) { e.preventDefault(); paso(1); }
+    if (atras) { e.preventDefault(); paso(-1); }
+    if (e.key === "Home") { e.preventDefault(); go(0); }
+    if (e.key === "End") { e.preventDefault(); go(slides.length - 1); }
+  });
+  // Al soltar la barra o elegir en el menú, el foco sale del control para que las flechas vuelvan a cambiar de diapositiva
+  $("pred").addEventListener("change", (e) => e.target.blur());
+  $("selCurva").addEventListener("change", (e) => e.target.blur());
+  $("btnNext").addEventListener("click", () => paso(1));
+  $("btnPrev").addEventListener("click", () => paso(-1));
+  if (!document.fullscreenEnabled) $("btnFull").hidden = true;   // en el visor de Claude la pantalla completa no está permitida
+  $("btnTheme").addEventListener("click", () => {
+    const root = document.documentElement;
+    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    root.dataset.theme = dark ? "light" : "dark";
+    try { localStorage.setItem("tema", root.dataset.theme); } catch {}
+  });
+  try { const t = localStorage.getItem("tema"); if (t) document.documentElement.dataset.theme = t; } catch {}
+  $("btnFull").addEventListener("click", () => {
+    const d = document;
+    (d.fullscreenElement ? d.exitFullscreen() : d.documentElement.requestFullscreen?.())?.catch?.(() => {});
+  });
+})();
+</script>

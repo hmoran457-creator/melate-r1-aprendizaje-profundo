@@ -1,0 +1,14 @@
+# Versiones fijas: con Smart App Control de Windows activado, versiones más nuevas de pandas (3.0.6),
+# torch (2.14.1), Pillow (13.0.0) y scikit-learn quedaron bloqueadas el 2026-10-22 ("An Application
+# Control policy has blocked this file"). Estas sí cargan. No desactivar Smart App Control.
+torch==2.9.1
+numpy==2.4.4
+pandas==3.0.2
+scipy==1.18.1
+matplotlib==3.11.1
+pillow==11.3.0
+nbformat>=5.10
+nbclient>=0.10
+ipykernel>=6.29
+# scikit-learn solo lo usa la etapa 2 completa de experimentos.py (gradient boosting); su versión
+# instalada el 2026-10-19 quedó bloqueada y no se ha probado otra.
